@@ -21,11 +21,23 @@ Find the smallest N - digit prime which, by replacing K - digits of the number (
 - **Note2:** Leading zeros should not be considered.
 - **Note3:** If there are several solutions, choose the "lexicographically" smallest one (one sequence is considered "lexicographically" smaller than another if its first element which does not match the corresponding element in another sequence is smaller)
 
-### Algorithm
+### Overal Algorithm Description
 
-*Here the algorithm should be described*
+There are multiple ways of solving this problem, if go by straight way of solving then we will face time-out (Thats what I did at first). Regular expression based approach is more proper for solving this problem. Here simplified algorithm:
+- generate prime numbers (sieve of Eratosthenes is good choice)
+- choose the range for looping (ex: if the replacement number K is 5, then we don't have to check 4 digit numbers)
+- for each prime number proper regular expression should be generated. Lets assume current prime number from the loop is equal to 56003, then following regular expressions can be generated. *6003, 5*003, 56*03, 560*3, 56\*\*3. For each regular expression can create its own family and collect similar kinds. It can be easily implemented by HashMap, where regular expression is used as a key and value would be the list of prime numbers matching that regular expression.
+- find the list with the smallest prime numbers and size of which equals L
 
-### My code in Java
+### Data Structure and Methods
+- **generateSieve(int n)** is the sieve generator function, which saves generated results into global static variable isPrime
+- **matches** is the HashMap that stores mask and list of prime numbers that are match with this given mask
+- **maxDigits, replace and siblings** variables are stands for N, K and L correspondingly. Those alphabets were changed to meaningful names.
+
+**Work-around:** Test case #16 has been given a timeout issue until I have found-out some hard-coded solution from guy named [Stephan Brumme](http://euler.stephan-brumme.com/). He has said all minimized families of 7-digit primes have members below 2000000 or 3000000. I will keep his work-around solution in my code until I found other solution
+
+
+### Code in Java
 
 ```java
 import java.io.*;
@@ -134,43 +146,4 @@ public class Solution {
 }
 ```
 
-```python
-print 'helloworld'
-```
 
-```ruby
-def foo
-  puts 'foo'
-end
-```
-
-{% highlight ruby %}
-def foo
-  puts 'foo'
-end
-{% endhighlight %}
-
-{% highlight ruby linenos %}
-def foo
-  puts 'foo'
-end
-{% endhighlight %}
-
-```c++
-#include <iostream>
-
-using namespace std;
-
-void foo(int arg1, int arg2)
-{
-
-}
-
-int main()
-{
-  string str;
-  foo(1, 2);
-  cout << "Hello World" << endl;
-  return 0;
-}
-```
