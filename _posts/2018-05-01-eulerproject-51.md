@@ -1,5 +1,5 @@
 ---
-title: Euler Project: #51: Prime digit replacements
+title: Euler Project-51, Prime digit replacements
 categories:
  - Competitive Programming
 tags:
