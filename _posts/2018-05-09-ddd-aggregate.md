@@ -11,7 +11,7 @@ tags:
 
 > An **aggregate** is a cluster of associated objects that we treat as a unit for the purpose of data changes.
 >
->                                                              <cite>Eric Evans (Domain-Driven Design)</cite>
+> <cite>Eric Evans (Domain-Driven Design)</cite>
 
 An Aggregate is a cluster of associated object that we treat as a single unit. Considering every object of the Design separately may and will cause big complication. In order to avoid the complexity the aggregates are used. Here is the example complexity view of the middle sized project:
 
@@ -68,7 +68,7 @@ If the root-aggregate is deleted, then associations should be deleted too. If in
 ![No Image](/assets/2018-05-09-ddd-aggregate/CascadingDeletion.png)
 
 
-<center> Aggregates are not always the answer to the problem !!! </center>
+**WARNING: Aggregates are not always the answer to the problem !!!**
 
 
 
