@@ -18,3 +18,12 @@ An Aggregate is a cluster of associated object that we treat as a single unit. C
 - Rule of Cascading Deletes. If the root-aggregate is deleted, then associations should be deleted too
 - **Invariant:** A condition that should always be true for the system to be in a consistent state
 - **Persistent Ignorant Class:** Classes that have no knowledge about how they are persistent
+
+
+
+
+> An **aggregate** is a cluster of associated objects that we treat as a unit for the purpose of data changes.
+>
+> -- <cite>Eric Evans (Domain-Driven Design)</cite>
+
+
