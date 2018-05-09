@@ -24,6 +24,24 @@ An Aggregate is a cluster of associated object that we treat as a single unit. C
 
 > An **aggregate** is a cluster of associated objects that we treat as a unit for the purpose of data changes.
 >
-> -- <cite>Eric Evans (Domain-Driven Design)</cite>
+>                                                              <cite>Eric Evans (Domain-Driven Design)</cite>
+
+
+
+### Relationships Between Aggregates
+The root object can hold the pointer to the non-root object, but non-root object should not hold the reference to the root object. Non-root object can hold the foreign case based link to the root object. For example it could have an ID (Guid) number of the root object.
+
+Root-to-Root allowed
+![No Image](/assets/2018-05-09-ddd-aggregate/rootToRootAllowed.png)
+
+Root-to-Object is not allowed
+![No Image](/assets/2018-05-09-ddd-aggregate/rootNonToRootNotAllowed.png)
+
+
+
+
+
+
+
 
 
