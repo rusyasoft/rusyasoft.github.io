@@ -34,7 +34,6 @@ If the Aggregation is designed well then cascaded saving operation can be perfor
 
 
 ### Simple Tips about Aggregates
-- Aggregates are not always the answer to the problem
 - Aggregates can connect only between root aggregates
 - Use FK (Foreign Key) to access children of the associated aggregates is possible
 - "Aggregate of One": Single object can be a root aggregate (without any childs)
@@ -69,6 +68,7 @@ If the root-aggregate is deleted, then associations should be deleted too. If in
 ![No Image](/assets/2018-05-09-ddd-aggregate/CascadingDeletion.png)
 
 
+**<p style="text-align: center;"> Aggregates are not always the answer to the problem </p>**
 
 
 
