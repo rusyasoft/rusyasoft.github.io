@@ -68,7 +68,7 @@ If the root-aggregate is deleted, then associations should be deleted too. If in
 ![No Image](/assets/2018-05-09-ddd-aggregate/CascadingDeletion.png)
 
 
-**<p style="text-align: center;"> Aggregates are not always the answer to the problem </p>**
+<p style="text-align: center;"> Aggregates are not always the answer to the problem !!! </p>
 
 
 
