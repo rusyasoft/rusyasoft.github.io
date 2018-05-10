@@ -3,11 +3,10 @@ title: DDD, Repsitory
 categories:
  - DDD
 tags:
- - Domain-Driven-Design
+ - Domain-Driven-Design, Repository
 ---
+We are continuing our Domain-Driven Design related chapters, and here I've tried to describe my understadings regarding to Repositories in the DDD. Repositories are easily confused with Factory patterns, while the main difference is factory does not provide persistency. Lets just dive into repository topic which starts with retrieving objects.
 
-
-## DDD Repository
 ### Retrieving Objects
 
 ![No Image](/assets/2018-05-10-ddd-repositories/retrievingObjects.png)
@@ -27,50 +26,41 @@ Any system has a persistent storage like a database for its fully functioning. A
 
 
 ### Repository Tips
-- Think of it as an in-memory collection
-	+ perfoming add, remove and retrieve operations on repositories
-
-- Implement a known, common access interface
-	+ global interface for developers to know how to interact with repository
-	example:
-
+- Think of it as an in-memory collection. Perfoming add, remove and retrieve operations on repositories
+- Implement a known, common access interface. Global interface for developers to know how to interact with repository
+Example:
 ```
-	public interface IRepository<T> {
-		T getById(int id);
-		void add(T entity);
-		void Remove(T entity);
-		void Update(T entity);
-		IEnumerable<T> List();
-	}
+public interface IRepository<T> {
+	T getById(int id);
+	void add(T entity);
+	void Remove(T entity);
+	void Update(T entity);
+	IEnumerable<T> List();
+}
 ```
-
-	+ interface may contain not only lowest level methods, but can contain little higher level methods too. If they are used by all classes that are uses that interface. For example: getByIdThroughCache() could be another useful method that employs the usage of in-memory cache
+Interface may contain not only lowest level methods, but can contain little higher level methods too. If they are used by all classes that are uses that interface. For example: getByIdThroughCache() could be another useful method that employs the usage of in-memory cache
 	
 - Methods for add & remove. These are the actual impelementation of the common interface and of course it may differ depend on the repository type.
-
 - Methods that predefine criteria for object selection. Predefine the most repeated queries in a form of methods.
-	example:
-
+Example:
+```C#
+public Schedule GetScheduledAppointmentsForDate(int clinicId, DateTime date) {
+	var scheduleGraph = QueryScheduleForThisOffice(clinicId)
+			.Select(s => new
+			{
+				Schedule = s,
+				Appointements = s.Appointments
+					.Where(a =>
+					DbFunctions.DiffDays(date, a.TimeRange.Start) == 0
+					)
+			})
+			.SingleOrDefault();
+	var schedule = scheduleGraph.Schedule;
+	schedule.DateRange = new DateTimeRange(date, date.AddDays(1));
+	return schedule;
+}
 ```
-	public Schedule GetScheduledAppointmentsForDate(int clinicId, DateTime date) {
-		var scheduleGraph = QueryScheduleForThisOffice(clinicId)
-				.Select(s => new
-				{
-					Schedule = s,
-					Appointements = s.Appointments
-						.Where(a =>
-						DbFunctions.DiffDays(date, a.TimeRange.Start) == 0
-						)
-				})
-				.SingleOrDefault();
-		var schedule = scheduleGraph.Schedule;
-		schedule.DateRange = new DateTimeRange(date, date.AddDays(1));
-		return schedule;
-	}
-```
-
 - Repos for aggregate roots only
-
 - Client focuses on the model, repo focuses on persistence. Client should not care about persistence related detail works.
 
 # Repository Benefits
@@ -81,9 +71,9 @@ Any system has a persistent storage like a database for its fully functioning. A
 - Improved Maintainability. Tuning performance, adding caching operations can be easily implemented on repository level
 
 # Common Repository Blunders
-- N+1 Query Errors. When we use one query for fetching the list, and then N individual queries for fetching each item.
+- *N+1* Query Errors. When we use one query for fetching the list, and then *N* individual queries for fetching each item.
 - Inappropriate use of eager or lazy loading.
-- Fetching more data than required. (Try not to use "select * from table" if possible )
+- Fetching more data than required. (Try not to use `select * from table` if possible )
 
 
 The Repositories and Factories are quite similar, because we use those patterns to get objects we want to work with. However factories are involved in creating a new objects, while repositories are used to find and update existing objects. Sometimes repositories use a factory pattern to create its objects.
@@ -92,7 +82,7 @@ The Repositories and Factories are quite similar, because we use those patterns 
 ## Generic Repositories in DDD
 - Create non-generic Implementation class of generic interface is more preferable by DDD. 
 
-```
+```C#
 class implementation:
 	public class Repository<TEntity> : IRepository<TEntity> where TEntity : class, IEntity
 	{
@@ -108,7 +98,7 @@ class implementation:
 ```
 
 usage: 
-```
+```C#
 	var repo = new Repository<Patient>(new CrudContext())
 	rep.Insert(new Patient())
 ```
