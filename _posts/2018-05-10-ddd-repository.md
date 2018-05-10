@@ -7,13 +7,13 @@ tags:
 ---
 We are continuing our Domain-Driven Design related chapters, and here I've tried to describe my understadings regarding to Repositories in the DDD. Repositories are easily confused with Factory patterns, while the main difference is factory does not provide persistency. Lets just dive into repository topic which starts with retrieving objects.
 
-### Retrieving Objects
+# Retrieving Objects
 
 ![No Image](/assets/2018-05-10-ddd-repositories/retrievingObjects.png)
 
 Any system has a persistent storage like a database for its fully functioning. Applying repositories happens by integrating and synchronizing with existing aggregate objects in the system. Aggregate root controls the data access to the repository, by limiting queries on random objects.
 
-### Object Life Cycles
+# Object Life Cycles
 
 - No persistence
 - With persistence 
@@ -25,7 +25,7 @@ Any system has a persistent storage like a database for its fully functioning. A
 > <cite>Eric Evans (Domain-Driven Design)</cite>
 
 
-### Repository Tips
+## Repository Tips
 - Think of it as an in-memory collection. Perfoming add, remove and retrieve operations on repositories
 - Implement a known, common access interface. Global interface for developers to know how to interact with repository
 Example:
@@ -79,7 +79,7 @@ public Schedule GetScheduledAppointmentsForDate(int clinicId, DateTime date) {
 The Repositories and Factories are quite similar, because we use those patterns to get objects we want to work with. However factories are involved in creating a new objects, while repositories are used to find and update existing objects. Sometimes repositories use a factory pattern to create its objects.
 
 
-## Generic Repositories in DDD
+# Generic Repositories in DDD
 - Create non-generic Implementation class of generic interface is more preferable by DDD. 
 
 ```C#
