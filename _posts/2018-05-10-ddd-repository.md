@@ -160,5 +160,9 @@ JpaRepository extends PagingAndSortingRepository which in turn extends CrudRepos
 
 
 
+# DDD with repository by JPA: simple Example
+![No Image](http://blog.ncortes.com/wp-content/uploads/2014/06/DDDAcademy2.png)
+for details refer to [Nico Corte's blog](http://blog.ncortes.com/2014/06/30/ddd-repository-by-jpa-simple-example/), [sourceCode](https://bitbucket.org/coganic/hexagonalacademy/src)
+
 
 
