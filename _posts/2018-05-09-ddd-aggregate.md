@@ -13,6 +13,10 @@ tags:
 >
 > <cite>Eric Evans (Domain-Driven Design)</cite>
 
+Aggregation is needed to overcome the complexity of the architecture. Complexity in the architecture eventually will cause the complexity in the source code. If the complexity level is gets higher than what human capable to understand then the probability of injecting a buggy code increases. Doesn't matter how professional is the developer.
+
+![No Image](/assets/2018-05-09-ddd-aggregate/BrainCapacityAndCodeComplexity.png)
+
 An Aggregate is a cluster of associated object that we treat as a single unit. Considering every object of the Design separately may and will cause big complication. In order to avoid the complexity the aggregates are used. Here is the example complexity view of the middle sized project:
 
 ![No Image](/assets/2018-05-09-ddd-aggregate/tackling_complexity.png)
