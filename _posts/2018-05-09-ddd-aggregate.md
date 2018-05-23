@@ -41,6 +41,9 @@ If the Aggregation is designed well then cascaded saving operation can be perfor
 - Aggregates can connect only between root aggregates
 - Use FK (Foreign Key) to access children of the associated aggregates is possible
 - "Aggregate of One": Single object can be a root aggregate (without any childs)
+- In the Aggregates:
+  - *Entity* can belong to single aggregate only
+  - *Value Object* can belong to multiple aggregates
 - **Persistent Ignorant Class:** Classes that have no knowledge about how they are persistent
 
 
@@ -71,8 +74,14 @@ If the root-aggregate is deleted, then associations should be deleted too. If in
 
 ![No Image](/assets/2018-05-09-ddd-aggregate/CascadingDeletion.png)
 
-
 **WARNING: Aggregates are not always the answer to the problem !!!**
 
+
+*Experiment*
+```sequence
+Alice->Bob: Hello Bob, how are you?
+Note right of Bob: Bob thinks
+Bob-->Alice: I am good thanks!
+```
 
 
