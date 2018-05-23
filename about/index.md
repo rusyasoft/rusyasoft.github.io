@@ -15,6 +15,7 @@ type: about
 - [Facebook](https://www.facebook.com/rustam.rakhimov.igorevich)
 - [Linkedin](https://www.linkedin.com/in/rrustam/)
 - [Youtube](https://www.youtube.com/mrrusyasoft)
+- [Google Scholar](https://scholar.google.co.kr/citations?user=yJ4oqNIAAAAJ&hl=en)
 
 ## Technical Skills
 - **Program Language** :: Java, C, Javascript, C++
@@ -24,7 +25,5 @@ type: about
 
 ## Activities
 
-
-## Research Papers
 
 
