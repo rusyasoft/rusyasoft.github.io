@@ -76,12 +76,3 @@ If the root-aggregate is deleted, then associations should be deleted too. If in
 
 **WARNING: Aggregates are not always the answer to the problem !!!**
 
-
-*Experiment*
-```sequence
-Alice->Bob: Hello Bob, how are you?
-Note right of Bob: Bob thinks
-Bob-->Alice: I am good thanks!
-```
-
-
