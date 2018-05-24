@@ -5,27 +5,28 @@ categories:
 tags:
  - Domain-Driven-Design, Repository
 ---
-We are continuing our Domain-Driven Design related chapters, and here I've tried to describe my understadings regarding to Repositories in the DDD. Repositories are easily confused with Factory patterns, while the main difference is factory does not provide persistency. Lets just dive into repository topic which starts with retrieving objects.
+We are continuing our Domain-Driven Design related chapters, and here I've tried to describe my understadings regarding to Repositories in the DDD. Repositories are easily confused with *Factory patterns*, while the main difference is that *Factory Pattern* does not provide persistency. Lets just dive into repository topic which starts with retrieving objects.
 
-# Retrieving and Saving Objects
+## Retrieving and Saving Objects
 
 Repository provides two basic interface:
-- lookup
-- save
-Saving is impelemented based on root aggregate. In DDD, a repository is an objcect that participates in the domain but really abstracts away storage and infrastructure.
+ - Lookup
+ - Save
+
+Saving is impelemented based on root aggregate. In DDD, a repository is an objcect that participates in the domain but really abstracts away storage and infrastructure details.
 
 ![No Image](/assets/2018-05-10-ddd-repositories/retrievingObjects.png)
 
-Any system has a persistent storage like a database for its fully functioning. Applying repositories happens by integrating and synchronizing with existing aggregate objects in the system. Aggregate root controls the data access to the repository, by limiting queries on random objects.
+Most systems have a persistent storage like a database for its fully functioning. Applying repositories happens by integrating and synchronizing with existing aggregate objects in the system. Aggregate root controls the data access to the repository, by limiting queries on random objects.
 
-# Object Life Cycles
-
-- No persistence
-- With persistence 
+## Object Life Cycles
+ - No persistence
+ - With persistence 
 
 ![No Image](/assets/2018-05-10-ddd-repositories/ObjectLifecycle.png)
 
 > A **repository** represents all objects of a certain type as a conceptual set ... like a collection with more elaborate querying capability
+>
 > <cite>Eric Evans (Domain-Driven Design)</cite>
 
 
