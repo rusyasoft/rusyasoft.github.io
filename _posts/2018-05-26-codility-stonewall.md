@@ -36,9 +36,9 @@ Complexity:
 expected worst-case time complexity is O(N);
 expected worst-case space complexity is O(N) (not counting the storage required for input arguments).
 
-### Code in Java
+## Code in Java
 
-#### StraightForward Solution (Correctness 50%)  time-complexity O(n^2)
+### Solution-1: StraightForward Solution *(Correctness 50%) time-complexity O(n^2)*
 
 ```java
 import java.util.*;
@@ -83,7 +83,7 @@ class Solution {
 }
 ```
 
-#### Stack Based Solution (Correctness 50%) time-complexity O(n)
+### Solution-2: Stack Based Solution *(Correctness 50%) time-complexity O(n)*
 
 ```java
 import java.util.*;
