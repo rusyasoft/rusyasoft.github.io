@@ -14,7 +14,9 @@ The wall should be built of cuboid stone blocks (that is, all sides of such bloc
 
 Write a function:
 
+```java
 class Solution { public int solution(int[] H); }
+```
 
 that, given an array H of N positive integers specifying the height of the wall, returns the minimum number of blocks needed to build it.
 
