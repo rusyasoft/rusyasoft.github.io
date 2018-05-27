@@ -85,7 +85,7 @@ class Solution {
 }
 ```
 
-### Solution-2: Stack Based Solution *(Correctness 50%) time-complexity O(n)*
+### Solution-2: Stack Based Solution *(Correctness 100%) time-complexity O(n)*
 
 ```java
 import java.util.*;
