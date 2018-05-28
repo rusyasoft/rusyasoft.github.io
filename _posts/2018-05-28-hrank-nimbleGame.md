@@ -47,5 +47,5 @@ First
 ```
 
 More TestCases:
-[TestCase5 Input](https://hr-testcases-us-east-1.s3.amazonaws.com/21906/input05.txt?AWSAccessKeyId=AKIAJ4WZFDFQTZRGO3QA&Expires=1527475408&Signature=zfFl7i32nm2fo4eLYYrLTpG30oo%3D&response-content-type=text%2Fplain) 
-[TestCase5 Output](https://hr-testcases-us-east-1.s3.amazonaws.com/21906/output05.txt?AWSAccessKeyId=AKIAJ4WZFDFQTZRGO3QA&Expires=1527475381&Signature=R1wjEZhw81uJ%2FSYhvvUOERb8Exw%3D&response-content-type=text%2Fplain)
+[TestCase5_Input](https://hr-testcases-us-east-1.s3.amazonaws.com/21906/input05.txt?AWSAccessKeyId=AKIAJ4WZFDFQTZRGO3QA&Expires=1527475408&Signature=zfFl7i32nm2fo4eLYYrLTpG30oo%3D&response-content-type=text%2Fplain), 
+[TestCase5_Output](https://hr-testcases-us-east-1.s3.amazonaws.com/21906/output05.txt?AWSAccessKeyId=AKIAJ4WZFDFQTZRGO3QA&Expires=1527475381&Signature=R1wjEZhw81uJ%2FSYhvvUOERb8Exw%3D&response-content-type=text%2Fplain)
