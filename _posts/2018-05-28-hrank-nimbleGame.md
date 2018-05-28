@@ -18,21 +18,20 @@ If the cell contains even number of stones then we should ignore those cells in 
 
 ```java
 static String nimbleGame(int[] s) {
-        int sum = 0;
-        for (int i = 0; i < s.length; i++) {
-            //sum += s[i];
-            if (s[i] % 2 == 1) {
-                sum ^= i;            
-            }
+    int sum = 0;
+    for (int i = 0; i < s.length; i++) {
+        //sum += s[i];
+        if (s[i] % 2 == 1) {
+            sum ^= i;            
         }
-        
-        if (sum == 0) {
-            return "Second";
-        } else {
-            return "First";
-        }
-
     }
+
+    if (sum == 0) {
+        return "Second";
+    } else {
+        return "First";
+    }
+}
 ```
 
 
