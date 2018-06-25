@@ -6,16 +6,15 @@ tags:
  - hackerrank
 ---
 
-The original  task is given at [hrank](https://www.hackerrank.com/challenges/minimum-loss/problem). 
+
 
 **Problem**
 Lauren has a chart of distinct projected prices for a house over the next several years. She must buy the house in one year and sell it in another, and she must do so at a loss. She wants to minimize her financial loss.
-
 For example, the house is valued at *price=[20, 15, 8, 2, 12]* over the next *n = 5* years. She can purchase the home in any year, but she must resell the house at a loss in one of the following years. Her minimum loss would be incurred by purchasing in year 2 at *price[1]=15* and reselling in year 5 at *price[4]=12*.
-
 Find and print the minimum amount of money Lauren must lose if she buys the house and resells it within the next *n* years.
-
 Note: It's guaranteed that a valid answer exists.
+
+The original  task is given at [hrank](https://www.hackerrank.com/challenges/minimum-loss/problem). 
 
 **Input Format**
 
