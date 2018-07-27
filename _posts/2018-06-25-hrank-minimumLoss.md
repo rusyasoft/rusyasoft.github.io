@@ -5,6 +5,7 @@ categories:
 tags:
  - hackerrank
 ---
+Here another weird problem given by hackerrank, though It was fun to solve this problem as well. This problem is good example of importance of understanding the given task. Sometimes it may have a straight logic from the definition of the task. Why is the Lauren wants to sell the houses and make a loss, not profit. Isn't the profit is main purpose of any business, so guys be careful when reading the definition of the task.
 
 **Problem**
 
