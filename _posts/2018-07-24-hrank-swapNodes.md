@@ -8,6 +8,7 @@ tags:
 
 It has been such a long time since I didn't work on graphs and trees. Here it is I'm back. This task is quite a simple one even though it is assigned a medium level of difficulty. The original task definition is given [hackerrank](https://www.hackerrank.com/challenges/swap-nodes-algo/problem).
 
+# Solution Description
 
 The reason it is assigned medium level is because You have to implement two In-order traversals on binary tree to solve this problem:
 - In-order traverser should do the swapping depend on the depth of the current node. (the depth should be a multiple of the given *k*)
@@ -33,11 +34,11 @@ static class Node {
 
 Before those In-order traverser functios are added we have to implement the reading of the tree. Reading tree from the input pairs should be performed in a top-to-down and left-to-right fashion.
 
- ![NoImage](https://trello-attachments.s3.amazonaws.com/5a39b7e3b48587c387d4e457/5b5915ea34eefb743eef9ee8/226218a72862d6d5598e7d9d34ce0c87/image.png). 
+ ![NoImage](/assets/images/hackerrank/binaryTreeTopDownLeftRight.png). 
 
 The above Binary tree is formed from input such as given below. The root node has an index equal to 1. It is default for all birnary trees in this example, that is why input does not contain root index. First number represents left child index while second number represents right child node index.
 
-![NoImage](https://trello-attachments.s3.amazonaws.com/5a39b7e3b48587c387d4e457/5b5915ea34eefb743eef9ee8/46c2206ee57d583131b30a0632e85224/image.png)
+![NoImage](/assets/images/hackerrank/InputReadingForBinaryTree.png)
 
 Reading the 2D array and forming the binary tree is performed by following code:
 
@@ -76,7 +77,7 @@ static void printInOrder(Node cur, List<Integer> result) {
 The current node should be checked to not being null, we call it stopper. Because in dynamic programming that is important to know when to stop :)
 Another function *swapInOrder()* function has been implemented in similar fashion where at the every node it checks the depth level and performs the swapping of the left and right branches.
 
-## Solution
+# Solution (Java)
 
 ```Java
 import java.io.*;
