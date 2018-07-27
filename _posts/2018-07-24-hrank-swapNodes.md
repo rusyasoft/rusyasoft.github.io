@@ -60,7 +60,11 @@ while (N < numOfNodes) {
 }
 ```
 
-Finally when we are done with reading the binary tree, now its time to perform In-order traversing. Back in University we have learned an easy way of remembering the In-order traversal by calling it LRR (Left-Root-Right) traversal. It is really easy way of remembering the whole algorithm. First we just keep diving into the left node, when there is nothing left we go to root. After processing root node (in our case printing and depth comparison) we go to right node, and then again going Left nodein there. Really simple algorithm but very powerful. The whole algorithm boils down into few lines of code:
+Finally when we are done with reading the binary tree, now its time to perform In-order traversing. Back in University we have learned an easy way of remembering the In-order traversal by calling it LRR (Left-Root-Right) traversal. It is really easy way of remembering the whole algorithm. First we just keep diving into the left node, when there is nothing left we go to root. After processing root node (in our case printing and depth comparison) we go to right node, and then again going Left nodein there. Really simple algorithm but very powerful. 
+
+![NoImage](/assets/images/hackerrank/Sorted_binary_tree_inorder.svg.png)
+
+The whole algorithm boils down into few lines of code:
 
 ```Java
 static void printInOrder(Node cur, List<Integer> result) {
