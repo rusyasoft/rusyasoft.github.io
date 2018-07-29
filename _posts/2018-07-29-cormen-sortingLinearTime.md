@@ -57,7 +57,7 @@ for i = 1 to d
     use a stable sort to sort array A on digit i
 ```
 
-![NoImage](/assets/images/cormenAlgorithms/cormen_8_3.jpg)
+![NoImage](/assets/images/cormenAlgorithms/cormen_fig_8_3.jpg)
 
 Here another good example from [geeksforgeeks](https://www.geeksforgeeks.org/radix-sort/):
 
