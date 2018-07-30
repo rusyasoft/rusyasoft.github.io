@@ -44,7 +44,5 @@ The running time of the algorithm is the sum of runnint times for each statement
 Simplifying abstraction: it is the **rate of growth**, or **order of growth**, of the running time that really intersts us. We therefore consider only the leading term of a formula (e.g.,*an^2*), since the lower-order terms are relatively insignificant for large values of *n*. We also ignore the leading term’s constant coefficient, since constant factors are less significant than the rate of growth in determining computational efficiency for large inputs.
 
 We write that insertion sort has a worst-case running time of Theta(n^2).
-```mathjax
-x = \dfrac{-b \pm \sqrt{b^2 - 4ac}}{2a}
-```
+
 
