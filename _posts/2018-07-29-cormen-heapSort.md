@@ -11,12 +11,11 @@ The **(binary) heap** data structure is an array object that we can view as a ne
 ![NoImage](/assets/images/cormenAlgorithms/cormen_fig_6_1.jpg)
 
 Macros functions:
-PARENT(i): return floor(i.2)
-LEFT(i): return 2 * i
-RIGHT(i): return 2 * i + 1
+- PARENT(i): return floor(i.2)
+- LEFT(i): return 2 * i
+- RIGHT(i): return 2 * i + 1
 
 Procedure Functions:
-
 - MAX-HEAPIFY procedure, runs in O(lg n) time, is the key to maintaining the max-heap property
 - BUILD-MAX-HEAP procedure, runs in a linear time, produces a max-heap from an unordered input array
 - HEAPSORT procedure, runs in O(n lg n) time, sorts an array in place
@@ -41,7 +40,7 @@ if largest != i
 ```
 ![NoImage](/assets/images/cormenAlgorithms/cormen_fig_6_2.jpg)
 
-Figure: The action of MAX-HEAPIFY(A, 2), where A.heap-size = 10
+Figure: The action of MAX-HEAPIFY(A, 2), where *A.heap-size* = 10
 
 The running time of MAX-HEAPIFY on a subtree of size *n* rooted at a given node *i* is the *O(1)* time to fix up the relationships among elements. The children's subtrees each have a size at most 2n/3. That is why worst case of running time of MAX-HEAPIFY by the recurrence is: *T(n) <= T(2n/3) + O(1)*
 
@@ -51,7 +50,7 @@ The running time of MAX-HEAPIFY on a subtree of size *n* rooted at a given node 
 The procedure BUILD-MAX-HEAP goes through the remaining nodes of the tree and runs MAX-HEAPIFY on each one:
 
 ```
-BUILD-MEAX-HEAP(A)
+BUILD-MEAX-HEAP(A):
 A.heap-size = A.length
 for i = floor(A.length / 2) downto 1
    MAX-HEAPIFY(A, i)
