@@ -7,9 +7,9 @@ tags:
 ---
 In a paradigm of divide-and-conquer we solve the problem recursively, applying three basic steps at each level of the recursion:
 
-**Divide** the problem into a number of subproblems that are smaller instances of the same problem
-**Conquer** the subproblems by solving them recursively. If the subproblem sizes are small enough (bottom out)
-**Combine** the solutions to the subproblems into the solution for the original problem
+- **Divide** the problem into a number of subproblems that are smaller instances of the same problem
+- **Conquer** the subproblems by solving them recursively. If the subproblem sizes are small enough (bottom out)
+- **Combine** the solutions to the subproblems into the solution for the original problem
 
 A **recurrence** is an equation or inequality that describes a function in terms of its value on smaller inputs. 
 
