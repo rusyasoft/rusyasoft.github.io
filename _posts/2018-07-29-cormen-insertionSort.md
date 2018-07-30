@@ -29,7 +29,7 @@ for j = 2 to A.length
 
 The black rectangle holds the key taken from A[j], which is compared with the values in shaded rectangles to its left. 
 
-here formaly we call **Loop invariante**, when at the each iteration of for loop the subarray A[1..j-1] consists of the elements originally existed in A[1..j-1] subarray, but in sorted order.
+here formaly we call **Loop invariant**, when at the each iteration of for loop the subarray A[1..j-1] consists of the elements originally existed in A[1..j-1] subarray, but in sorted order.
 
 ## Analyzing algorithms
 **Analyzing** an algorithm has come to mean predicting the resources that the algorithm requires. 
