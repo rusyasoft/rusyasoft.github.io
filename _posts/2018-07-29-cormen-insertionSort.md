@@ -36,13 +36,11 @@ here formaly we call **Loop invariant**, when at the each iteration of for loop 
 
 ![NoImage](/assets/images/cormenAlgorithms/insertionSortAnalysis.jpg)
 
-The running time of the algorithm is the sum of runnint times for each statement execute.
+The running time of the algorithm is the sum of running times for each statement executed.
 
 ![NoImage](/assets/images/cormenAlgorithms/insertionSortAnalysis2.jpg)
 
 
-Simplifying abstraction: it is the **rate of growth**, or **order of growth**, of the running time that really intersts us. We therefore consider only the leading term of a formula (e.g.,*an^2*), since the lower-order terms are relatively insignificant for large values of *n*. We also ignore the leading term’s constant coefficient, since constant factors are less significant than the rate of growth in determining computational efficiency for large inputs.
+**Simplifying abstraction:** it is the **rate of growth**, or **order of growth**, of the running time that really intersts us. We therefore consider only the leading term of a formula (e.g.,*an^2*), since the lower-order terms are relatively insignificant for large values of *n*. We also ignore the leading term’s constant coefficient, since constant factors are less significant than the rate of growth in determining computational efficiency for large inputs.
 
 We write that insertion sort has a worst-case running time of Theta(n^2).
-
-
