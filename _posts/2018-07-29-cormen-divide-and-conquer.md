@@ -11,26 +11,30 @@ In a paradigm of divide-and-conquer we solve the problem recursively, applying t
 - **Conquer** the subproblems by solving them recursively. If the subproblem sizes are small enough (bottom out)
 - **Combine** the solutions to the subproblems into the solution for the original problem
 
+![NoImage](/assets/images/cormenAlgorithms/divideAndConquer.jpg)
+
 A **recurrence** is an equation or inequality that describes a function in terms of its value on smaller inputs. 
+
+![NoImage](/assets/images/cormenAlgorithms/mergeSortRecurrence.jpg)
 
 There are three methods for solving recurrences - that is, for obtaining "O" bounds on the solution:
 - In the **substitution method**, we guess a bound and then use mathematical induction to prove our guess correct
 - The **recursion-tree method** converts the recurrence into a tree whose nodes represent the costs incurred at various levels of the recursion. We use techniques for bounding summations to solve the recurrence
 - The **master method** provides bounds for recurrences of the form
 
-T(n) = aT(n/b) + f(n)
+```T(n) = aT(n/b) + f(n)```
 
-where a >= 1, b > 1 and f(n) is a given function. 
+where *a >= 1, b > 1* and *f(n)* is a given function. 
 
 
 ## The maximum-subarray problem
 
 Finding a maximum-subarray is quite popular problem around, and it has multiple solutions: brute-force, divide-and-conquer and kadane.
 
-Divide-and-conquer suggests that we divide the subarray into two subarrays of as equal size as possible. We find the midpoint, say mid, of the subarray, and consider the subarrays A[low..mid] and A[mid + 1 .. hight] must lie in exactly one of the following places:
-- entirely in the subarray A[low .. mid], so that low <= i <= j <= mid
-- entirely in the subarray A[mid + 1 .. high], so that mid < i <= high
-- crossing the midpoint, so that low <= i <= mid < j <= high
+Divide-and-conquer suggests that we divide the subarray into two subarrays of as equal size as possible. We find the midpoint, say mid, of the subarray, and consider the subarrays *A[low ... mid]* and *A[mid + 1 ... hight]* must lie in exactly one of the following places:
+- entirely in the subarray *A[low .. mid]*, so that *low <= i <= j <= mid*
+- entirely in the subarray *A[mid + 1 .. high]*, so that *mid < i <= high*
+- crossing the midpoint, so that *low <= i <= mid < j <= high*
 
 ```
 FIND-MAX-CROSSING-SUBARRAY(A, low, mid, high):
@@ -53,8 +57,8 @@ return (max-left, max-right, left-sum + right-sum)
 
 ![NoImage](/assets/images/cormenAlgorithms/cormen_fig_4_4.jpg)
 
-(a) Possible locations of subarrays of A[low..high]: entirely in A[low..mid], entirely in A[mid + 1..high], or crossing the midpoint mid
-(b) Any subarray of A[low..high] crossing the midpoint comprises two subarrays A[i..mid] and A[mid + 1 .. j], where low <= i <= mid and mid < j <= high
+- (a) Possible locations of subarrays of *A[low..high]*: entirely in *A[low..mid]*, entirely in *A[mid + 1..high]*, or crossing the midpoint *mid*
+- (b) Any subarray of *A[low..high]* crossing the midpoint comprises two subarrays *A[i..mid]* and *A[mid + 1 .. j]*, where *low <= i <= mid* and *mid < j <= high*
 
 
 With a linear-time FIND-MAX-CROSSING-SUBARRAY procedure in hand, we can write pseudocode for a divide-and-conquer algorithm to solve the maximum-subarray problem:
