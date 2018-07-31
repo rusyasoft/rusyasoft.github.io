@@ -22,11 +22,11 @@ Complexity of Popular Algorithms Table
 ![NoImage](/assets/images/cormenAlgorithms/algorithmsComplexity.png)
 
 
-![NoImage](/assets/images/cormenAlgorithms/ArraySortingAlgorithms.png)
+![NoImage](/assets/images/cormenAlgorithms/ArraySortingAlgorithms.jpg)
 
 
-![NoImage](/assets/images/cormenAlgorithms/CommonDataStructureOperations.png)
+![NoImage](/assets/images/cormenAlgorithms/CommonDataStructureOperations.jpg)
 
 
-![NoImage](/assets/images/cormenAlgorithms/bigOComplexity.png)
+![NoImage](/assets/images/cormenAlgorithms/bigOComplexity.jpg)
 
