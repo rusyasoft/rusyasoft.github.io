@@ -21,3 +21,12 @@ Efficiency Table (how many operations we can perform per given time):
 Complexity of Popular Algorithms Table
 ![NoImage](/assets/images/cormenAlgorithms/algorithmsComplexity.png)
 
+
+![NoImage](/assets/images/cormenAlgorithms/ArraySortingAlgorithms.png)
+
+
+![NoImage](/assets/images/cormenAlgorithms/CommonDataStructureOperations.png)
+
+
+![NoImage](/assets/images/cormenAlgorithms/bigOComplexity.png)
+
