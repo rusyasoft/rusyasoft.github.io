@@ -36,7 +36,7 @@ V is the number of vertices
 E is the number of Edges
 
 
-##Topological Sort Applications
+## Topological Sort Applications
 - Build Systems: IDE such as Visual Studio, Eclipse. When we build our project the dependency between libraries and sub-projects should be considered. We cannot build the library before building and solving its dependencies.
 - Advanced-Packaging Tool (apt-get): In Linux we use this tool in order simply install the applications and libraries into our OS. This tool also uses a dependency map to install. 
 - Task Scheduling
