@@ -17,8 +17,10 @@ For a Directed Acyclic Graph (DAG) is a linear ordering of vertices such that fo
 
 
 - For a DAG
-- Topological sort is not uniqu:
+- Topological sort is not unique:
+
   A B C D E
+  
   A C B D E
 
 ##Topological Sorting
