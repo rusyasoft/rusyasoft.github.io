@@ -52,7 +52,7 @@ The Dagger algorithm works by creating a directed acyclic graph (the technical t
 
 ![NoImage](/assets/images/ethash_algorithm.png)
 
-## Why Is This Memory Hard?
+#### Why Is This Memory Hard?
 Every mixing operation requires a 128 byte read from the DAG (See Figure above, Step 2).  Hashing a single nonce requires 64 mixes, resulting in (128 Bytes x 64) = 8 KB of memory read.  The reads are random access (each 128 byte page is chosen pseudorandomly based on the mixing function), so putting a small chunk of the DAG in an L1 or L2 cache isn’t going to help much, since the next DAG fetch will very likely yield a cache miss.  Since fetching the DAG pages from memory is much slower than the mixing computation, we’ll see almost no performance improvement from speeding up the mixing computation.  The best way to speed up the ethash hashing algorithm is to speed up the 128 byte DAG page fetches from memory.  Thus, we consider the ethash algorithm to be memory hard or memory bound, since the system's memory bandwidth is limiting our performance.
 
 
