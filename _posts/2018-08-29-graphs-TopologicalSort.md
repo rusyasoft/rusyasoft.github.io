@@ -23,7 +23,7 @@ For a Directed Acyclic Graph (DAG) is a linear ordering of vertices such that fo
   
   A C B D E
 
-##Topological Sorting
+## Topological Sorting
 
 Start with A and perform DFS, while not priting the path on the way. Go to deepest vertex and when there are no neighbours to go from the vertex (it can be by two reason: first is because it is a leaf node, second all neighbour nodes are already visited) set the vertex as visited and push it onto the stack.
 
