@@ -37,25 +37,7 @@ Continuing this process untill all nodes becomes visited and then perform pop op
 V is the number of vertices
 E is the number of Edges
 
-
-## Topological Sort Applications
-- Build Systems: IDE such as Visual Studio, Eclipse. When we build our project the dependency between libraries and sub-projects should be considered. We cannot build the library before building and solving its dependencies.
-- Advanced-Packaging Tool (apt-get): In Linux we use this tool in order simply install the applications and libraries into our OS. This tool also uses a dependency map to install. 
-- Task Scheduling
-- Pre-requisite problems
-- In a Blockchains
-
-### Usage in a Blockchain
-It has been in used in a Dagger which is "memory-hard proof of work" algorithm. The main reason why memory hardness is important is to make the proof of work function resistant to specialized hardware such as FPGA or ASICs solutions. 
-
-The Dagger algorithm works by creating a directed acyclic graph (the technical term for a tree where each node is allowed to have multiple parents) with ten levels including the root and a total of 225 - 1 values. In levels 1 through 8, the value of each node depends on three nodes in the level above it, and the number of nodes in each level is eight times larger than in the previous. In level 9, the value of each node depends on 16 of its parents, and the level is only twice as large as the previous; the purpose of this is to make the natural time-memory tradeoff attack be artificially costly to implement at the first level, so that it would not be a viable strategy to implement any time-memory tradeoff optimizations at all. For more details about Dagger algorithm refer to [link](http://www.hashcash.org/papers/dagger.html)
-
-![NoImage](/assets/images/ethash_algorithm.png)
-
-#### Why Is This Memory Hard?
-Every mixing operation requires a 128 byte read from the DAG (See Figure above, Step 2).  Hashing a single nonce requires 64 mixes, resulting in (128 Bytes x 64) = 8 KB of memory read.  The reads are random access (each 128 byte page is chosen pseudorandomly based on the mixing function), so putting a small chunk of the DAG in an L1 or L2 cache isn’t going to help much, since the next DAG fetch will very likely yield a cache miss.  Since fetching the DAG pages from memory is much slower than the mixing computation, we’ll see almost no performance improvement from speeding up the mixing computation.  The best way to speed up the ethash hashing algorithm is to speed up the 128 byte DAG page fetches from memory.  Thus, we consider the ethash algorithm to be memory hard or memory bound, since the system's memory bandwidth is limiting our performance.
-
-
+### Java Implementation
 ```Java
 // A Java program to print topological sorting of a DAG
 import java.io.*;
@@ -143,3 +125,22 @@ class Graph
     }
 }
 ```
+
+
+## Topological Sort Applications
+- Build Systems: IDE such as Visual Studio, Eclipse. When we build our project the dependency between libraries and sub-projects should be considered. We cannot build the library before building and solving its dependencies.
+- Advanced-Packaging Tool (apt-get): In Linux we use this tool in order simply install the applications and libraries into our OS. This tool also uses a dependency map to install. 
+- Task Scheduling
+- Pre-requisite problems
+- In a Blockchains
+
+### Usage in a Blockchain
+It has been in used in a Dagger which is "memory-hard proof of work" algorithm. The main reason why memory hardness is important is to make the proof of work function resistant to specialized hardware such as FPGA or ASICs solutions. 
+
+The Dagger algorithm works by creating a directed acyclic graph (the technical term for a tree where each node is allowed to have multiple parents) with ten levels including the root and a total of 225 - 1 values. In levels 1 through 8, the value of each node depends on three nodes in the level above it, and the number of nodes in each level is eight times larger than in the previous. In level 9, the value of each node depends on 16 of its parents, and the level is only twice as large as the previous; the purpose of this is to make the natural time-memory tradeoff attack be artificially costly to implement at the first level, so that it would not be a viable strategy to implement any time-memory tradeoff optimizations at all. For more details about Dagger algorithm refer to [link](http://www.hashcash.org/papers/dagger.html)
+
+![NoImage](/assets/images/ethash_algorithm.png)
+
+#### Why Is This Memory Hard?
+Every mixing operation requires a 128 byte read from the DAG (See Figure above, Step 2).  Hashing a single nonce requires 64 mixes, resulting in (128 Bytes x 64) = 8 KB of memory read.  The reads are random access (each 128 byte page is chosen pseudorandomly based on the mixing function), so putting a small chunk of the DAG in an L1 or L2 cache isn’t going to help much, since the next DAG fetch will very likely yield a cache miss.  Since fetching the DAG pages from memory is much slower than the mixing computation, we’ll see almost no performance improvement from speeding up the mixing computation.  The best way to speed up the ethash hashing algorithm is to speed up the 128 byte DAG page fetches from memory.  Thus, we consider the ethash algorithm to be memory hard or memory bound, since the system's memory bandwidth is limiting our performance.
+
