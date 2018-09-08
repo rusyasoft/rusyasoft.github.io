@@ -108,11 +108,11 @@ There are different implementations of the Ford Fulkerson Algorithm. The Edmonds
 ### Bipartite Matching 
 There are dozens of real world problems that can be formed as Bipartite Matching. One of the popularly used one is Applicants and Jobs (mentioned by Robert Sedgewick in his Coursera MOOC):
 
-![courseraRobertClass](/assets/2018-09-10-maxflow/courseraRobertClass.jpg)
+![courseraRobertClass](/assets/2018-09-10-maxflow/courseraRobertClass.JPG)
 
 Alice has been accepted by Adobe, Amazon and Google. Bob has been accepted by Adobe and Amazon, and so on. Each of these jobs only receives one person. How should we perform matching that each of these applicants gets the job. This problem can be converted into maximum flow problem, and it has following solution:
 
-![courseraRobertClassSolution](/assets/2018-09-10-maxflow/courseraRobertClassSolution.jpg)
+![courseraRobertClassSolution](/assets/2018-09-10-maxflow/courseraRobertClassSolution.JPG)
 
 Lets design it in the graph, using VisualAlgo web site, which I found really good tool for quick check:
 
