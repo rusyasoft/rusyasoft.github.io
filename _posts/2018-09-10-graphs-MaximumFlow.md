@@ -124,6 +124,63 @@ After designing the graph using VisualAlgo we can quick-run the algorithm for th
 
 ### Try to Apply to Web Services
 
+I have been looking around for different kinds of application examples, especially try to find web services related application. Couldn't find one and decided to make my own. 
+
+![WebServiceEx1](/assets/2018-09-10-maxflow/WebServiceEx1.jpg)
+
+Here typical web architecture, with (right to left order) users, load balancer, web servers, application servers, databases and data itself. Two ends should be considered in an abstract way.
+
+To make it look more examplistic (note sure such a word exist), lets give the weight to each edge, relative to the maximum load of the each server can handle. We are considering heterogeneous network and nodes. 
+
+![WebServiceEx2](/assets/2018-09-10-maxflow/WebServiceEx2.jpg)
+
+Now everything looks settled and ready to design the maximum flow. The goal of using maximum flow algorithm is to calculate what is the capability of this system and where are the bottlenecks.
+
+![matumdeBefore](/assets/2018-09-10-maxflow/matumdeBefore.JPG)
+
+We have designed our network using another good online tool. Here you can see the source code of the model:
+
+```
+% Graph saved at Fri Sep 07 2018 22:43:41 GMT+0900 (Korean Standard Time)
+n 25.267009493670884 203.61802184466018
+n 206.91257911392407 352.88986650485435
+n 205.80498417721518 236.38501213592232
+n 206.91257911392407 134.4432645631068
+n 209.1277689873418 47.064623786407765
+n 415.1404272151899 352.88986650485435
+n 398.52650316455697 209.68598300970874
+n 417.35561708860763 55.55976941747573
+n 528.1151107594936 280.0743325242718
+n 541.40625 142.93841019417474
+n 672.1024525316456 212.11316747572815
+e 0 1 10
+e 0 2 10
+e 0 3 10
+e 0 4 10
+e 1 5 2
+e 1 6 5
+e 2 5 2
+e 2 6 5
+e 3 5 2
+e 3 6 5
+e 3 7 2
+e 4 6 5
+e 4 7 12
+e 5 8 10
+e 6 8 10
+e 6 9 10
+e 7 9 10
+e 8 10 20
+e 9 10 20
+```
+
+Lets, run the simulation and find out the maximum flow.
+
+![matumdeAfter](/assets/2018-09-10-maxflow/matumdeAfter.JPG)
+
+Here, we can see the maximum flow is equal to 33. Which is not something what we have expected. At the input we have 40 users connected, and on the right side we have the database with capability to serve 40 users. But somehow we are ending up serving only 33 users.
+
+By applying maximum flow algorithms we can analyze and find bottlnecks of our systems.
 
 
 
