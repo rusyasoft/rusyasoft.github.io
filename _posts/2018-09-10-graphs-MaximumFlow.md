@@ -18,7 +18,7 @@ The following is a simple idea of the algorithm
 2) While there is an augmenting path from source to sink Add this path flow to maxFlow
 3) Return maxFlow
 
-![NoImage](MaximumFlowExampleFigure1.jpg)
+![NoImage](/assets/2018-09-10-maxflow/MaximumFlowExampleFigure1.jpg)
 
 ## Terminologies
 - **Residual Graph**: It's a graph which indicates additional possible flow. If there is such path from source to sink then there is a possibility to add flow
