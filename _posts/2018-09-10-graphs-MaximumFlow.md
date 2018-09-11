@@ -9,14 +9,14 @@ tags:
 
 ## Problem
 Given a graph which represents a flow network where every edge has a capacity. Also given two vertices source *S* and sink *T* in the graph. Find out the maximum possible flow from *S*  to *T* with following constraints
-a) Flow on an edge doesn't exceed the given capacity of the edge
-b) In-flow is equal to Out-flow for every vertex except *s* and *t*
+a. Flow on an edge doesn't exceed the given capacity of the edge
+b. In-flow is equal to Out-flow for every vertex except *s* and *t*
 
 ## Ford-Fulkerson Algorithm
 The following is a simple idea of the algorithm
-1) Start with a initial maxFlow as 0
-2) While there is an augmenting path from source to sink Add this path flow to maxFlow
-3) Return maxFlow
+1. Start with a initial maxFlow as 0
+2. While there is an augmenting path from source to sink Add this path flow to maxFlow
+3. Return maxFlow
 
 ![NoImage](/assets/2018-09-10-maxflow/MaximumFlowExampleFigure1.jpg)
 
@@ -25,8 +25,8 @@ The following is a simple idea of the algorithm
 - **Residual Capacity**: It's original capacity of the edge minus flow
 - **Minimal Cut**: Also known as bottleneck capacity, which decides maximum possible flow from source to sink through an augmented path
 - **Augmenting path**: Augmenting path can be done in two ways:
-1) Non-full forward edges
-2) Non-empty backward edges
+1. Non-full forward edges
+2. Non-empty backward edges
 
 **Not so clear, especially the 2nd one "Non-empty backward edges" :(, but we will get into it later in our example.
 
@@ -36,9 +36,9 @@ Lets assume we have simple graph with four vertices and five edges:
 ![SimpleRombGraph](/assets/2018-09-10-maxflow/SimpleRombGraph.png)
 
 When the Naive Greedy Algorithm (GA) approach is applied the maximum flow may be not produced. It is well known from the definition of the greedy algorithm that every step it tries to grab maximum value. Which is not always brings to the collective maxmum solution. 
-1) From the source GA chooses 3 because it has highest value
-2) From vertex 1 the GA would choose edge with value 5
-3) Finally from vertex 2 the GA chooses only left edge which is 3
+1. From the source GA chooses 3 because it has highest value
+2. From vertex 1 the GA would choose edge with value 5
+3. Finally from vertex 2 the GA chooses only left edge which is 3
 
 ![SimpleRombGraph1](/assets/2018-09-10-maxflow/SimpleRombGraph1.png)
 ![SimpleRombGraph2](/assets/2018-09-10-maxflow/SimpleRombGraph2.png)
