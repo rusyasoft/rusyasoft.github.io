@@ -9,8 +9,9 @@ tags:
 
 ## Problem
 Given a graph which represents a flow network where every edge has a capacity. Also given two vertices source *S* and sink *T* in the graph. Find out the maximum possible flow from *S*  to *T* with following constraints
-a. Flow on an edge doesn't exceed the given capacity of the edge
-b. In-flow is equal to Out-flow for every vertex except *s* and *t*
+
+1. Flow on an edge doesn't exceed the given capacity of the edge
+2. In-flow is equal to Out-flow for every vertex except *s* and *t*
 
 ## Ford-Fulkerson Algorithm
 The following is a simple idea of the algorithm
