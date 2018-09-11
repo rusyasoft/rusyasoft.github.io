@@ -26,8 +26,8 @@ The following is a simple idea of the algorithm
 - **Residual Capacity**: It's original capacity of the edge minus flow
 - **Minimal Cut**: Also known as bottleneck capacity, which decides maximum possible flow from source to sink through an augmented path
 - **Augmenting path**: Augmenting path can be done in two ways:
-1. Non-full forward edges
-2. Non-empty backward edges
+   1. Non-full forward edges
+   2. Non-empty backward edges
 
 **Not so clear, especially the 2nd one "Non-empty backward edges" :(, but we will get into it later in our example.
 
