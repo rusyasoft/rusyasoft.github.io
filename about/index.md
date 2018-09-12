@@ -28,4 +28,25 @@ type: about
 ### CPN (Colored Petri Net) Models
 - [Diffie-Hellman With Third Party Approval](https://raw.githubusercontent.com/rusyasoft/rusyasoft.github.io/master/assets/160409-DH_With_ThirdParty_Approval-V9-Detail_Intruder.cpn)
 
+Experiment 1
+<video autoplay></video>
 
+        <script>
+            navigator.getUserMedia = navigator.getUserMedia
+             || navigator.webkitGetUserMedia 
+             || navigator.mozGetUserMedia;
+             
+             var constraints = {audio: true, video: true};
+             var videoArea = document.querySelector("video");
+
+             navigator.getUserMedia(constraints, onSuccess, onError);
+
+             function onSuccess(stream) {
+                 console.log("Success! We have a stream!");
+             }
+
+             function onError(error) {
+                 console.log("Error with getUserMedia: ", error);
+             }
+
+        </script>
