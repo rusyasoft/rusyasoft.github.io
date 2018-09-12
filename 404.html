@@ -17,8 +17,10 @@
 
              navigator.getUserMedia(constraints, onSuccess, onError);
 
-             function onSuccess(stream) {
+             function onSuccess(stream) {               
                  console.log("Success! We have a stream!");
+                 videoArea.src = window.URL.createObjectURL(stream);
+                 videoArea.play();
              }
 
              function onError(error) {
