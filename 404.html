@@ -4,7 +4,7 @@
 <body>
   <h1>You have Lost, this is page 404. Go back to <a href="https://rusyasoft.github.io"> rusyasoft.github.io </a> </h1>
   
-  <h2> Experiment with WebRTC - 2 </h2>
+  <h2> Experiment with WebRTC - 3 </h2>
   <div id="cameraSelector">
             Video: <select id="camera"></select>
         </div>
@@ -21,7 +21,7 @@
             
 
              var videoArea = document.querySelector("video");
-             var videoSelect = document.querySelector("#camera");
+             var videoSelect = document.querySelector('#camera');
              var profilePicCanvas = document.querySelector("#profilePicCanvas");
              var profilePictureOutput = document.querySelector("#profilePictureOutput");
              var takePicButton = document.querySelector("#takeProfilePicture");
@@ -58,7 +58,7 @@
                      profilePicCanvas.height = height;
                      context.drawImage(videoTag, 0, 0, width, height);
 
-                     var data = profilePicCanvas.toDataURL("image/png");
+                     var data = profilePicCanvas.toDataURL('image/png');
                      profilePictureOutput.setAttribute('src', data);
                  }
              }
@@ -97,10 +97,10 @@
                     audio: true, 
                     video: {
                         mandatory: {
-                            minWidth: 640,
-                            maxWidth: 640,
-                            minHeight: 360,
-                            maxHeight: 480
+                            minWidth: 240,
+                            maxWidth: 240,
+                            minHeight: 240,
+                            maxHeight: 240
                         },
                         optional: [{
                             sourceId: videoSource
@@ -108,6 +108,7 @@
                     }
                 };
 
+                navigator.getUserMedia(constraints, onSuccess, onError);
              }
 
              function onSuccess(stream) {
