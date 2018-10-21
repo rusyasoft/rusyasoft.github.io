@@ -1,5 +1,5 @@
 ---
-title: [Book Reivew] Deep Work
+title: Deep Work
 categories:
  - Book, Review
 tags:
