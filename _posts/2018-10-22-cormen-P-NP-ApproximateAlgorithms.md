@@ -7,6 +7,7 @@ tags:
 ---
 
 
+
 P and NP is the problem that always comes out while we are studying algorithms, and usually, it comes up at the end of any algorithms book. The reason it comes out at the latest pages is that it is quite an advanced topic. 
 
 P means the polynomial time, which is mathematically can be represented as `x^k + x^3 + x ^2 + x + C = 0` where and has time complexity O(n^k). It is important to notice that `k` is not big for P-type of problems.
