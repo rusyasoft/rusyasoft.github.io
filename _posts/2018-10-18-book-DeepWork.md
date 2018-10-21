@@ -1,5 +1,5 @@
 ---
-title: Deep Work
+title: Deep Work (Book Review)
 categories:
  - Book, Review
 tags:
