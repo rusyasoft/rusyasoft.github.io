@@ -7,6 +7,7 @@ tags:
 ---
 
 
+
 The book has been written by Cal Newport, a professor at the Georgetown University (Washington D.C). He wrote about the importance of the focusing and concentration on the work, by increasing the limit of the time we usually allocate for it. The Author writes a lot of different use cases for great historical people (some of them are still alive), how they have been going deep into their work. Who used what kind of technique, and how the technique was mastered. While going through the book I have realized that all of these characters had some similar points and patterns. Concentration Technique !!!
 
 ![NoImage](/assets/images/FrontPageOfDeepWorkBook.png)
