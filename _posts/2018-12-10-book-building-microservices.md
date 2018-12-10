@@ -31,7 +31,8 @@ If we need to make a choice to cut a few corners to get some urgent features out
 ### Postel's Law
 
 > Be conservative in what you do, be liberal in what you accept from others
-> -- <cite>Postel's Law</cite>
+> 
+> <cite>Postel's Law</cite>
 
 Originally the concept of this law was intended to the interaction of devices over networks, where you should expect all sorts of odd things to happen.  
 
@@ -69,4 +70,5 @@ Author refers to Martin Fowler's *Catastrophic Failover* problem with his own pa
 > We were using a transacted queue: as the worker died, its lock on the request timed out, and 
 > the pricing request was put back on the queue - only for another worker to pick it up and die.
 > This was a classic example of what Martin Fowler calls a catastrophic failover
-> -- <cite>Sam Newman</cite>                   
+> 
+> <cite>Sam Newman</cite>                   
