@@ -11,6 +11,19 @@ The book has been written by Sam Newman, who talks about microservice architectu
 
 ![NoImage](https://covers.oreillystatic.com/images/0636920033158/lrg.jpg)
 
+## What Makes a Good Service?
+
+The author emphasizes the terms most of us heard many times "Loose Coupling" and "High Cohesion". Me personally heard this terms since very very beginning of my programming career (which goes back to B.C). But one going to understand the real meaning of these words after long sufferings.
+
+### Loose Coupling
+
+When services are loosely coupled, a change to one service should not require a change to another service. The main purpose of introducing MSA is exactly about making the system loosely coupled. Where the developer must be able to make a change to one service and deploy it, without needing to change any other part of the system. The author describes details of the loosely coupling problem in Chapter 4(Integration) with good examples and ways.
+
+### High Cohesion
+
+All the related behaviors must sit together, and unrelated behaviors to sit elswhere. When new changes to the behavior should be applied then we should able to change in one place and deploy. Making changes in lots of different places is slower and error prone. It also may cause the safe deployment problems. Because changed behaviors must be deployed togethere at once, otherwise it may cause a big chaose of inconsistency.
+
+
 ### Technical Dept
 
 If we need to make a choice to cut a few corners to get some urgent features out, then it creates a **technical dept**, It might have a short-term benefit but a long-term cost. Technical dept must be considered just like dept in the real world. It has an ongoing cost, and is something we want to pay down.
@@ -18,7 +31,7 @@ If we need to make a choice to cut a few corners to get some urgent features out
 ### Postel's Law
 
 > Be conservative in what you do, be liberal in what you accept from others
->                                                    Postel's Law
+> -- <cite>Postel's Law</cite>
 
 Originally the concept of this law was intended to the interaction of devices over networks, where you should expect all sorts of odd things to happen.  
 
@@ -47,3 +60,13 @@ If the breaking change in the new API must be released, then we deploy a new ver
 
 After release all the depedant services are informed about deprectation of the old API, and suggested them to switch new one. When everyone who consumes the old API interface switched to new one, then the old API must be terminated. Old API must be monitored for some time to not holding any incoming request, if incoming requests are appeared then turning-off the interface may harm the system. When all dependent services are switched to new V2 version of the API then V1 can be completely removed (as depicted in figure above).
 
+
+## Catastrophic Failover
+
+Author refers to Martin Fowler's *Catastrophic Failover* problem with his own past experience. It is worth to read and learn from.
+
+> A bug had crept in whereby a certain type of pricing request would cause a worker to crash. 
+> We were using a transacted queue: as the worker died, its lock on the request timed out, and 
+> the pricing request was put back on the queue - only for another worker to pick it up and die.
+> This was a classic example of what Martin Fowler calls a catastrophic failover
+> -- <cite>Sam Newman</cite>                   

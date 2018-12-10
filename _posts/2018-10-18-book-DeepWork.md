@@ -68,7 +68,7 @@ The journalist Mason Currey spent half a decade studying the habits of famous th
 Through out the book the author brings the topic related to modern SNS (Facebook, twitter, etc) and how they affect to our deep work life. But he avoids inteligently to open the big topic for discussion. Of course we can feel he is personally not much big fan of those SNS and considers them as a disturbing tools. I can agree with him on that it is really big never ending discussion. Because even me myself personally inside still have controversial views, while I do understand the social networks are disturbing tools, but sometimes I can get really useful information which could actually affect my life (It could be IT blog, motivational speech or video). That is why as a conclusion everyone should realize for oneself at the proper time, is it needed or not. The balance is important. 
 
 > Great creative minds think like artists but work like accountants
->                                                    David Brooks
+> -- <cite>David Brooks</cite>
 
 
 
