@@ -1,5 +1,5 @@
 ---
-title: [Spring Security] Introduction
+title: (Spring Security) Introduction
 categories:
  - spring-security
 tags:
