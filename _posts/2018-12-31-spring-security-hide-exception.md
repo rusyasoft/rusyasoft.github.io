@@ -1,5 +1,5 @@
 ---
-title: (Spring Security) Disable Hiding Exception Messages
+title: Disable Hiding Exception Messages (Spring Security)
 categories:
  - spring-security
 tags:
@@ -9,18 +9,14 @@ tags:
 
 We will need a UserDetailService implementation, which depends on each development requirements. 
 
-```JAVA
-
+```java
    @Autowired
    private CustomUserDetailsService userDetailsService;
 ```
 
-
-
 I think the configureGlobal can be considered as a starting point. 
 
-```JAVA
-
+```java
 @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(authProvider());
@@ -29,8 +25,7 @@ I think the configureGlobal can be considered as a starting point.
 
 AuthenticationProvider object with disabling hideUserNotFoundException should be created
 
-```JAVA
-
+```java
 public AuthenticationProvider authProvider() {
         DaoAuthenticationProvider impl = new DaoAuthenticationProvider();
         impl.setUserDetailsService(userDetailsService);
@@ -42,18 +37,15 @@ public AuthenticationProvider authProvider() {
 
 in order to process exceptions we have to register custom AuthenticationFailureHandler at the HttpSecurity.
 
-```JAVA
-
+```java
 http.formLogin()
                 .loginPage("/login")
                 .failureHandler(new CustomAuthenticationFailureHandler())
 ```
 
-
 Custom authentication failure handler may simply encode the error message to be fit into the query request argument
 
-```JAVA
-
+```java
 public class    CustomAuthenticationFailureHandler implements AuthenticationFailureHandler {
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
@@ -63,14 +55,11 @@ public class    CustomAuthenticationFailureHandler implements AuthenticationFail
 
         response.sendRedirect("/login?error=" + encodedMsg);
     }
-
 ```
-
 
 Finally login controller which gets the message and organizes the string into view model
 
-```JAVA
-
+```java
 @Controller
 public class Login {
     @RequestMapping(value = "/login", method = RequestMethod.GET)
@@ -84,10 +73,7 @@ public class Login {
         return modelAndView;
     }
 }
-
 ```
-
-
 
 ## References
 
