@@ -89,3 +89,113 @@ In above code we have two configure methods overriden, and they will block from 
 - csrf().disable() says to disable CSRF prevention which is turned on by default
 - and() is the chainer that is used to help the chain all these functionalities together
 
+As it can be seen from above example Spring Security by default is the safe and easy runnable framework. At the same it time it is very flexible and reconfigurable framework. Almost any part of the framework is reconfigurable. 
+
+## The Main Processes of the Spring Security
+
+Roughly we can consider Spring Security as a two separate processes (anyhting out of these two can be considered as additional necessary features):
+1. Authentication Process
+2. Authoriztion Process
+
+![NoImage](/assets/spring-security/AuthenticationAndAuthorization.jpg)
+
+### Authentication Process
+
+Spring Security applies chain of filters to the incoming requests. When the user authentication request arrives to the server it goes through the chain of filters until it finds the relevant Authentication Filter based on the authentication mechanism. Here some examples of the authentication filters:
+
+- BasicAuthenticationFilter
+- DigestAuthenticationFilter
+- UsernamePasswordAuthenticationFilter
+- X509AuthenticationFilter
+
+In our description we are considering the basic username and password based authentication that is why the UsernamePasswordAuthenticationFilter gets activated and sends the request to the UsernamePasswordAuthenticationToken module, which is going to create a token out of username and password arguments. Using the token object *authenticate* method of the AuthenticationManager will be invoked. AuthenticationManager is the interface with real implementation class depicted as *ProviderManager*. *ProviderManager* has a list of configured *AuthenticationProvider*(s):
+
+- CasAuthenticationProvider
+- JaasAuthenticationProvider
+- DaoAuthenticationProvider
+- OpenIDAuthenticationProvider
+- RememberMeAuthenticationProvider
+- LdapAuthenticationProvider
+
+Depend on the provider the usage of the above created token would be different. For example DaoAuthenticationProvder is one of the provider that uses UserDetailsService for retrieving the user details based on username. Most of the cases the details are extracted from DB. 
+
+```JAVA
+
+public class DaoAuthenticationProvider extends AbstractUserDetailsAuthenticationProvider {	    
+    // ... codes are skipped        
+    
+    private UserDetailsService userDetailsService;
+
+    // ... codes are skipped    
+    protected final UserDetails retrieveUser(String username,
+			UsernamePasswordAuthenticationToken authentication)
+			throws AuthenticationException {
+		prepareTimingAttackProtection();
+		try {
+			UserDetails loadedUser = this.getUserDetailsService().loadUserByUsername(username);
+			if (loadedUser == null) {
+				throw new InternalAuthenticationServiceException(
+						"UserDetailsService returned null, which is an interface contract violation");
+			}
+			return loadedUser;
+		}
+		catch (UsernameNotFoundException ex) {
+			mitigateAgainstTimingAttack(authentication);
+			throw ex;
+		}
+		catch (InternalAuthenticationServiceException ex) {
+			throw ex;
+		}
+		catch (Exception ex) {
+			throw new InternalAuthenticationServiceException(ex.getMessage(), ex);
+		}
+    }
+    // ... more codes
+}
+```
+
+To not get confused and ask question *where is the AuthenticationProvider ?*, the AbstractUserDetailsAuthenticationProvider implements it internally and calls *retrieveUser(...)* method while *authenticated(...)* method is called
+
+```JAVA
+public abstract class AbstractUserDetailsAuthenticationProvider implements
+		AuthenticationProvider, InitializingBean, MessageSourceAware {
+
+    // ... codes are skipped 
+    public Authentication authenticate(Authentication authentication)
+			throws AuthenticationException {
+		// ... codes are skipped 
+        try {
+            user = retrieveUser(username,
+                    (UsernamePasswordAuthenticationToken) authentication);
+        }
+        catch (UsernameNotFoundException notFound) {
+            logger.debug("User '" + username + "' not found");
+
+            if (hideUserNotFoundExceptions) {
+                throw new BadCredentialsException(messages.getMessage(
+                        "AbstractUserDetailsAuthenticationProvider.badCredentials",
+                        "Bad credentials"));
+            }
+            else {
+                throw notFound;
+            }
+        }
+        // ... more codes
+	}
+    // ... more codes
+}
+
+```
+
+I think it would be little bit off topic, but i think i have to mention the variable *hideUserNotFoundExceptions* is something that hides the internal messages. So if in UserDetailService layer you would throw some exception which should be seen by the end user, then you should false this variable. Otherwise the end user will be getting only BadCredentialException. It can be set at the moment when you register your authentication provider object by *setHideUserNotFoundExceptions(false)*.
+
+```JAVA
+
+public interface UserDetailsService
+{
+  UserDetails loadUserByUsername(String username) throws UsernameNotFoundException;
+}
+```
+
+As a result of the UserDetailsService must be implemented and inside the *loadUserByUsername()* developer has a full freedome to do whatever desires :). I mean usually the access to the DB is implemented, and if it is decided that authentication is successfully passed then the UserDtails object must be returned otherwise *UsernameNotFoundException* must be thrown. Based on return recurse return happens and AuthenticationObject is returned to the security context, otherwise AuthenticationException is thrown. If AuthenticationException is thrown, that will be handled by the configured AuthenticationEntryPoint that supports for the authentication mechanism. 
+
