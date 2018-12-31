@@ -1,5 +1,5 @@
 ---
-title: (Spring Security) Introduction
+title: Introduction Spring Security
 categories:
  - spring-security
 tags:
@@ -29,7 +29,6 @@ Here some are the features provided by default:
 First of all we have to integrate Spring Security into our code by declaring it in the gradle configuration file build.gradle:
 
 ```
-
 dependencies {
     compile ('org.springframework.security:spring-security-config')
     compile ('org.springframework.security:spring-security-core')
@@ -37,10 +36,9 @@ dependencies {
 }
 ```
 
-sometime we may be pushed to declare the version. For Spring Boot users who love to just easy start with starters the following starter adding line could work too:
+sometime it may become necessary to declare the version of the package. For Spring Boot users who love to just easy start with starters the following starter adding line would be enough:
 
 ```
-
 dependencies {    
     compile('org.springframework.boot:spring-boot-starter-security')
 }
@@ -48,8 +46,7 @@ dependencies {
 
 Most basic start of the spring security is done by declaring the configuration bean:
 
-```JAVA
-
+```java
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -91,7 +88,7 @@ In above code we have two configure methods overriden, and they will block from 
 
 As it can be seen from above example Spring Security by default is the safe and easy runnable framework. At the same it time it is very flexible and reconfigurable framework. Almost any part of the framework is reconfigurable. 
 
-## The Main Processes of the Spring Security
+# The Main Processes of the Spring Security
 
 Roughly we can consider Spring Security as a two separate processes (anyhting out of these two can be considered as additional necessary features):
 1. Authentication Process
@@ -99,7 +96,7 @@ Roughly we can consider Spring Security as a two separate processes (anyhting ou
 
 ![NoImage](/assets/spring-security/AuthenticationAndAuthorization.jpg)
 
-### Authentication Process
+## Authentication Process
 
 Spring Security applies chain of filters to the incoming requests. When the user authentication request arrives to the server it goes through the chain of filters until it finds the relevant Authentication Filter based on the authentication mechanism. Here some examples of the authentication filters:
 
@@ -119,8 +116,7 @@ In our description we are considering the basic username and password based auth
 
 Depend on the provider the usage of the above created token would be different. For example DaoAuthenticationProvder is one of the provider that uses UserDetailsService for retrieving the user details based on username. Most of the cases the details are extracted from DB. 
 
-```JAVA
-
+```java
 public class DaoAuthenticationProvider extends AbstractUserDetailsAuthenticationProvider {	    
     // ... codes are skipped        
     
@@ -156,7 +152,7 @@ public class DaoAuthenticationProvider extends AbstractUserDetailsAuthentication
 
 To not get confused and ask question *where is the AuthenticationProvider ?*, the AbstractUserDetailsAuthenticationProvider implements it internally and calls *retrieveUser(...)* method while *authenticated(...)* method is called
 
-```JAVA
+```java
 public abstract class AbstractUserDetailsAuthenticationProvider implements
 		AuthenticationProvider, InitializingBean, MessageSourceAware {
 
@@ -184,13 +180,11 @@ public abstract class AbstractUserDetailsAuthenticationProvider implements
 	}
     // ... more codes
 }
-
 ```
 
-I think it would be little bit off topic, but i think i have to mention the variable *hideUserNotFoundExceptions* is something that hides the internal messages. So if in UserDetailService layer you would throw some exception which should be seen by the end user, then you should false this variable. Otherwise the end user will be getting only BadCredentialException. It can be set at the moment when you register your authentication provider object by *setHideUserNotFoundExceptions(false)*.
+I think it would be little bit off topic, but i think i have to mention the variable *hideUserNotFoundExceptions* is something that hides the internal messages. So if in UserDetailService layer you would throw some exception which should be seen by the end user, then you should false this variable. Otherwise the end user will be getting only BadCredentialException. It can be set at the moment when you register your authentication provider object by *setHideUserNotFoundExceptions(false)*. [For Details](https://rusyasoft.github.io/spring-security/2018/12/31/spring-security-hide-exception/)
 
-```JAVA
-
+```java
 public interface UserDetailsService
 {
   UserDetails loadUserByUsername(String username) throws UsernameNotFoundException;
