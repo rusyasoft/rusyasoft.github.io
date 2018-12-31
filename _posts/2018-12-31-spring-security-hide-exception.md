@@ -10,37 +10,37 @@ tags:
 We will need a UserDetailService implementation, which depends on each development requirements. 
 
 ```java
-   @Autowired
-   private CustomUserDetailsService userDetailsService;
+@Autowired
+private CustomUserDetailsService userDetailsService;
 ```
 
 I think the configureGlobal can be considered as a starting point. 
 
 ```java
 @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.authenticationProvider(authProvider());
-    }
+public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+    auth.authenticationProvider(authProvider());
+}
 ```
 
 AuthenticationProvider object with disabling hideUserNotFoundException should be created
 
 ```java
 public AuthenticationProvider authProvider() {
-        DaoAuthenticationProvider impl = new DaoAuthenticationProvider();
-        impl.setUserDetailsService(userDetailsService);
-        impl.setPasswordEncoder(getPasswordEncoder());//new BCryptPasswordEncoder());
-        impl.setHideUserNotFoundExceptions(false) ;
-        return impl;
-    }
+    DaoAuthenticationProvider impl = new DaoAuthenticationProvider();
+    impl.setUserDetailsService(userDetailsService);
+    impl.setPasswordEncoder(getPasswordEncoder());//new BCryptPasswordEncoder());
+    impl.setHideUserNotFoundExceptions(false) ;
+    return impl;
+}
 ```
 
 in order to process exceptions we have to register custom AuthenticationFailureHandler at the HttpSecurity.
 
 ```java
 http.formLogin()
-                .loginPage("/login")
-                .failureHandler(new CustomAuthenticationFailureHandler())
+    .loginPage("/login")
+    .failureHandler(new CustomAuthenticationFailureHandler())
 ```
 
 Custom authentication failure handler may simply encode the error message to be fit into the query request argument
@@ -55,6 +55,7 @@ public class    CustomAuthenticationFailureHandler implements AuthenticationFail
 
         response.sendRedirect("/login?error=" + encodedMsg);
     }
+}
 ```
 
 Finally login controller which gets the message and organizes the string into view model

@@ -1,5 +1,5 @@
 ---
-title: Introduction Spring Security
+title: Introduction to the Spring Security
 categories:
  - spring-security
 tags:
@@ -193,3 +193,6 @@ public interface UserDetailsService
 
 As a result of the UserDetailsService must be implemented and inside the *loadUserByUsername()* developer has a full freedome to do whatever desires :). I mean usually the access to the DB is implemented, and if it is decided that authentication is successfully passed then the UserDtails object must be returned otherwise *UsernameNotFoundException* must be thrown. Based on return recurse return happens and AuthenticationObject is returned to the security context, otherwise AuthenticationException is thrown. If AuthenticationException is thrown, that will be handled by the configured AuthenticationEntryPoint that supports for the authentication mechanism. 
 
+## Authorization Process
+
+In order to describe about Authorization process the UserDetails should be studied first. UserDetails is the interface that must provide the GrantedAuthority objects, which are inserted into the Authentication object by the AuthenticationManager. Implementation of UserDetails must contain ```Collection<? extends GrantedAuthority> getAuthorities();``` method. This method allows *AccessDecisionManager*s to obtain a precise *String* representation of the *GrantedAuthority*.
