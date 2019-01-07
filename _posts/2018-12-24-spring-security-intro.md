@@ -90,7 +90,7 @@ As it can be seen from above example Spring Security by default is the safe and 
 
 # The Main Processes of the Spring Security
 
-Roughly we can consider Spring Security as a two separate processes (anyhting out of these two can be considered as additional necessary features):
+Roughly we can consider Spring Security as a two separate processes (anyhting out of these two can be considered as an additional feature):
 1. Authentication Process
 2. Authoriztion Process
 
@@ -196,3 +196,19 @@ As a result of the UserDetailsService must be implemented and inside the *loadUs
 ## Authorization Process
 
 In order to describe about Authorization process the UserDetails should be studied first. UserDetails is the interface that must provide the GrantedAuthority objects, which are inserted into the Authentication object by the AuthenticationManager. Implementation of UserDetails must contain ```Collection<? extends GrantedAuthority> getAuthorities();``` method. This method allows *AccessDecisionManager*s to obtain a precise *String* representation of the *GrantedAuthority*.
+
+*AccessDecisionManager* interface serves as a core strategy in Authorization process. There are three implementations provided by the framework and all three delegate to a chain of AccessDecisionVoter. AccessDecisionVoter considers a ConfigAttributes that are generated after Authentication process. As name says, AccessDecisionVoter decides allow the action or not based on Authentication and ConfigAttributes information.
+
+```Java
+boolean supports(ConfigAttribute attribute);
+
+boolean supports(Class<?> clazz);
+
+int vote(Authentication authentication, S object,
+        Collection<ConfigAttribute> attributes);
+```
+
+In most cases the default AccessDecisionManager is AffirmativeBased (if no voters decline then access is granted). Any customization tends to happen in the voters, either adding new ones, or modifying the existing one. ConfigAttributes can be represented in Spring Expression Language (SpEL) expresssions, for example ```isFullyAuthenticated() && hasRole('FOO')```. AccessDecisionVoter can handle the expressions and create a context for them.
+
+
+
