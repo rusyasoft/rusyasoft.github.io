@@ -1,9 +1,9 @@
 ---
 title: Algorithms, Sorting in Linear Time
 categories:
- - Algorithms, Cormen-book
+ - Algorithms
 tags:
- - algorithms, cormen, optimization, sorting, linear time
+ - algorithms, cormen, optimization, sorting, linear time, cormen, book
 ---
 
 Usually, the sorting algorithms determine the sort based on comparisons between the input elements. That is why they called *comparison sorts* algorithms. In here we would like to consider non-comparison sorts.

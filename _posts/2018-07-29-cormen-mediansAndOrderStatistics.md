@@ -1,7 +1,7 @@
 ---
 title: Algorithms, Medians and Order Statistics
 categories:
- - Algorithms, Cormen-book
+ - Algorithms
 tags:
  - algorithms, cormen, optimization, medians, statistics
 ---

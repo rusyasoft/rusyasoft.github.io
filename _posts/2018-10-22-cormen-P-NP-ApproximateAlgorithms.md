@@ -1,7 +1,7 @@
 ---
 title: P-NP, Approximate Algorithms
 categories:
- - Cormen, Algorithms
+ - Algorithms
 tags:
  - cormen, algorithms, p, np, polynomial, nondeterministic polynomial time
 ---

@@ -1,7 +1,7 @@
 ---
 title: Deep Work (Book Review)
 categories:
- - Book, Review
+ - Book-review
 tags:
  - books, review, deepwork, concentration, philosophy
 ---

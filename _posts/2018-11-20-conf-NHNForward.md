@@ -1,7 +1,7 @@
 ---
 title: NHN Forward 2018
 categories:
- - Conference, Java, Database
+ - Conference
 tags:
  - conference, java, database, mysql, mybatis, spa
 ---

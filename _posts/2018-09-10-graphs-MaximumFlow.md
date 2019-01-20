@@ -1,7 +1,7 @@
 ---
 title: Maximum Flow
 categories:
- - Algorithms, Graphs
+ - Algorithms
 tags:
  - algorithms, cormen, graphs
 ---

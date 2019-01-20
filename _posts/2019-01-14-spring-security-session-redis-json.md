@@ -1,9 +1,9 @@
 ---
 title: Storing Json Formatted Spring Session in Redis
 categories:
- - spring-security, spring-session, redis, json
+ - spring-security
 tags:
- - books, review, spring security, microservices, features, redis, json, jackson
+ - books, review, spring, security, spring-session, microservices, features, redis, json, jackson
 ---
 
 I have found combination of these three is a quite interesting topic. Actually  four, because usually Spring Session is used with Spring Security. There are many resources for Spring Session storing in Redis, but when it comes to storing session in Json format not many infos are there. I have found some but I felt they were not good enough to finish up practically. 

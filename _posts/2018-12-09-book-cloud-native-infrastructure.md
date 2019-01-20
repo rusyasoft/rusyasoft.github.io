@@ -1,7 +1,7 @@
 ---
 title: Cloud Native Infrastructure (Book Review)
 categories:
- - Book, Review
+ - Book-review
 tags:
  - books, review, cloud-native, microservices, design, Justin Garrison, Kris Nova
 ---
