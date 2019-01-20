@@ -1,7 +1,7 @@
 ---
 title: Algorithms, Divide-and-conquer
 categories:
- - Algorithms, Cormen-book
+ - Algorithms
 tags:
  - algorithms, cormen, optimization, sort, divide-and-conquer
 ---

@@ -1,7 +1,7 @@
 ---
 title: Topological Sort
 categories:
- - Algorithms, Graphs
+ - Algorithms
 tags:
  - algorithms, cormen, graphs
 ---

@@ -1,9 +1,9 @@
 ---
 title: Algorithms, The role of Algorithms in Computing
 categories:
- - Algorithms, Cormen-book
+ - Algorithms
 tags:
- - algorithms, cormen, optimization
+ - algorithms, cormen, book, optimization
 ---
 
 **Algorithm** is any well-defined computational procedure that takes some value, or set of values as **input** and produces some value, or set of values, as **output**.

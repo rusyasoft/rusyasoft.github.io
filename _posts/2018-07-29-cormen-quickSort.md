@@ -1,9 +1,9 @@
 ---
 title: Algorithms, Quick-Sort
 categories:
- - Algorithms, Cormen-book
+ - Algorithms
 tags:
- - algorithms, cormen, optimization, quicksort
+ - algorithms, cormen, book, optimization, quicksort
 ---
 
 The quicksort algorithm has a worst-case running time of O(n^2) on an input array of *n* numbers, and worst case happens when the array is sorted in descending order. Despite a worst-case running time, quicksort is often the best practical choice for sorting. Its average expected running time is O(n log n), and it has an advantage of sorting in place.

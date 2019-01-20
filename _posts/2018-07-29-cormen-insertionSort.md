@@ -1,7 +1,7 @@
 ---
 title: Algorithms, Insertion Sort
 categories:
- - Algorithms, Cormen-book
+ - Algorithms
 tags:
  - algorithms, cormen, optimization, sort, insertion-sort
 ---

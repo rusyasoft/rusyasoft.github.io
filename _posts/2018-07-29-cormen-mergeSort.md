@@ -1,7 +1,7 @@
 ---
 title: Algorithms, Merge-Sort
 categories:
- - Algorithms, Cormen-book
+ - Algorithms
 tags:
  - algorithms, cormen, optimization, sort, merge-sort
 ---

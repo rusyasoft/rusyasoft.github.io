@@ -1,7 +1,7 @@
 ---
 title: Building Microservices (Book Review)
 categories:
- - Book, Review
+ - Book-review
 tags:
  - books, review, microservices, design, Sam Newman
 ---

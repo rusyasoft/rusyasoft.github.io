@@ -1,7 +1,7 @@
 ---
 title: Algorithms, Heap Sort
 categories:
- - Algorithms, Cormen-book
+ - Algorithms
 tags:
  - algorithms, cormen, optimization, heap-sort
 ---
