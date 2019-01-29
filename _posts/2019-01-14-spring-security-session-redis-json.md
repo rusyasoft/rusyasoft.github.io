@@ -3,7 +3,7 @@ title: Storing Json Formatted Spring Session in Redis
 categories:
  - spring-security
 tags:
- - books, review, spring, security, spring-session, microservices, features, redis, json, jackson
+ - books, review, spring, security, spring-session, microservices, features, redis, json, jackson, mixin
 ---
 
 I have found combination of these three is a quite interesting topic. Actually  four, because usually Spring Session is used with Spring Security. There are many resources for Spring Session storing in Redis, but when it comes to storing session in Json format not many infos are there. I have found some but I felt they were not good enough to finish up practically. 
@@ -241,7 +241,7 @@ Two select queries are performed via JPA:
 ## MixIn solution
 
 If we are developing the whole project by ourselves and all classes are created and modifiable by us then above solution (Declaring @JsonSerializable annotation) should be enough. But what if we have to use third party classes in our project ?
-MixIn solution comes to our rescue. 
+MixIn solution comes to our rescue. Here what *Effective Java* book says about mixin: *a mixin is a type that a class can implement in addition to its "primary type", to declare that it provides some optional behavior. They are called mixin because it allows the optional functionality to be "mixed in" to the type's primary functionality.*
 
 ### Quick example:
 
