@@ -6,8 +6,9 @@ tags:
  - git, hacks, repository
 ---
 
+Here I try to put up some of the usefull git commands
 
-# Copy the Repository
+# Copy Repository
 
 If we need to copy the repository to a new repository then it can be simply pushed while staying at the source repository. For example we have an old-repo and we want to copy its contents to new-repo.
 
