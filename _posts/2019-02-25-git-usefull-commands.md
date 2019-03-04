@@ -6,7 +6,7 @@ tags:
  - git, hacks, repository
 ---
 
-Here I try to put up some of the usefull git commands
+Here I try to put up some of the usefull git commands. Refer to it whenever quick check is needed.
 
 # Copy Repository
 
