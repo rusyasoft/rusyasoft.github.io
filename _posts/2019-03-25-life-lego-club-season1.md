@@ -38,7 +38,6 @@ Let me post some of the result pictures from our Lego Club.
 ![legoImage](/assets/images/legoClubS1/24.jpg)
 ![legoImage](/assets/images/legoClubS1/25.jpg)
 ![legoImage](/assets/images/legoClubS1/26.jpg)
-![legoImage](/assets/images/legoClubS1/26.jpg)
 ![legoImage](/assets/images/legoClubS1/27.jpg)
 ![legoImage](/assets/images/legoClubS1/28.jpg)
 ![legoImage](/assets/images/legoClubS1/29.jpg)
