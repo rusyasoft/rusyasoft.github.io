@@ -48,6 +48,7 @@ Interface may contain not only lowest level methods, but can contain little high
 - Methods for add & remove. These are the actual impelementation of the common interface and of course it may differ depend on the repository type.
 - Methods that predefine criteria for object selection. Predefine the most repeated queries in a form of methods.
 Example:
+
 ```C#
 public Schedule GetScheduledAppointmentsForDate(int clinicId, DateTime date) {
 	var scheduleGraph = QueryScheduleForThisOffice(clinicId)
@@ -65,6 +66,7 @@ public Schedule GetScheduledAppointmentsForDate(int clinicId, DateTime date) {
 	return schedule;
 }
 ```
+
 - Repos for aggregate roots only
 - Client focuses on the model, repo focuses on persistence. Client should not care about persistence related detail works.
 
@@ -88,6 +90,7 @@ The Repositories and Factories are quite similar, because we use those patterns 
 - Create non-generic Implementation class of generic interface is more preferable by DDD. 
 
 class implementation:
+
 ```C#
 public class Repository<TEntity> : IRepository<TEntity> where TEntity : class, IEntity
 {
@@ -103,6 +106,7 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : class, I
 ```
 
 usage: 
+
 ```C#
 var repo = new Repository<Patient>(new CrudContext())
 rep.Insert(new Patient())
@@ -124,8 +128,9 @@ Spring Data JPA is not a JPA Provider. It is a library/framework that adds an ex
 - JPA Provider implements the Java Persistence API
 
 JPA example: 
-```Java
-import java.util.Optional
+
+```java
+import java.util.Optional;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.Repository;
 import org.springframework.data.repository.query.Param;

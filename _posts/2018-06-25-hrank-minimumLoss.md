@@ -75,7 +75,7 @@ Lauren buys the house in year 2 at *price[1]=7* and sells it in year *5* at *pri
 
 **Solution: Java**
 
-```Java
+```java
 import java.io.*;
 import java.math.*;
 import java.security.*;

@@ -26,7 +26,7 @@ Intitialization with unlimited signature is needed to tell that node is impossib
 
 There are many implementations of BFS online. Here I would like to introduce the BFS that prints the levels while performs search. Even though the source code is little long, it is quite primitive.
 
-```Java
+```java
 public class BfsWithLevels {
 
     private int numOfVertices;
@@ -100,6 +100,4 @@ public class BfsWithLevels {
         g.BFS(0);
     }
 }
-
-
 ```

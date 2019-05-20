@@ -38,7 +38,7 @@ V is the number of vertices
 E is the number of Edges
 
 ### Java Implementation
-```Java
+```java
 // A Java program to print topological sorting of a DAG
 import java.io.*;
 import java.util.*;

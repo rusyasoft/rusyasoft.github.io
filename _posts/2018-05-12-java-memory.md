@@ -10,8 +10,7 @@ Some usefull collection of notes regarding to Java memory management has been co
 # Unmodifiable Collections
 Unmodifiable collections are important while returning collection from inside function should be locked for any kind of changes
 
-```Java
-
+```java
 private Map<String, Customer> records;
 
 public Map<String, Customer> getCustomers() {
@@ -27,7 +26,7 @@ We have to be careful with escaping references, which allow to caller object do 
 # Internalized Strings
 When the two strings are created under the same scope two strings are same, then Java is smart enough to create the only single object and share the reference between those two objects. It is called internalized strings, shown below:
 
-```Java
+```java
 public static void main() {
    String one = "hello";
    String two = "hello";
@@ -37,11 +36,10 @@ Generally, it happens with literal strings that are defined statically. Java sto
 
 But sometimes we can enforce the java to save some calculation result string into string pool. So later we can reuse this string inside our code scope. In order to enforce the java to save the string into string pool, we should use intern() method. Here is an example:
 
-```Java
+```java
 String three = new Integer(13).toString().intern();
 String four = "13";
 Assert.assertEquals(three, four);  
-
 ```
 
 # GC: Generational Garbage Collection

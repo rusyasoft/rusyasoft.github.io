@@ -185,7 +185,7 @@ By applying maximum flow algorithms we can analyze and find bottlnecks of our sy
 
 ## Source Code
 
-```Java
+```java
 // Java program for implementation of Ford Fulkerson algorithm
 import java.util.*;
 import java.lang.*;

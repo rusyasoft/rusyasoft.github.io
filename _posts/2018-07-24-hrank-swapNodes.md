@@ -16,7 +16,7 @@ The reason it is assigned medium level is because You have to implement two In-o
 
 First of all lets define the Node data structure. Basically Binary tree data structure contains left, right and data values. But in this task we have to do swapping of the left and right branches of the tree based on the depth of the current node. That is why it is important to keep track of the depth of current node. That is why we have added additional field of depth for basic binary tree data structure:
 
-```Java 
+```java 
 static class Node {
     int index;
     int depth;
@@ -42,7 +42,7 @@ The above Binary tree is formed from input such as given below. The root node ha
 
 Reading the 2D array and forming the binary tree is performed by following code:
 
-``` Java
+``` java
 int N = 0;
 while (N < numOfNodes) {
     cur = nodes.poll();
@@ -66,7 +66,7 @@ Finally when we are done with reading the binary tree, now its time to perform I
 
 The whole algorithm boils down into few lines of code:
 
-```Java
+```java
 static void printInOrder(Node cur, List<Integer> result) {
     if (cur == null) {
         return ;
@@ -83,7 +83,7 @@ Another function *swapInOrder()* function has been implemented in similar fashio
 
 # Solution (Java)
 
-```Java
+```java
 import java.io.*;
 import java.math.*;
 import java.text.*;

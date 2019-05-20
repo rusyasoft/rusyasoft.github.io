@@ -55,7 +55,7 @@ For a detail comparison with graph refert to [here](https://freefeast.info/diffe
 
 Since the representation of adjacency list is mostly used in a real-life applications here we will demonstrated the Java code example for it:
 
-```Java
+```java
 import java.util.LinkedList;
 
 public class GFG

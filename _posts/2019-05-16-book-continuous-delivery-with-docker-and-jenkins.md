@@ -18,7 +18,7 @@ Each chapter described interestingly, and book reading is quite clear. Most chap
 - Development workflow is the way how team puts the code into the repository. It depends, of course, on many factors such as the source control management tool, the project specifics, or the team size. Can be classified into three types: trunk-based workflow, branching workflow, forking workflow
 - Feature toggle is a technique that is an alternative to maintaining multiple source code branches such that the feature can be tested before it is completed and ready for release. 
 
-```Java
+```java
 if (feauture_togle) {
     // do the new feature works
 }
