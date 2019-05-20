@@ -16,9 +16,9 @@ Breadth-first search systematically explores the edges of G graph to discover ev
 
 ![BFS_cormen_stepbystep_process](/assets/images/graphs/BFS_cormen_stepbystep_process.png)
 
-White color - not visited nodes
-Gray color - about to be visited (keeping them in FIFO queue)
-Black color - visited nodes
+* White color - not visited nodes
+* Gray color - about to be visited (keeping them in FIFO queue)
+* Black color - visited nodes
 
 Intitialization with unlimited signature is needed to tell that node is impossible to reach from the starting *s* node. At the end of the BFS if still see some unlimited signs then there is no path from *s* to that node.
 
