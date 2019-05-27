@@ -36,7 +36,7 @@ Simple solution is to do sorting of the given array using O(N*log(N)) where N is
 
 This solution is almost named after Quick Sort, because it uses the logic of quick sort algorithm. Shortly saying it uses QuickSort algorithm's partition functionality and compares the current pivot's position with the *k*. If they are match then we have no reason to continue, because the pivot gets its place and does not moves anymore. If the pivot's new position is not equal to *k* then we have to choose a partition where the *k* index is located. After that perform partition on elements of choosen partition. 
 
-![k-th-largest-element](/assets/images/cormen/kth-largest-element.jpg)
+![k-th-largest-element](/assets/images/cormenAlgorithms/kth-largest-element.jpg)
 
 The meaning of pivot in QuickSort is to define the element to his position where all remaining small elements on one side and other large elements on the other side. So the pivot is static and doesn't move anymore. That means if our *k*th element is in the small group then we continue on that side, otherwise we continue with large group. Continue this process until the pivot position is equal to *k*.
 
