@@ -13,6 +13,18 @@ There are multiple uproaches to solve this problem and popular Dynamic Programmi
 
 # Dynamic Programming Approach
 
+We can use palindrome checker dp pattern:
+
+```python
+def isPalindrome(si, ei, a):
+    if (si == ei):  # if we stand on same character it is palindrome
+        return true
+    if (si == ei-1):    #   if elements are neighbour
+        return a[si] == a[ei]   # and neighbour elements are equal, then its palindrome too
+    
+    return a[si] == a[ei] and isPalindrome(si + 1, ei - 1)  # if two elements are equal they may be palindrome only if the substring betwee them is palindrome
+```
+
 My personal solution is not an elegant code, which i have reached after multiple optimizations. I was keep getting "Time Limit Exceed", until i have stoped using a hash-map and reduced useless substring operations.
 
 ```java
@@ -70,4 +82,4 @@ class Solution {
 }
 ```
 
-
+Basically  I have done wrapping the true operation into the Maximum value tracker and of course memoization for not redoing already performed tasks. Memoization performed based on indexes, so eventually we are memoizing not substring itself but their location(result of dp operations). It is interesting to note that before my this approach i have tried the sub-string based memoization, but substring operations took too long so i got "Time Limit Exceed". But I think in a real cases stil the sub-string based memoization would be better approach. Because we may have repeated substrings on a different locations. 
