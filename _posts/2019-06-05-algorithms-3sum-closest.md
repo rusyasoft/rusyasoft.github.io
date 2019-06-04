@@ -24,7 +24,7 @@ The sum that is closest to the target is 2. (-1 + 2 + 1 = 2).
 5. If the *sum* is less than *target* then we should increase j
 5. If the *sum* is greater than *target* then we should decrease k
 
-![3SumClosest](/assets/images/algorithmSoltuions/3SumClosest.jpg)
+![3SumClosest](/assets/images/algorithmSolutions/3SumClosest.jpg)
 
 # Java Solution 
 
