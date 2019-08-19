@@ -1,5 +1,5 @@
 ---
-title: Couchbase Mistake
+title: Couchbase Scale-UP Mistake
 categories:
  - couchbase
 tags:
