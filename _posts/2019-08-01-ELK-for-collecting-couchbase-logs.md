@@ -14,7 +14,7 @@ ELK has become important part of the monitoring web-services. When the ELK is us
 
 I have tried my ELK installation by following tutorial from [logz](https://logz.io/blog/install-elk-stack-amazon-aws/), but because of these projects are upgrading so often the tutorial didn't exactly match. At the end I had to improvize while installing. But the explanation on elasticsearch website were quite enough to install, config and run.
 
-## ELK Instalation
+## ELK Installation
 
 We are going to install whole Elastic Stack in a single standalone machine. So most of the time the address will be settled as localhost.
 
@@ -34,6 +34,17 @@ network.host: localhost
 http.port: 9200
 ```
 
+#### Running ES
+
+```
+./bin/elasticsearch -d -p pid
+```
+
+simple localhost testing the running ES:
+
+```
+curl localhost:9200
+```
 
 #### Test liveness of Elasticsearch 
 
