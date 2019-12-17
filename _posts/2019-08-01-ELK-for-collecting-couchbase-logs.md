@@ -128,7 +128,14 @@ sudo yum install logstash
 
 ### Simple Test of ELK 
 
-As I have mentioned before i have followed the logz tutorials and they are giving us a good example [log-file](wget https://s3.amazonaws.com/logzio-elk/apache-daily-access.log)
+As I have mentioned before i have followed the logz tutorials and they are giving us a good example [log-file](https://logz.io/learn/complete-guide-elk-stack/)
+
+
+We can download logs for test by following commands:
+
+```
+wget https://s3.amazonaws.com/logzio-elk/apache-daily-access.log
+```
 
 Here is the logstash configuration file for this file:
 

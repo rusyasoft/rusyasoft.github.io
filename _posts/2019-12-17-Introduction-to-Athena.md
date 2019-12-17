@@ -8,6 +8,33 @@ tags:
 
 Amazon Athena is an interactive query service that makes it easy to analyze data in Amazon S3 using standard SQL. Athena is a serverless infrastructure that allows us to run SQL on S3 files. Athena helps to analyze unstructure, semi-structured and structured data stored in Amazon S3 (such as CSV, JSON, columnar data formats, Apache Parquet, Apache ORC). Detail references can be read from official aws [web-page](https://docs.aws.amazon.com/athena/latest/ug/getting-started.html)
 
+![Athena Sample Pipeline](/assets/2019/AWSAthenaPipelineExample1.jpg)
+
+- There is no concept of loading data into Athena, when you are not using Athena you are not paying for it, You just pay for data that is sitting on S3
+- Use ANSI SQL, support for complex joins, nested queries & window functions, support for complex data types (arrays, structs), support for partitioning of data by any key
+- Uses presto for SQL Queries
+- Uses Hive for DDL functionality
+- Schema on Read (like Hive)
+- less data is scanned less we pay (compressing and columnar format approach is good for optimization)
+
+## Amazon Athena is Fast
+
+- Tuned for performance
+- Automatically parallelizes queries
+- Results are streamed to console
+- Results also stored in S3
+- Improve Query performance
+    - Compress your data
+    - Use columnar formats
+
+## Cost Effective
+
+- Pay per query
+- $5 per TB scanned from S3
+- DDL Queries and failed queries are free
+- Save by using compression, columnar formats, partitions
+
+
 ## Quick Run
 
 We have to create Athena database and table which is going to do crawling over Amazon S3 bucket rather than a file. Location path of S3 bucket must be given by considering a partition. It means some part of the path can become a partition and be served as a column. 
