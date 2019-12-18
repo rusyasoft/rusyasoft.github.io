@@ -34,7 +34,6 @@ Amazon Athena is an interactive query service that makes it easy to analyze data
 - DDL Queries and failed queries are free
 - Save by using compression, columnar formats, partitions
 
-
 ## Quick Run
 
 We have to create Athena database and table which is going to do crawling over Amazon S3 bucket rather than a file. Location path of S3 bucket must be given by considering a partition. It means some part of the path can become a partition and be served as a column. 
@@ -66,6 +65,69 @@ MSCK REPAIR TABLE Employee;
 ```
 
 Details regarding to partitioning can be found from [here](https://aws.amazon.com/premiumsupport/knowledge-center/athena-empty-results/?nc1=h_ls)
+
+## Compression is Useful
+
+In order to save time and money, it is better to change the format of the data from json to Apache Parquet or Apache ORC. Here is we will shortly describe why it is useful. First lets intorduce little about those formats
+
+### Parquet
+
+- Columnar format
+- Schema segregated into footer
+- Column major format (min, max, count values are precalculated)
+- All data is pushed to the leaf
+- Integrated compression and indexes
+- Support for predicate pushdown
+
+### ORC
+
+- Apache Top level project
+- Schema segregated into footer
+- Column major format
+- Integrated compression, indexes and stats
+- Support for Predicate Pushdown
+
+### Converting to ORC and Parquet
+
+- It is possible to use Hive CTAS to convert data
+
+```
+CREATE TABLE new_key_value_store
+STORED AS PARQUET
+AS
+SELECT col_1, col_2, col_3 FROM noncolumnartable
+SORT BY new_key, key_value_pair;
+```
+
+- Also usage of Spark possible to convert the file into PARQUET / ORC
+- 20 lines of Pyspark [code](https://github.com/aws-samples/aws-big-data-blog/tree/master/aws-blog-spark-parquet-conversion), running on EMR 
+    - Converts 1TB of text data into 130 GB of Parquet with snappy conversion
+    - Total cost $5
+
+### Comparison Result for Compression
+
+- Pay by the amount of data scanned per query
+- Ways to save costs
+    - Compress
+    - Convert to Columnar format
+    - Use Partitioning
+- Free: DDL Queries, Failed Queries
+
+```
+SELECT elb_name, uptime, downtime, cast(downtime as DOUBLE)/cast(uptime as DOUBLE) uptime_downtime_ration
+FROM 
+    (SELECT elb_name, sum(case elb_response_code
+        WHEN '200' THEN
+        1
+        ELSE 0 end) AS uptime, sum(case elb_response_code
+        WHEN '404' THEN 
+        1
+        ELSE 0 end) AS downtime
+    FROM elb_logs_raw_native
+    GROUP BY elb_name)
+```
+
+![comparisonTable](/assets/2019/convertedColumnarFormatPerformanceComparison.png)
 
 ## Naming Issue with Athena (BE CAREFUL !!)
 
