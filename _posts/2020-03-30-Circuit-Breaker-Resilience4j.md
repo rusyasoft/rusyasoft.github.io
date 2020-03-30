@@ -125,3 +125,125 @@ private Mono<String> fallback(String param1, RuntimeException e) {
 
 For more detail information about applying resilience4j to spring-boot-2 refer to [here](https://resilience4j.readme.io/docs/getting-started-3)
 
+
+## Easy Integration with Prometheus and Grafana
+
+Another good advantage of Resilience4j is that it easily can be integrated with prometheus and grafana in order to provide us good monitoring system.
+
+![img](/assets/2020/circuit-breaker/Resilience4j-prometheus-grafana.jpg)
+
+In order to implement this scenario we have to make sure that our spring-boot application contains actuator libraries and metrics for prometheus should be exported through the actuator
+
+```groovy
+compile('org.springframework.boot:spring-boot-starter-actuator')
+compile('io.micrometer:micrometer-registry-prometheus")
+```
+
+For quick-run Prometheus and Grafana can be configured and run using docker-compose.yml (this file runs well on Linux docker, didn't work with macOS):
+
+```yaml
+version: '3'
+services:
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    network_mode: "host"
+    volumes:
+      - ./docker/prometheus.yml:/etc/prometheus/prometheus.yml
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    network_mode: "host"
+    volumes:
+      - ./docker/grafana-ds.yml:/etc/grafana/provisioning/datasources/local-prometheus.yaml
+      - ./docker/prometheus-grafana.json:/etc/grafana/provisioning/dashboards/prometheus-grafana.json
+      - ./docker/grafana-prometheus-dashboard.yml:/etc/grafana/provisioning/dashboards/grafana-prometheus-dashboard.yml
+    # - ./docker/grafana.ini:/etc/grafana/grafana.ini
+    #command: ["--config=/etc/grafana/grafana.ini"]
+    env_file:
+      - ./docker/grafana.env
+```
+
+there must be a folder called "docker/" on the same level as docker-compose.yml. Inside docker folder the following files should be located:
+
+- grafana-ds.yml : contains data source auto initiation information (if we don't initialize here, then it should be done manually through grafana UI)
+
+```yaml
+datasources:
+  - name: Prometheus
+    type: prometheus
+    access: proxy
+    url: http://localhost:9090
+```
+
+- grafana-prometheus-dashboard.yml : configures grafana (explicitly to check /etc/grafana/provisioning/dashboards folder for loading dashboards)
+
+```yaml
+- name: 'default'
+  org_id: 1
+  folder: ''
+  type: 'file'
+  options:
+    folder: '/etc/grafana/provisioning/dashboards'
+```
+
+- prometheus-grafana.json : grafana dashboard for showing resilience4j data (File is little bit for this context to show, it can be downloaded from [here](/assets/2020/circuit-breaker/prometheus-grafana.json))
+
+- grafana.env : contains docker container environment variables that are used while starting grafana server. For example we can predefine user name and password for our grafana server
+
+```
+[server]
+# GF_SERVER_DOMAIN=localhost
+# GF_SERVER_HTTP_PORT=3001
+# GF_SERVER_PROTOCOL=http
+
+[security]
+GF_SECURITY_ADMIN_USER=admin
+GF_SECURITY_ADMIN_PASSWORD=password
+```
+
+- prometheus.yml : prometheus configuration file
+
+```yaml
+global:
+  scrape_interval:     15s # By default, scrape targets every 15 seconds.
+
+  # Attach these labels to any time series or alerts when communicating with
+  # external systems (federation, remote storage, Alertmanager).
+  external_labels:
+    monitor: 'resilience4j-test-monitor'
+
+# A scrape configuration containing exactly one endpoint to scrape:
+scrape_configs:
+  # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
+  - job_name: 'prometheus'
+
+    # Override the global default and scrape targets from this job every 5 seconds.
+    scrape_interval: 5s
+
+    static_configs:
+      - targets: ['172.31.33.240']
+
+  - job_name:       'resilience4j-test-spring-boot2'
+
+    # Override the global default and scrape targets from this job every 5 seconds.
+    scrape_interval: 5s
+
+    metrics_path: /actuator/prometheus
+
+    static_configs:
+      - targets: ['172.31.33.240']
+```
+
+to run/stop docker composition:
+
+```
+# start 
+docker-compose -f docker-compose.yml up
+
+## if you want to run in background
+## docker-compose -f docker-compose.yml up -d
+
+# stop
+docker-compose -f docker-compose.yml down
+```
