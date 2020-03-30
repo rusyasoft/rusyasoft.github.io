@@ -33,12 +33,12 @@ After applying circuit breaker technic:
 
 ![Circuit Breaker Flow Diagram](/assets/2020/circuit-breaker/Resilience4j_Introduction-DS-circuit-breaker-applied.png)
 
-Few years ago I have found myself reading about [Hystrix](https://github.com/Netflix/Hystrix], the popular circuit breaker solution developed by netflix. Many companies were using hystrix in their production (I have found out when I visited conferences). Now If you visit official github page of hystrix, it says "Hystrix is no longer in active development, and is currently in maintenance mode" and advises us to use another solution called [resilience4j](https://github.com/resilience4j/resilience4j)
+Few years ago I have found myself reading about [Hystrix](https://github.com/Netflix/Hystrix), the popular circuit breaker solution developed by netflix. Many enterprises were using hystrix in their production (I have found out when I visited conferences). Now If you visit official github page of hystrix, it says "Hystrix is no longer in active development, and is currently in maintenance mode" and advises us to use another solution called [resilience4j](https://github.com/resilience4j/resilience4j)
 
 
 ## Resilience4j
 
-Resilience4j is a lightweight fault tolerance library inspired by Netflix Hystrix, but designed for Java 8 and functional programming. Lightweight, because the library only uses Vavr, which does not have any other external library dependencies. Resilience4j provides higher-order functions (decorators) to enhance any functional interface, lambda expression or method reference with a Circuit Breaker, Rate Limiter, Retry or Bulkhead. Additionally, Timelimiter and Cache features are also considered as core modules. You can stack more than one decorator on any functional interface, lambda expression or method reference. The advantage is that you have the choice to select the decorators you need and nothing else. You can refer to resilience4j web site where quick usage guides are given in a very good shape.
+Resilience4j is a lightweight fault tolerance library inspired by Netflix Hystrix, but designed for Java 8 and functional programming. Lightweight, because the library only uses [vavr](https://www.vavr.io/), which does not have any other external library dependencies. Resilience4j provides higher-order functions (decorators) to enhance any functional interface, lambda expression or method reference with a Circuit Breaker, Rate Limiter, Retry, Bulkhead, Time limiter and Cache modues. You can stack more than one decorator on any functional interface, lambda expression or method reference. The advantage is that you have the choice to select the necessary decorators.
 
 The Resilience4j circuit breaker is implemented as a finite state machine with three normal states: CLOSED, OPEN and HALF_OPEN and two special states DISABLED and FORCED_OPEN.
 
@@ -56,7 +56,7 @@ The implementation uses a sliding window to store and aggregate the outcome of c
 ### When State is Changed
 
 - The state of the CircuitBreaker changes from CLOSED to OPEN when the failure rate (or percentage of slow calls) is equal or greater than a configurable threshold. For example when more than 50% of the recorded calls have failed.
-- The failure rate and slow call rate can only be calculated, if a minimum number of calls were recorded. For example, if the minimum number of required calls is 10, then at least 10 calls must be recorded, before the failure rate can be calculated. If only 9 calls have been evaluated the CircuitBreaker will not trip open even if all 9 calls have failed.
+- The failure rate and slow call rate can be calculated only if a minimum number of calls were recorded. For example, if the minimum number of required calls is 10, then at least 10 calls must be recorded, before the failure rate can be calculated. If only 9 calls have been evaluated the CircuitBreaker will not trip open even if all 9 calls have failed.
 - After a wait time duration has elapsed, the CircuitBreaker state changes from OPEN to HALF_OPEN and permits a configurable number of calls to see if the backend is still unavailable or has become available again. 
     - If the failure rate or slow call rate is equal or greater than the configured threshold, the state changes back to OPEN. 
     - If the failure rate and slow call rate is below the threshold, the state changes back to CLOSED.
@@ -222,7 +222,7 @@ scrape_configs:
     scrape_interval: 5s
 
     static_configs:
-      - targets: ['172.31.33.240']
+      - targets: ['172.31.01.240']
 
   - job_name:       'resilience4j-test-spring-boot2'
 
@@ -232,7 +232,7 @@ scrape_configs:
     metrics_path: /actuator/prometheus
 
     static_configs:
-      - targets: ['172.31.33.240']
+      - targets: ['172.31.01.240']
 ```
 
 to run/stop docker composition:
