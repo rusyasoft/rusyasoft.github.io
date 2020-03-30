@@ -1,7 +1,7 @@
 ---
 title: Usage of Resilience4j Retry and CircuitBreaker together
 categories:
- - java, circuit-breaker, resilience4j, retry, spring-boot
+ - java
 tags:
  - java, circuit-breaker, resilience4j, retry, spring-boot
 ---

@@ -1,7 +1,7 @@
 ---
 title: Circuit Breaker (Resilience4j)
 categories:
- - java, circuit-breaker, resilience4j, spring-boot
+ - java
 tags:
  - java, circuit-breaker, resilience4j, spring-boot
 ---
