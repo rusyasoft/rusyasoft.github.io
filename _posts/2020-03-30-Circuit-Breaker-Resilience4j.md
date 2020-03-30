@@ -42,21 +42,26 @@ Resilience4j is a lightweight fault tolerance library inspired by Netflix Hystri
 
 The Resilience4j circuit breaker is implemented as a finite state machine with three normal states: CLOSED, OPEN and HALF_OPEN and two special states DISABLED and FORCED_OPEN.
 
-![Circuit Breaker Flow Diagram](/assets/2020/circuit-breaker/cb-state_machine.jpg)
+![Circuit Breaker Flow Diagram](/assets/2020/circuit-breaker/resilience4j-state-machine.jpg)
 
 The implementation uses a sliding window to store and aggregate the outcome of calls. You can choose between a count-based sliding window and a time-based sliding window. The count-based sliding window aggregrates the outcome of the last N calls. The time-based sliding window aggregrates the outcome of the calls of the last N seconds.
 
+### What is Failure
+
+- By default, all exceptions count as a failure. 
+- We can list out exceptions that should count as a failure 
+- If we define list of exceptions specifically then all other exceptions are counted as a success
+- If exceptions ignored then neither count as a failure nor success
+
 ### When State is Changed
 
-The state of the CircuitBreaker changes from CLOSED to OPEN when the failure rate (or percentage of slow calls) is equal or greater than a configurable threshold. For example when more than 50% of the recorded calls have failed.
-
-By default, all exceptions count as a failure. You can define a list of exceptions that should count as a failure. All other exceptions are then counted as a success unless they are ignored. Exceptions can also be ignored so that they neither count as a failure nor success.
-
-The failure rate and slow call rate can only be calculated, if a minimum number of calls were recorded. For example, if the minimum number of required calls is 10, then at least 10 calls must be recorded, before the failure rate can be calculated. If only 9 calls have been evaluated the CircuitBreaker will not trip open even if all 9 calls have failed.
-
-After a wait time duration has elapsed, the CircuitBreaker state changes from OPEN to HALF_OPEN and permits a configurable number of calls to see if the backend is still unavailable or has become available again. Further calls are rejected with a CallNotPermittedException, until all permitted calls have completed. If the failure rate or slow call rate is then equal or greater than the configured threshold, the state changes back to OPEN. If the failure rate and slow call rate is below the threshold, the state changes back to CLOSED.
-
-Additionally Resilience4j Circuit Breaker supports two more special states, DISABLED (always allow access) and FORCED_OPEN (always deny access). In these two states no Circuit Breaker events (apart from the state transition) are generated, and no metrics are recorded. The only way to exit from those states are to trigger a state transition or to reset the Circuit Breaker.
+- The state of the CircuitBreaker changes from CLOSED to OPEN when the failure rate (or percentage of slow calls) is equal or greater than a configurable threshold. For example when more than 50% of the recorded calls have failed.
+- The failure rate and slow call rate can only be calculated, if a minimum number of calls were recorded. For example, if the minimum number of required calls is 10, then at least 10 calls must be recorded, before the failure rate can be calculated. If only 9 calls have been evaluated the CircuitBreaker will not trip open even if all 9 calls have failed.
+- After a wait time duration has elapsed, the CircuitBreaker state changes from OPEN to HALF_OPEN and permits a configurable number of calls to see if the backend is still unavailable or has become available again. 
+    - If the failure rate or slow call rate is equal or greater than the configured threshold, the state changes back to OPEN. 
+    - If the failure rate and slow call rate is below the threshold, the state changes back to CLOSED.
+- When Circuit in OPEN state all calls are rejected with a CallNotPermittedException. 
+- Additionally Resilience4j Circuit Breaker supports two more special states, DISABLED (always allow access) and FORCED_OPEN (always deny access). In these two states no Circuit Breaker events (apart from the state transition) are generated, and no metrics are recorded. The only way to exit from those states are to trigger a state transition or to reset the Circuit Breaker.
 
 ### Quick Start of with Spring Boot 2
 
