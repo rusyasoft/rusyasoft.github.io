@@ -71,7 +71,7 @@ else
    mid = floor((low + high)/2)
    (left-low, left-high, left-sum) = FIND-MAXIMUM-SUBARRAY(A, low, mid)
    (right-low, right-high, right-sum) = FIND-MAXIMUM-SUBARRAY(A, mid+1, high)
-   (cross-low, cross-high, cross-sum) = FIND-MAXIMUM-SUBARRAY(A, low, mid, high)
+   (cross-low, cross-high, cross-sum) = FIND-MAXIMUM-CROSSING-SUBARRAY(A, low, mid, high)
    if left-sum >= right-sum and left-sum >= cross-sum
       return (left-low, left-high, left-sum)
    elseif right-sum >= left-sum and right-sum >= cross-sum
