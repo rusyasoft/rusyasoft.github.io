@@ -20,12 +20,13 @@ go to the project folder and initialize alembic
 $ alembic init alembic
 ```
 
-Notion: The second alembic is the name of the migration project folder. It is a kind of convention to give a name "alembic". The folder and all internal containings should go to git source control.
+> **Notion:** The second alembic is the name of the migration project folder. It is a kind of convention to 
+> give a name "alembic". The folder and all internal containings should go to git source control.
 
 Next we have to edit alembic.ini file (it is not inside the alembic folder) in order to tell alembic about our project. There are many settings over there, and lets start with setting the database connection. To do that we have to set configuration `sqlalchemy.url` . Basicaly it is just a copy of sqlalchemy database connection from our source code.
 
 ```
-$ sqlalchemy.url = driver://user:password@localhost/dbname
+sqlalchemy.url = driver://user:password@localhost/dbname
 ```
 
 After setting database connection string we can run command to get version information with current code and database status
