@@ -61,7 +61,7 @@ $ alembic revision --autogenerate -m "last updated on packages"
 
 and it will automatically generates alembic differences
 
-CAUTION: When I just run above command right away alembic couldn't find my myproject module and showed me following error:
+**CAUTION:** When I just run above command right away alembic couldn't find my myproject module and showed me following error:
 
 ```
 ...
@@ -88,8 +88,8 @@ Autogeneration of revision in alembic has created the python script file that ca
 
 To apply the script we can just simply run the command:
 
-```
-alembic upgrade head
+```bash
+$ alembic upgrade head
 ```
 
 Now our database tables are upgraded according to our models
