@@ -34,7 +34,7 @@ Constraints:
 -10^4 <= nums[i] <= 10^4
 1 <= k <= nums.length
 
-For original task refer to (leetcode)[https://leetcode.com/problems/sliding-window-maximum/]
+For original task refer to [leetcode](https://leetcode.com/problems/sliding-window-maximum/)
 
 # Solution
 
