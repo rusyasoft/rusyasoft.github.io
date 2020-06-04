@@ -14,13 +14,13 @@ Accordingly graphDB is the database that is build based on the graph. When we ta
 
 ![img](/assets/2020/graphDbImages/2-highLevelView-graphComputeEngine.png)
 
-- Underlying Storage is the part which is responsible for storing the data on actual hard disk. Storage also can have two kinds: 
+- **Underlying Storage** is the part which is responsible for storing the data on actual hard disk. There are two kinds of underlying storages possible: 
   - Native Graph Storage
   - Non-Native Storage (Serialize the graph into traditional database):
     - Relational database
     - Object-oriented database
     - General-purpose data stores
-- Processing Engine, referes to how a graph database processes database operations. Any database that from the user's perspective behaves like a graph database qualifies as a graph database. Means that, user must be able to perform CRUD operations on underlying storage. Since underlying storage can be native and non-native, processing engine also differs accordingly, for example:
+- **Processing Engine**, referes to how a graph database processes database operations. Any database that from the user’s perspective behaves like a graph database qualifies as a graph database. Means that, user must be able to perform CRUD operations on underlying storage. Since underlying storage can be native and non-native, processing engine also differs accordingly:
   - Index-free adjacency, is a native way of processing by ensuring that each node is stored directly its adjacent nodes and relationships
   - Non-native graph processing engines are implemented based on tradtional database, and uses a lot of indexes in order to complete a read or write transactions. As we know when we applying many indexes on single table the write operation significantly slowing down.
 
@@ -51,30 +51,27 @@ Lets consider another example with highly connected domain (modelling friends-of
 
 Based on above simple schema try to perform some queries:
 
-Who are Bob's friends?
-
+*Who are Bob’s friends?*
 ```
 SELECT p1.Person
 FROM Person p1 JOIN PersonFriend
   ON PersonFriend.FriendID = p1.ID
 JOIN Person p2
   ON PersonFriend.PersonID = p2.ID
-WHERE p2.Person = 'Bob'
+WHERE p2.Person = ‘Bob’
 ```
 
-Who is friends with Bob?
-
+*Who is friends with Bob?*
 ```
 SELECT p1.Person
 FROM Person p1 JOIN PersonFriend
   ON PersonFriend.PersonID = p1.ID
 JOIN Person p2
   ON PersonFriend.FriendID = p2.ID
-WHERE p2.Person = 'Bob'
+WHERE p2.Person = ‘Bob’
 ```
 
-Who are friends of my friends?
-
+*Who are friends of my friends?*
 ```
 SELECT p1.Person AS PERSON, p2.Person AS FRIEND_OF_FRIEND
 FROM PersonFriend pf1 JOIN Person p1
@@ -83,10 +80,10 @@ JOIN PersonFriend pf2
   ON pf2.PersonID = pf1.FriendID
 JOIN Person p2
   ON pf2.FriendID = p2.ID
-WHERE p1.Person = 'Alice' AND pf2.FriendID <> p1.ID
+WHERE p1.Person = ‘Alice’ AND pf2.FriendID <> p1.ID
 ```
 
-First two queries are easily can be used, even though the second query would take a longer if we don't do indexing of necessary columns. But when we come to the third query, it would take longer and longer as we increase the depth of the friendships line.
+First two queries are easily can be used, even though the second query would take a longer if we don’t do indexing of necessary columns. But when we come to the third query, it would take longer and longer as we increase the depth of the friendships line.
 
 Now lets see the database designed using GraphDB approach.
 
@@ -101,7 +98,7 @@ In order to convince ourselves to select graphDB for the domain problem where hi
 Partner and Vukotic’s experiment seeks to find friends-of-friends in a social network, to a maximum depth of five. Social network containing 1,000,000 people each with approximately 50 friends. At depth two (Friends-of-Friends) relational database and graph database perform well enough, although Neo4j query runs in two-thirds the time of relational database.
 Starting from depth three RDBMs solution is unacceptable for the real-time service (it takes 30 seconds)
 
-Another quick example for user's order history can be modelled as follows:
+Another quick example for user’s order history can be modelled as follows:
 
 ![img](/assets/2020/graphDbImages/8-ModelingUserOrderHistory.png)
 
@@ -117,5 +114,5 @@ Here is another sophisticated Cross-Domain model example:
 
 
 
-For GraphDB modeling pitfalls follow to [here][https://rusyasoft.github.io/database/2020/06/02/graphdb-pitfalls/]
+For GraphDB modeling pitfalls follow to [here](https://rusyasoft.github.io/database/2020/06/01/graphdb-pitfalls/)
 
