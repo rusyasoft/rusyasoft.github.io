@@ -1,5 +1,5 @@
 ---
-title: Quick Review - OrientDB
+title: Overview of OrientDB
 categories:
  - database
 tags:
