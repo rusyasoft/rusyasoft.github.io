@@ -6,7 +6,7 @@ type: about
 
 ## Rustam Rakhimov Igorevich [rusyasoft]
 - Sr. **Back-end** Developer
-- Working at [withinnovation](https://www.withinnovation.co.kr/)
+- Working at [Kakao Page Corp](https://page.kakao.com/main)
 
 ## Links
 - Email : rusyasoft@gmail.com

@@ -8,10 +8,11 @@ tags:
 
 In this blog I have collected some knowledges about OrientDB which is multi-model graph database. This blog can be referred to to some kind of fact checks about OrientDB.
 
-> :warning: **The following facts may change, by the time**: For most recent info refer to OrientDB [!homepage](https://orientdb.com/docs/last/index.html)
+| WARNING: **The following facts may change, by the time**: For most recent info refer to OrientDB [homepage](https://orientdb.com/docs/last/index.html) |
+| --- |
+
 
 # Fact List 
-
 - An edge is a relationship, the same as a link. Edges provide more flexibility and are available in graph databases while a link is also available in a document database
 - Edges are not always stored in the database as a document
 - Fully restricted schema-ful data model can be created in OrientDB
@@ -25,7 +26,6 @@ In this blog I have collected some knowledges about OrientDB which is multi-mode
     - Providing data replication options
 
 ## OrientDB Studio
-
 - OrientDB Studio feature that is available not only in Enterprise Edition
 - There are some default classes beginning with "O" inside the database. They add special capabilities to the database such as permissions and server side functions
 - Studio provides mechanisms for using both the visual and command interfaces in the browser tab
@@ -35,9 +35,7 @@ In this blog I have collected some knowledges about OrientDB which is multi-mode
 - In the graph view, only 20 records are displayed from the query. Subsequent queries with different parameters will add nodes to the view within these result limits
 - The _studio class stores user specific settings like colors, past queries etc.
 
-
 # Basic Console commands:
-
 - in order to run the console you have to start the shell script ./console.sh
 
 ```
@@ -77,7 +75,6 @@ orientdb {server=remote:localhost/}> connect remote:localhost/databases/ConsoleD
 `browse class Person` - used to see records
 
 ## Backup
-
 In order to backup we have to disconnect from the database and the shutdown the OrientDB database (can be done just by clicking CTRL+C in the console where the orientDB was running in a verbose mode)
 In a state while OrientDB is turned off, we connect to our database and run backup command (IMPORTANT: BACKUPS IN COMMUNITY VERSION CAN BE PERFORMED ONLY LOCALLY)
 
@@ -94,12 +91,9 @@ orientdb {db=ConsoleDemo}> import database /Users/folderWhereYouWantToStore/Cons
 ```
 
 # Basic CRUD
-
 - Main difference between using the `INSERT INTO` command in comparison to the `CREATE VERTEX` command is that `CREATE VERTEX` does some extra checks and balances related to a graph database, but either command creates a record
 
-
 # Users and Roles
-
 - Based on Users and Roles (OUser and ORole classes)
 - Three default users are created
 - Roles can inherit from other roles
