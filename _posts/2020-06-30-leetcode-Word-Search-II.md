@@ -32,12 +32,11 @@ Output: ["eat","oath"]
 
 In order to solve this problem we can apply the Trie data structure and DFS (Depth First Search) algorithm. Trie can be applied to the boards itself as well as to the given words. Lets go with approach of building a trie for the given words
 
-![img]()
 ![img](/assets/2020/algorithms/wordSearchTrie.jpg)
 
 The code for building a Trie goes as follows:
 
-```Java
+```java
 private void buildTrie(TrieNode root, String[] words) {
 	for (String word : words) {
 		TrieNode cur = root;
@@ -106,7 +105,7 @@ private void dfs(char[][] board, int row, int col, TrieNode cur, List<String> re
 
 # Final Solution Code
 
-```Java
+```java
 class Solution {
 
     class TrieNode {
@@ -176,4 +175,4 @@ class Solution {
 }
 ```
 
-(Ref)[https://www.youtube.com/watch?v=5Ha1nJ5rjrE]
+[Ref](https://www.youtube.com/watch?v=5Ha1nJ5rjrE)
