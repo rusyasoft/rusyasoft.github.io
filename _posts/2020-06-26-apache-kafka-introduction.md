@@ -76,6 +76,9 @@ Brokers hold the topics (distributed among multiple brokers), and Kafka cluster 
     - acks=1: Producer waits for leader ack (limited data loss) <-- selected by default
     - acks=all: Leader + replicas acks (no data loss)
 
+Here is the case where acks = all
+
+![acks_all](/assets/2020/kafka/kafka-producers-acks-all.png)
 
 ## Producers: Message keys
 
