@@ -47,14 +47,12 @@ The above description file describes that this pod contains nginx container, in 
 kubectl apply -f pod-definition.yml
 ```
 
-=================================
-
 ## Replication Controller and ReplicaSets (Bigger Building Blocks)
 
 - Replication Controller is responsible to create a replica of the pod or node
 - It also responsible for load Balancing requests across pods and nodes
 
-There are two similar terms: Replication Controller and Replica Set and both have same purpose
+There are two similar terms: **Replication Controller** and **Replica Set** and both have same purpose
 - Replication controller is older technology
 - Replica Set is a new recommended way of applying replica
 
@@ -251,10 +249,7 @@ Multiple pods on multiple nodes are handled by kubernetes as follows:
 
 ![image](/assets/2020/kubernetes/multiple-pods-on-multiple-nodes.png)
 
-Example:
-
-pod-definition.yml
-
+Example: *pod-definition.yml*
 ```yml
 apiVersion: v1
 kind: Pod
@@ -270,8 +265,7 @@ spec:
 
 ```
 
-service-defintion.yml
-
+*service-defintion.yml*
 ```yml
 apiVersion: v1
 kind: Service
@@ -297,7 +291,7 @@ kubectl get services
 
 This is the way we give a name to our services, in order to allow services interact through each other
 
-pod-definition.yml
+*pod-definition.yml*
 ```yml
 apiVersion: v1
 kind: Pod
@@ -311,7 +305,7 @@ spec:
       image: nginx
 ```
 
-service-definition.yml
+*service-definition.yml*
 ```yml
 apiVersion: v1
 kind: Service
@@ -387,7 +381,7 @@ kubectl create configmap app-config --from-literal=APP_COLOR=blue --from-literal
 
 Declarative config file which is called by "kubectl create -f config-map.yaml"
 
-config-map.yaml
+*config-map.yaml*
 ```yml
 apiVersion: v1
 kind: ConfigMap
