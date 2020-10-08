@@ -15,17 +15,16 @@ It is guaranteed that every call to ping uses a strictly larger value of t than 
 
 Example 1:
 
-**Input**
+
 ```
+Input: 
 ["RecentCounter", "ping", "ping", "ping", "ping"]
 [[], [1], [100], [3001], [3002]]
-```
-**Output**
-```
+
+Output:
 [null, 1, 2, 3, 3]
-```
-**Explanation**
-```
+
+Explanation:
 RecentCounter recentCounter = new RecentCounter();
 recentCounter.ping(1);     // requests = [1], range is [-2999,1], return 1
 recentCounter.ping(100);   // requests = [1, 100], range is [-2900,100], return 2
