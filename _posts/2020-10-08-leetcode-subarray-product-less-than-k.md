@@ -19,15 +19,12 @@ Explanation: The 8 subarrays that have product less than 100 are: [10], [5], [2]
 Note that [10, 5, 2] is not included as the product of 100 is not strictly less than k.
 ```
 
-**Note:**
-```
-0 < nums.length <= 50000.
-0 < nums[i] < 1000.
-0 <= k < 10^6
-```
+**Constraints:**
+- 0 < nums.length <= 50000.
+- 0 < nums[i] < 1000.
+- 0 <= k < 10^6
 
 ###  Approach
-
 We can apply sliding window type of approach to solve this problem. Where we create a virtual window that contains the range of values that whose product are less then a given `k`. Every time when we slide the window to one-step to the right, we check and stabilize the table by shifting the left-side border (if necessary). Summary of range size in every step gives us expected result.
 
 - initilize left and right borders of the window
