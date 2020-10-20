@@ -14,7 +14,7 @@ Anemic domain models are very thin. They usually only provide fields to hold the
 
 Another disadvantage of the anemic model has related to dependencies. Dependencies on methods that we do'nt need in our context to make the code harder to understand and to test. Lets see the following method call flow (in the original book this example was used for another purpose, but I have decided to use it for explaining anemic model)
 
-![image](/assets/2020/dddd/figure-6-2.png)
+![image](/assets/2020/ddd/figure-6-2.png)
 
 If we need to write a unit test for RegisterAccountService, we have to know which methods in AccountRepository interface do we have to create a mock for. Of course if we are an original creator of this project (or this part of the project) and not long time passed since we worked with this project, then we can do it quickly and may be even without checking the source code. But imagine another developer who need to this job (in this context another developer could be we ourselves after few month), then some research of the source code is needed. Because not knowing how methods are binded there will be tedious errors triggered. It is good to mention Martin C.Robert's words here:
 
@@ -25,7 +25,7 @@ If we need to write a unit test for RegisterAccountService, we have to know whic
 
 Here how it can be resolved by applying outgoing ports:
 
-![image](/assets/2020/dddd/figure-6-3.png)
+![image](/assets/2020/ddd/figure-6-3.png)
 
 Now each service only depends on the methods it actually uses. The questions like "What should we mock in order to test RegisterAccountService" can be answered very easily (answer is CreateAccountPort). Of course we may say it doesn't solve our problem completely, but it shrinks down the scope of our analysis. Means we still have to research method list in CreateAccountPort. But still it is much better than research on bigger and common interface like AccountRepository (from previous figure).
 
