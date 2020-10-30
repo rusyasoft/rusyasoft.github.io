@@ -27,7 +27,7 @@ Gson is a Java library that is used to convert Java Objects into their JSON repr
 ## Get GsonBuilder from GsonFireBuilder
 Since GsonFireBuilder wrapps GsonBuilder, we may think we can just use all configurations of GsonBuilder at GsonFireBuilder, but it is not. For example, If we have some date-format configuration setting at GsonBuilder, then we cannot directly set it on GsonFireBuilder. We have to get GsonBuilder object from the GsonFireBuilder and then set the necessary configurations:
 
-```Java
+```java
 private static GsonFireBuilder fireBuilder = new GsonFireBuilder()
     .registerPostProcessor(ExampleVO.class, new PostProcessor<ExampleVO>() {
 
@@ -58,7 +58,7 @@ If we are satisfied with default configurations for Gson then we can create Gson
 ## By Implementing Deserializer
 It is possible to do post processing without using GsonFire, by implementing JsonDeserializer.
 
-```Java
+```java
 public class ExampleVOTypeAdapter implements JsonDeserializer<ExampleVO> {
     @Override
     public ExampleVO deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
@@ -74,13 +74,13 @@ public class ExampleVOTypeAdapter implements JsonDeserializer<ExampleVO> {
 
 After that this type adapter should be included into GsonBuilder object:
 
-```Java
+```java
 private static Gson gson = new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
-            .setDateFormat("yyyy-MM-dd'T'HH:mm:ssXXX")
-            .disableHtmlEscaping()
-            .excludeFieldsWithModifiers(Modifier.FINAL, Modifier.TRANSIENT)
-            .registerTypeAdapter(ContentVO.class, new ContentVOTypeAdapter())
-            .create();
+    .setDateFormat("yyyy-MM-dd'T'HH:mm:ssXXX")
+    .disableHtmlEscaping()
+    .excludeFieldsWithModifiers(Modifier.FINAL, Modifier.TRANSIENT)
+    .registerTypeAdapter(ContentVO.class, new ContentVOTypeAdapter())
+    .create();
 ```
 
 By some people standards this is not a clean code and may cause some confusions later. For example myself had a bug problem while try to go with TypeAdapter way. You may face forever loop problem of serializers, where two serailizers call each other recursively. It is very much advised to use GsonFire kind of post-processor based solutions.
