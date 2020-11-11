@@ -104,9 +104,9 @@ The following technology stacks were used in order to develop Jarvis DevOps:
 
 Source Codes:
 
-https://github.com/aws-dna-4team/jarvis-agent (Public repository)
-https://github.com/aws-dna-4team/jarvis-manager-amplify (Private repository)
-https://github.com/aws-dna-4team/jarvis-ask (Private repository)
+- https://github.com/aws-dna-4team/jarvis-agent (Public repository)
+- https://github.com/aws-dna-4team/jarvis-manager-amplify (Private repository)
+- https://github.com/aws-dna-4team/jarvis-ask (Private repository)
 
 
 ## Conclusion
