@@ -100,7 +100,7 @@ The following technology stacks were used in order to develop Jarvis DevOps:
 
 ### Jarvis DevOps Project Demo
 
-<iframe width="420" height="315" src="https://youtu.be/HM7ILoL-tkk" frameborder="0" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/HM7ILoL-tkk" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 Source Codes:
 
