@@ -68,15 +68,15 @@ It depends on our needs, but I needed it when start using Github Actions. As a m
 aws_access_key_id = XXXXXXXXXX
 aws_secret_access_key = XXXXXXXXXXXXX
 
-[aws-idn-cli]
+[aws-ac3-cli]
 aws_access_key_id = XXXXXXXXXX
 aws_secret_access_key = XXXXXXXXXXXXX
 
-[aws-twn-cli]
+[aws-ac2-cli]
 aws_access_key_id = XXXXXXXXXX
 aws_secret_access_key = XXXXXXXXXXXXX
 
-[aws-tha-cli]
+[aws-ac1-cli]
 aws_access_key_id = XXXXXXXXXX
 aws_secret_access_key = XXXXXXXXXXXXX
 
