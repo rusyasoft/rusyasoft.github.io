@@ -1,5 +1,5 @@
 ---
-title: How to get AWS Solutions Architect Associate Exam
+title: How to prepare for AWS Solutions Architect Associate Exam
 categories:
  - certification, aws, saa
 tags:
