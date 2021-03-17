@@ -1,5 +1,5 @@
 ---
-title: My Work Experience at Kakaopage (Korea)
+title: My Work Experience at KakaoPage (Korea)
 categories:
  - life
 tags:
