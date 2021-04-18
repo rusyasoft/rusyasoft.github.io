@@ -1,9 +1,9 @@
 ---
-title: One Year of Leetcode Marathon
+title: My Work Experience at KakaoPage (Korea)
 categories:
- - leetcode
+ - life
 tags:
- - leetcode, competitive-programming
+ - life, work, experience, programming, developer, korea, IT, company, microservice, monolithic, kakaopage, kakao, subsidiary company
 ---
 
 I would like to share my work experience at Kakaopage (Korea) as a developer. It is one of the top Software Companies in Korea and very good place to work as a developer (<-- for TL;DRs)
@@ -61,6 +61,10 @@ Once a year every employee had to complete an online courses on topics:
 - Gender Equality
 - Disablity Equality
 - Privacy and Security in Organization
+
+# KakaoPage Office from Inside (only one floor)
+
+<iframe width="560" height="315" src="https://www.youtube.com/watch?v=SuO13-Z1NAU" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 # My Team
 I have been working at Global Kakaopage team, which had a projects that are oriented to launch the Kakaopage service in foreign countries. At the time of my arrival to Kakaopage they had launched the Kakaopage Indonesia service and during my stay, I was part of the team that developed additional features and kept the service alive. 
