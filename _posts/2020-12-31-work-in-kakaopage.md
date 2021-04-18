@@ -64,7 +64,7 @@ Once a year every employee had to complete an online courses on topics:
 
 # KakaoPage Office from Inside (only one floor)
 
-<iframe width="560" height="315" src="https://www.youtube.com/watch?v=SuO13-Z1NAU" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/SuO13-Z1NAU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 # My Team
 I have been working at Global Kakaopage team, which had a projects that are oriented to launch the Kakaopage service in foreign countries. At the time of my arrival to Kakaopage they had launched the Kakaopage Indonesia service and during my stay, I was part of the team that developed additional features and kept the service alive. 
