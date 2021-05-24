@@ -5,8 +5,8 @@ type: about
 ---
 
 ## Rustam Rakhimov Igorevich [rusyasoft]
-- Sr. **Back-end** Developer
-- Working at [Kakao Page Corp](https://page.kakao.com/main)
+- SDE
+- Working at Amazon
 
 ## Links
 - Email : rusyasoft@gmail.com
@@ -20,7 +20,7 @@ type: about
 ## Technical Skills
 - **Program Language** :: Java, C/C++, Python, Javascript
 - **Web Framework** :: Spring, Nodejs - Express
-- **Database** :: MySql, MongoDB, AWS RDB
+- **Database** :: MySql, MongoDB, AWS RDB, Couchbase, DynamoDB
 - **Others** :: AWS, DevOps
 
 ## Activities
