@@ -79,7 +79,7 @@ b1(1, 3)   b2(6)   b3(10)
 
 ## Solution Code
 
-```Java
+```java
 class Solution {
     public int maximumGap(int[] nums) {
         if (nums.length < 2) return 0;

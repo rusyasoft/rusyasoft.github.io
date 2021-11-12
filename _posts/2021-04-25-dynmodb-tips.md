@@ -31,7 +31,7 @@ It is very important to know the steps that are happening while we are running o
 
 It works only with query operation only and operates only on primary key elements (partition key and sort key).
 
-```Python
+```python
 import boto3
 
 client = boto3.client('dynamodb')
@@ -73,7 +73,7 @@ Functions:
 
 Example-1: 
 
-```Python
+```python
 import boto3
 client = boto3.client('dynamodb')
 resp = client.put_item(
@@ -94,7 +94,7 @@ resp = client.put_item(
 
 Example-2:
 
-```Python
+```python
 import boto3
 client = boto3.client('dynamodb')
 resp = client.update_item(
