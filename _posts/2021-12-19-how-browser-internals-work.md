@@ -17,7 +17,6 @@ Description of sections of document object:
 - **CSSOM TREE**: is the tree that contains CSS objects that are read either from CSS file or in-code CSS tags
 - **DOM API**: is the javaScript functions provided by default, using which we can access DOM-Tree objects. If we add more custom javaScript codes, you can imagine them ending up in this section
 
-
 ## Event Manager
 
 Another important concept to know in browser is the Event Manager. Event Manager is responsible to interactive part of the browser, where browser interacts with Operating System by getting ingested various events. Operating System events can be:
@@ -25,7 +24,6 @@ Another important concept to know in browser is the Event Manager. Event Manager
 - Browser resive event
 - Internet (network incoming) event
 - Keyboard and mouse event
-
 
 ![Event Manager in Action](/assets/2021/12/web-browser/event-manager-in-action.png)
 
