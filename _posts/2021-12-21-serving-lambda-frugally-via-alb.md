@@ -108,3 +108,10 @@ private createVPC(natType: NatType) {
 }
 ```
 
+## Lambda Quota Limits
+
+If you are going for a production with this setup then don't forget to request quota extension of for concurrency limit. By default it is 1000 which is quite a big enough. But if you are considering big load it is something you should look into this. Requesting limit increase doesn't require any additional charges from you. So called soft limit 1000 can be easily extended to 10'000 (tried for Frankfurt region). But if you need even more than that, then you may need to explain details of your application and load pattern to the AWS Customer Service. No worries, if you need it they will provide it (at the end you pay for what you use anyway)
+
+## What NoSQL to use ?
+
+Since lambda is the serverless compute it would be more proper to use serverless DB accordingly (dynamodb). But in most cases when we migrate to AWS we want to reuse the DB which we already have expertise on. MongoDB worked well for the beginning, but during stress-test it was the bottleneck. Our application start failing because MongoDB couldn't handle many number of connections. Even declaring the connection globally and reusing existing connection is still wasn't enough. The reason is we don't control which lambda contain instances lives and which one whipes out. When the container whiped out, we start having zombie mongoDB connections. In my stress test we try to run mongoDB on premise and ec2 the results were same. Next step was adding a redish cache layer which did allow us to increase number of incoming concurrent request towards the lambda.
