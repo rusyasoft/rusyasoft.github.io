@@ -1,9 +1,9 @@
 ---
 title: Hello World Application Using Hololens-2
-categories:
- - expressjs, nodejs, aws, lambda, frugality, alb
+categories:s
+ - hololens
 tags:
- - expressjs, nodejs, aws, lambda, frugality, alb
+ - hololens, hololens2, mixed-reality, augmented-reality, microsoft
 ---
 
 Even though its not related to my work directly, I was able to get in touch with Hololens-2. I remember back from my work at KETI (Korea Electronics Technology Institute) when I first time played with Hololens (now its referred as Hololens-1). It was amazing feeling when you can see augmented things with such a great quality and precision just in front of your eye. I would like to admit that Hololens-2 is surely advanced version of previous Hololens. Its much lighter, faster, comfortably sits on your head, can fold screen to your top-head when you stop interacting with mixed-reality. 
