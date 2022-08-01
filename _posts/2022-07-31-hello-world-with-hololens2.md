@@ -1,6 +1,6 @@
 ---
-title: Hello World Application Using Hololens-2
-categories:s
+title: Hello World Application Using HoloLens 2
+categories:
  - hololens
 tags:
  - hololens, hololens2, mixed-reality, augmented-reality, microsoft
@@ -12,14 +12,14 @@ When I wrote my first application on Hololens-1 it was kinda easy and steps were
 
 ## MRTK Tooling
 
-As I have mentioned above, steps to build Hololens-2 kinda got complicated, compared to what I have experienced before for Hololens-1 build setup. Because now there is a tooling called ![MRTK](https://docs.microsoft.com/en-us/windows/mixed-reality/mrtk-unity/mrtk2/?view=mrtkunity-2022-05) is introduced. Again I don't exactly remember using this tool before, but it was kinda little confusing at the setup time. But eventually it worked, so may be little improvement of documentation could help.
+As I have mentioned above, steps to build Hololens-2 kinda got complicated, compared to what I have experienced before for Hololens-1 build setup. Because now there is a tooling called [MRTK](https://docs.microsoft.com/en-us/windows/mixed-reality/mrtk-unity/mrtk2/?view=mrtkunity-2022-05) is introduced. Again I don't exactly remember using this tool before, but it was kinda little confusing at the setup time. But eventually it worked, so may be little improvement of documentation could help.
 
 Other than that Steps for build setup are mostly same except Unity project relies on setups/configurations from MRTK tool. May be I don't see the whole advantage of actually having this MRTK tooling because, I was just aiming for "Hello World" application. Because I can see it has very advanced settings/configurations that can affect your build. 
 
 
 ## Tutorial Links For Quick Setup
 
-For people whoever wants to do quick getting started, ![this](https://docs.microsoft.com/en-us/learn/paths/beginner-hololens-2-tutorials/) is the official tutorial, so feel free to follow it. You will end-up creating a two boxes in your Mixed-reality application. I did add "Hello World" text by using ![textmesh-pro](https://learn.unity.com/tutorial/working-with-textmesh-pro#) and added some non-functioning buttons.
+For people whoever wants to do quick getting started, [this](https://docs.microsoft.com/en-us/learn/paths/beginner-hololens-2-tutorials/) is the official tutorial, so feel free to follow it. You will end-up creating a two boxes in your Mixed-reality application. I did add "Hello World" text by using [textmesh-pro](https://learn.unity.com/tutorial/working-with-textmesh-pro#) and added some non-functioning buttons.
 
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/QE4DaXttXic" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
