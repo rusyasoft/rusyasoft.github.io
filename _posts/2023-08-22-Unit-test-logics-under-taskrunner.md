@@ -6,8 +6,6 @@ tags:
  - java, spring, test, junit
 ---
 
-# Introduction
-
 In this blog post, we'll explore a common challenge faced by Java developers - testing complex logic within task runners. We'll discuss a practical approach to isolate and test the logic within task runners effectively.
 
 # The Challenge
