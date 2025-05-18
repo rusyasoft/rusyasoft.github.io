@@ -1,12 +1,10 @@
 ---
-title: Beyond Code: Thinking Like a Modern Software Architect
+title: Thinking Like a Modern Software Architect
 categories:
  - architect
 tags:
  - architecture, software-design, system-design
 ---
-
-# Beyond Code: Thinking Like a Modern Software Architect
 
 In software development, writing clean code is only part of the equation. A software architect must rise above the code and think in terms of **systems, evolution, constraints, and trade-offs**. It's not just *how* something should be built—but *why*, *when*, and *to what extent*.
 
