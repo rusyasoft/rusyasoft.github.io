@@ -1,5 +1,5 @@
 ---
-title: Under the Hood: How the Gemini CLI Agent Thinks and Acts
+title: How the Gemini CLI Agent Thinks and Acts
 categories:
  - ai
  - software-engineering
