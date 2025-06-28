@@ -1,0 +1,14 @@
+sequenceDiagram
+    participant User
+    participant GeminiCLI
+    participant GeminiAPI
+    participant ToolExecutor
+
+    User->>GeminiCLI: "list the files in the current directory"
+    GeminiCLI->>GeminiAPI: Sends prompt to API
+    GeminiAPI-->>GeminiCLI: Streams back a ToolCallRequest for 'list_directory'
+    GeminiCLI->>ToolExecutor: Executes 'list_directory' tool
+    ToolExecutor-->>GeminiCLI: Returns file list as ToolResult
+    GeminiCLI->>GeminiAPI: Sends ToolResult back to API
+    GeminiAPI-->>GeminiCLI: Streams back final text response
+    GeminiCLI-->>User: Displays final response with file list

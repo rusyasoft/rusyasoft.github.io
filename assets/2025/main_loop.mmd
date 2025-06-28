@@ -1,0 +1,11 @@
+graph TD
+    A[User Input] --> B{GeminiClient.sendMessageStream};
+    B --> C{Turn.run};
+    C --> D{GeminiChat.sendMessageStream};
+    D --> E[Gemini API];
+    E --> F[Response Stream];
+    F --> C;
+    C --> G{{Event Processing}};
+    G -- Content --> H[Stream to User];
+    G -- Tool Call --> I[Tool Execution];
+    I --> D;

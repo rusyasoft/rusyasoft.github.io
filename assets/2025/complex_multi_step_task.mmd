@@ -1,0 +1,21 @@
+sequenceDiagram
+    participant User
+    participant GeminiCLI
+    participant GeminiAPI
+    participant ToolExecutor
+
+    User->>GeminiCLI: "Summarize the tests in the packages directory"
+    GeminiCLI->>GeminiAPI: Sends prompt to API
+
+    GeminiAPI-->>GeminiCLI: Streams back ToolCallRequest for 'glob' with pattern 'packages/**/*.test.ts'
+    GeminiCLI->>ToolExecutor: Executes 'glob' tool
+    ToolExecutor-->>GeminiCLI: Returns list of test file paths
+
+    GeminiCLI->>GeminiAPI: Sends file list back to API
+    GeminiAPI-->>GeminiCLI: Streams back ToolCallRequest for 'read_many_files' with the found paths
+    GeminiCLI->>ToolExecutor: Executes 'read_many_files' tool
+    ToolExecutor-->>GeminiCLI: Returns the concatenated content of all test files
+
+    GeminiCLI->>GeminiAPI: Sends file contents back to API
+    GeminiAPI-->>GeminiCLI: Streams back the final summary of the tests
+    GeminiCLI-->>User: Displays the summary

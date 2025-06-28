@@ -1,0 +1,9 @@
+graph TD
+    A[ToolCallRequest] --> B{executeToolCall};
+    B --> C{ToolRegistry};
+    C --> D[Get Tool];
+    D --> E[Execute Tool];
+    E --> F[ToolResult];
+    F --> G{convertToFunctionResponse};
+    G --> H[FunctionResponse];
+    H --> I[Gemini API];

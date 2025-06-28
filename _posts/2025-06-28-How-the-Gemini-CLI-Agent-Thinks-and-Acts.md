@@ -32,19 +32,7 @@ This loop is what allows the agent to tackle complex, multi-step tasks that go f
 
 Let's visualize this main loop:
 
-```mermaid
-graph TD
-    A[User Input] --> B{GeminiClient.sendMessageStream};
-    B --> C{Turn.run};
-    C --> D{GeminiChat.sendMessageStream};
-    D --> E[Gemini API];
-    E --> F[Response Stream];
-    F --> C;
-    C --> G{{Event Processing}};
-    G -- Content --> H[Stream to User];
-    G -- Tool Call --> I[Tool Execution];
-    I --> D;
-```
+![Main Loop](/assets/2025/main_loop.png)
 
 ### From Prompt to Action: A Step-by-Step Breakdown
 
@@ -63,17 +51,7 @@ The "Act" phase of the cycle is where the agent interacts with your system. This
 
 Here’s a look at the tool execution flow:
 
-```mermaid
-graph TD
-    A[ToolCallRequest] --> B{executeToolCall};
-    B --> C{ToolRegistry};
-    C --> D[Get Tool];
-    D --> E[Execute Tool];
-    E --> F[ToolResult];
-    F --> G{convertToFunctionResponse};
-    G --> H[FunctionResponse];
-    H --> I[Gemini API];
-```
+![Tool Execution Flow](/assets/2025/tool_execution_flow.png)
 
 This process ensures that every tool call is properly requested, executed, and its result reported back to the agent's "brain" for the next phase of reasoning.
 
@@ -85,22 +63,7 @@ Let's see how this plays out in practice.
 
 Imagine you ask: **"list the files in the current directory."**
 
-```mermaid
-sequenceDiagram
-    participant User
-    participant GeminiCLI
-    participant GeminiAPI
-    participant ToolExecutor
-
-    User->>GeminiCLI: "list the files in the current directory"
-    GeminiCLI->>GeminiAPI: Sends prompt to API
-    GeminiAPI-->>GeminiCLI: Streams back a ToolCallRequest for 'list_directory'
-    GeminiCLI->>ToolExecutor: Executes 'list_directory' tool
-    ToolExecutor-->>GeminiCLI: Returns file list as ToolResult
-    GeminiCLI->>GeminiAPI: Sends ToolResult back to API
-    GeminiAPI-->>GeminiCLI: Streams back final text response
-    GeminiCLI-->>User: Displays final response with file list
-```
+![Simple File Listing](/assets/2025/simple_file_listing.png)
 
 Here, the agent reasons that it needs the `list_directory` tool, acts by calling it, observes the resulting file list, and then reasons that it can now formulate a final answer for you.
 
@@ -108,29 +71,7 @@ Here, the agent reasons that it needs the `list_directory` tool, acts by calling
 
 Now for a more advanced request: **"Summarize the tests in the `packages` directory."**
 
-```mermaid
-sequenceDiagram
-    participant User
-    participant GeminiCLI
-    participant GeminiAPI
-    participant ToolExecutor
-
-    User->>GeminiCLI: "Summarize the tests in the packages directory"
-    GeminiCLI->>GeminiAPI: Sends prompt to API
-
-    GeminiAPI-->>GeminiCLI: Streams back ToolCallRequest for 'glob' with pattern 'packages/**/*.test.ts'
-    GeminiCLI->>ToolExecutor: Executes 'glob' tool
-    ToolExecutor-->>GeminiCLI: Returns list of test file paths
-
-    GeminiCLI->>GeminiAPI: Sends file list back to API
-    GeminiAPI-->>GeminiCLI: Streams back ToolCallRequest for 'read_many_files' with the found paths
-    GeminiCLI->>ToolExecutor: Executes 'read_many_files' tool
-    ToolExecutor-->>GeminiCLI: Returns the concatenated content of all test files
-
-    GeminiCLI->>GeminiAPI: Sends file contents back to API
-    GeminiAPI-->>GeminiCLI: Streams back the final summary of the tests
-    GeminiCLI-->>User: Displays the summary
-```
+![Complex Multi-Step Task](/assets/2025/complex_multi_step_task.png)
 
 This example showcases the true power of the ReAct loop. The agent forms a multi-step plan:
 
