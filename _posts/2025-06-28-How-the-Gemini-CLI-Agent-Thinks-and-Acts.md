@@ -15,9 +15,9 @@ tags:
 
 Have you ever wondered what goes on inside an AI-powered command-line tool? How does it understand your requests, execute commands, and interact with your file system, all while feeling like a natural extension of your workflow?
 
-This week Google introduced Gemini-cli, which was kind of expected after claude-code and openAIs codex. But surprise-surprise google makes it [free and open-sourced](https://www.techrepublic.com/article/news-google-introduces-gemini-cli/)
+This week, Google introduced Gemini-cli. Its arrival was anticipated following similar tools like Claude-code and OpenAI's Codex, but Google's decision to make it [free and open-sourced](https://www.techrepublic.com/article/news-google-introduces-gemini-cli/) came as a pleasant surprise.
 
-Using the chance coding cli tool getting open-sourced, we're taking a deep dive into the internal architecture of the Gemini CLI's AI agent. We'll explore the core logic that powers its ability to reason, act, and learn from its interactions, transforming it from a simple command executor into a powerful development partner.
+With the open-sourcing of this CLI tool, we're taking a deep dive into the internal architecture of the Gemini CLI's AI agent. We'll explore the core logic that powers its ability to reason, act, and learn from its interactions, transforming it from a simple command executor into a powerful development partner.
 
 ## The Core Engine: A "Reason-Act" (ReAct) Cycle
 
@@ -30,7 +30,7 @@ At the heart of the Gemini CLI agent is a design pattern known as the "Reason-Ac
 
 This loop is what allows the agent to tackle complex, multi-step tasks that go far beyond the capabilities of a traditional chatbot.
 
-Let's visualize this main loop:
+Here's a visualization of this main loop:
 
 ![Main Loop](/assets/2025/main_loop.png)
 
@@ -49,19 +49,19 @@ Let's visualize this main loop:
 
 The "Act" phase of the cycle is where the agent interacts with your system. This is handled by a dedicated tool execution module that safely and efficiently runs the commands requested by the AI.
 
-Here’s a look at the tool execution flow:
+Here's a detailed look at the tool execution flow:
 
 ![Tool Execution Flow](/assets/2025/tool_execution_flow.png)
 
-This process ensures that every tool call is properly requested, executed, and its result reported back to the agent's "brain" for the next phase of reasoning.
+This process ensures that every tool call is properly requested, executed, and its result is reported back to the agent's "brain" for the next phase of reasoning.
 
 ## Putting It All Together: Two Examples
 
-Let's see how this plays out in practice.
+Let's examine how this plays out in practice.
 
 ### Example 1: A Simple File Listing
 
-Imagine you ask: **"list the files in the current directory."**
+Imagine you ask: **"List the files in the current directory."**
 
 ![Simple File Listing](/assets/2025/simple_file_listing.png)
 
