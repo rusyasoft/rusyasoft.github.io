@@ -1,5 +1,5 @@
 ---
-title: Had chance to try Certified AI Security Professional 
+title: My Experience with the Certified AI Security Professional (CAISP) Course
 categories:
  - ai
  - security
@@ -13,7 +13,6 @@ tags:
  - course
 ---
 
-# My Experience with the Certified AI Security Professional (CAISP) Course
 
 Artificial Intelligence is transforming every industry — but with innovation comes new security risks. Recently, I had the chance to explore these challenges firsthand through the **[Certified AI Security Professional (CAISP)](https://www.practical-devsecops.com/certified-ai-security-professional/)** course by **Practical DevSecOps**.
 
