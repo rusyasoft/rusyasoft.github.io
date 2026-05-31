@@ -10,10 +10,7 @@ tags:
  - acid
  - transactions
  - software-architecture
-published: false
 ---
-
-# Managing Agent State with ACID Principles
 
 AI agents are becoming more capable at writing code, editing files, running tests, and coordinating larger engineering tasks. But as soon as an agent starts working across multiple files, multiple steps, or multiple sessions, a familiar engineering problem appears:
 
@@ -28,7 +25,7 @@ Databases have spent decades solving the problem of safely changing state. They 
 - **Isolation**
 - **Durability**
 
-That same mental model can help us design better agent harnesses.
+That same mental model can help us design better agent harnesses, not just better agent memory. This post is about the operational layer around the model: the part that makes agent work safe, repeatable, and recoverable.
 
 A harness is the system around the agent: the scripts, rules, files, checks, workflows, prompts, and environment that control how the agent works. The agent may be the “brain,” but the harness is the operational system that keeps the work safe.
 
@@ -340,7 +337,7 @@ The harness can enforce this by requiring a final summary file for larger operat
 
 Example:
 
-```markdown
+````markdown
 # Final Report: Payment Summary Endpoint
 
 ## Changed Files
@@ -369,7 +366,7 @@ Result: passed.
 ## Notes for Future Work
 
 Pagination is not required because the endpoint returns aggregate summary data, not raw payment records.
-```
+````
 
 This kind of file is incredibly useful. It gives future humans and future agents a durable understanding of what happened.
 
