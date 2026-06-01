@@ -1,0 +1,18 @@
+# Jekyll/GitHub Pages generated output
+_site/
+.sass-cache/
+.jekyll-cache/
+.jekyll-metadata
+
+# Bundler/local dependencies
+.bundle/
+vendor/
+
+# OS/editor noise
+.DS_Store
+*.swp
+*.swo
+
+# Logs and temporary debug artifacts
+*.log
+tmp/

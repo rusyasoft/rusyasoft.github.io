@@ -1,0 +1,51 @@
+{
+  "project": "rusyasoft.github.io blog harness",
+  "active_policy": "One logical change at a time; mark complete only with verification evidence.",
+  "features": [
+    {
+      "id": "harness-minimal-agent-workspace",
+      "title": "Create minimal agent harness for the Jekyll blog",
+      "status": "verified",
+      "priority": 1,
+      "scope": [
+        "Root agent instructions",
+        "Durable progress log",
+        "Session handoff template",
+        "Standard verification script",
+        "Post structural validation"
+      ],
+      "done_criteria": [
+        "AGENTS.md explains startup, repo map, verification, and definition of done",
+        "./init.sh is the standard startup/verification path",
+        "scripts/validate_blog.py validates Jekyll post structure and the ACID harness post",
+        "progress.md records verification evidence"
+      ],
+      "verification": {
+        "commands": [
+          "python3 scripts/validate_blog.py",
+          "bundle exec jekyll build --trace"
+        ],
+        "evidence": "./init.sh passes end-to-end after local Bundler setup. Jekyll build succeeds."
+      }
+    },
+    {
+      "id": "acid-agent-state-post-quality",
+      "title": "Maintain Managing Agent State with ACID Principles as a harness-quality article",
+      "status": "verified_existing",
+      "priority": 2,
+      "target_file": "_posts/2026-05-31-Managing-Agent-State-with-ACID-Principles.md",
+      "done_criteria": [
+        "Post has valid front matter",
+        "Post covers Atomicity, Consistency, Isolation, and Durability",
+        "Post includes practical verification/commit/rollback examples",
+        "Site build succeeds"
+      ],
+      "verification": {
+        "commands": [
+          "python3 scripts/validate_blog.py"
+        ],
+        "evidence": "Validator encodes structural checks for this post."
+      }
+    }
+  ]
+}
