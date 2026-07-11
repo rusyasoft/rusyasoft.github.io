@@ -46,6 +46,26 @@
         ],
         "evidence": "Validator encodes structural checks for this post."
       }
+    },
+    {
+      "id": "architecture-implementation-evidence-post",
+      "title": "Publish Architecture Is Becoming Part of the Implementation Process with supporting diagrams",
+      "status": "verified",
+      "priority": 3,
+      "target_file": "_posts/2026-07-11-architecture-as-part-of-implementation.md",
+      "done_criteria": [
+        "Post has valid front matter and repository-compliant filename",
+        "Post includes all nine supporting diagrams from assets/images/architecture-implementation",
+        "All image references resolve through Jekyll relative_url",
+        "Site structural validation and build succeed"
+      ],
+      "verification": {
+        "commands": [
+          "python3 scripts/validate_blog.py",
+          "./init.sh"
+        ],
+        "evidence": "Both commands pass; only the two documented legacy fenced-code warnings remain."
+      }
     }
   ]
 }

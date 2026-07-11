@@ -41,6 +41,24 @@ bundle update nokogiri --conservative
 - `_config.yml` now excludes `vendor`, `.bundle`, harness state files, and other local/generated directories from Jekyll source scanning.
 - `./init.sh` passes end-to-end: structural validation, Bundler check, and `bundle exec jekyll build --trace`.
 
+## 2026-07-11 — Architecture and implementation article with diagrams
+
+### Goal
+
+Publish the architecture article using the replacement draft and its nine supporting diagrams.
+
+### Changed files
+
+- Added `_posts/2026-07-11-architecture-as-part-of-implementation.md`.
+- Added nine diagrams under `assets/images/architecture-implementation/`.
+- Image references use the existing Jekyll `relative_url` pattern.
+
+### Verification evidence
+
+- `python3 scripts/validate_blog.py` passes.
+- `./init.sh` passes end-to-end, including the Jekyll build.
+- The validator still reports the two pre-existing legacy fenced-code warnings.
+
 ### Next step
 
 Optional cleanup follow-up: fix the two legacy posts with unbalanced fenced code blocks so the validator can eventually fail on all unbalanced fences, not just the target ACID post.
