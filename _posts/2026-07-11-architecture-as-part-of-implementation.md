@@ -200,16 +200,16 @@ It may be helping us make better decisions before we commit to that code.
 
 ![Architecture decisions supported by working implementation spikes]({{ '/assets/images/architecture-implementation/02-implementation-as-decision-making.png' | relative_url }})
 
-![Cheaper experimentation can create stronger, evidence-based architectural decisions]({{ '/assets/images/architecture-implementation/04-cheaper-experimentation.png' | relative_url }})
-
 ![A workflow where the ADR is written after exploration and evaluation]({{ '/assets/images/architecture-implementation/03-adrs-move-later.png' | relative_url }})
 
-![Evaluate architectural options from both the implementation and consumer perspectives]({{ '/assets/images/architecture-implementation/05-evaluate-consumer-side.png' | relative_url }})
+![Cheaper experimentation can create stronger, evidence-based architectural decisions]({{ '/assets/images/architecture-implementation/04-cheaper-experimentation.png' | relative_url }})
 
-![The ADR format remains familiar while the evidence behind it becomes stronger]({{ '/assets/images/architecture-implementation/08-what-has-not-changed.png' | relative_url }})
+![Evaluate architectural options from both the implementation and consumer perspectives]({{ '/assets/images/architecture-implementation/05-evaluate-consumer-side.png' | relative_url }})
 
 ![AI agents can draft ADRs, but humans remain responsible for architectural judgement]({{ '/assets/images/architecture-implementation/06-agents-draft-humans-judge.png' | relative_url }})
 
 ![ADRs preserve architectural context for future engineers and AI coding agents]({{ '/assets/images/architecture-implementation/07-adrs-preserve-context.png' | relative_url }})
+
+![The ADR format remains familiar while the evidence behind it becomes stronger]({{ '/assets/images/architecture-implementation/08-what-has-not-changed.png' | relative_url }})
 
 ![A practical workflow for evidence-based architecture using AI-assisted prototypes]({{ '/assets/images/architecture-implementation/09-practical-workflow.png' | relative_url }})
