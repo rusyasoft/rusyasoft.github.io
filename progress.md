@@ -59,6 +59,20 @@ Publish the architecture article using the replacement draft and its nine suppor
 - `./init.sh` passes end-to-end, including the Jekyll build.
 - The validator still reports the two pre-existing legacy fenced-code warnings.
 
+## 2026-07-11 — Article image layout adjustment
+
+### Changed files
+
+- Updated `_posts/2026-07-11-architecture-as-part-of-implementation.md` to keep the body free of inline diagrams.
+- Grouped all nine diagrams after the article's final paragraph.
+- Preserved the user's removal of the duplicate body title.
+
+### Verification evidence
+
+- `python3 scripts/validate_blog.py` passes.
+- `./init.sh` passes end-to-end, including the Jekyll build.
+- The validator still reports the two pre-existing legacy fenced-code warnings.
+
 ### Next step
 
 Optional cleanup follow-up: fix the two legacy posts with unbalanced fenced code blocks so the validator can eventually fail on all unbalanced fences, not just the target ACID post.

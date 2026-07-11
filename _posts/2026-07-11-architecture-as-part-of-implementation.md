@@ -13,10 +13,6 @@ tags:
   - Proof of Concept
 ---
 
-# Architecture Is Becoming Part of the Implementation Process
-
-![Traditional ADR workflow compared with an AI-assisted, evidence-based workflow]({{ '/assets/images/architecture-implementation/01-core-idea.png' | relative_url }})
-
 Designing software architecture and writing an Architecture Decision Record—or ADR—is not an easy job.
 
 Despite all my years of experience and all the architecture books I have read, I have always found this part of software development difficult.
@@ -33,7 +29,7 @@ But whenever I design a new system, many questions immediately appear in my head
 
 Years ago, before the current AI advancements, I often tried to answer these questions by building small Proofs of Concept.
 
-Sometimes I spent my own extra hours creating those prototypes. Other times, I gave parts of the investigation to junior developers and worked with them to test different approaches.
+Sometimes, I spent extra hours creating those prototypes. Other times, I gave parts of the investigation to junior developers and worked with them to test different approaches.
 
 The feedback I occasionally received from senior engineers or professors was that I should trust my experience more.
 
@@ -49,8 +45,6 @@ Even worse, I did not want to make a confident architectural decision and later 
 
 ## Architecture Was Painful, but Implementation Was Easier
 
-![Architecture decisions supported by working implementation spikes]({{ '/assets/images/architecture-implementation/02-implementation-as-decision-making.png' | relative_url }})
-
 As a result, the architecture and design period was usually painful for me.
 
 I would investigate, experiment, and think about many possible failure scenarios. It sometimes felt like I was already implementing the system before the implementation had officially started.
@@ -64,8 +58,6 @@ The rest of the development process became much more enjoyable. Instead of wonde
 In other words, I was spending more effort at the beginning to reduce uncertainty later.
 
 ## AI Is Making Proofs of Concept Cheaper
-
-![Cheaper experimentation can create stronger, evidence-based architectural decisions]({{ '/assets/images/architecture-implementation/04-cheaper-experimentation.png' | relative_url }})
 
 With the advancement of LLMs and agentic coding tools, I have started enjoying the architecture process much more.
 
@@ -91,8 +83,6 @@ Now it is increasingly possible to build small versions of those options and com
 
 ## Does Architecture Still Need to Be a Separate First Step?
 
-![A workflow where the ADR is written after exploration and evaluation]({{ '/assets/images/architecture-implementation/03-adrs-move-later.png' | relative_url }})
-
 This change made me think about a bigger question:
 
 **Do architecture and implementation always need to be completely separate steps?**
@@ -116,15 +106,11 @@ But with cheaper experimentation, the process can become more iterative:
 
 Architecture does not disappear in this process.
 
-![Evaluate architectural options from both the implementation and consumer perspectives]({{ '/assets/images/architecture-implementation/05-evaluate-consumer-side.png' | relative_url }})
-
 It becomes more connected to implementation.
 
 Instead of treating architecture as a document that must be completed before coding begins, we can treat it as a process of reducing uncertainty through thinking and experimentation.
 
 ## ADRs Can Record Evidence, Not Only Predictions
-
-![The ADR format remains familiar while the evidence behind it becomes stronger]({{ '/assets/images/architecture-implementation/08-what-has-not-changed.png' | relative_url }})
 
 Last week, I came across an interesting article by Garry Shutler called [“ADRs in a post-flip world”](https://gshutler.com/2026/06/adrs-in-a-post-flip-world/).
 
@@ -166,8 +152,6 @@ The ADR becomes less of a prediction and more of an actual record of what the te
 
 ## Humans Still Own the Decision
 
-![AI agents can draft ADRs, but humans remain responsible for architectural judgement]({{ '/assets/images/architecture-implementation/06-agents-draft-humans-judge.png' | relative_url }})
-
 There is one important boundary.
 
 An AI agent can help us:
@@ -192,13 +176,9 @@ If we do not define proper evaluation criteria, we may simply choose the prototy
 
 The purpose of experimentation is not to avoid thinking.
 
-![ADRs preserve architectural context for future engineers and AI coding agents]({{ '/assets/images/architecture-implementation/07-adrs-preserve-context.png' | relative_url }})
-
 It is to support thinking with better evidence.
 
 ## My Current View
-
-![A practical workflow for evidence-based architecture using AI-assisted prototypes]({{ '/assets/images/architecture-implementation/09-practical-workflow.png' | relative_url }})
 
 I no longer see architecture as something that must always be finished before implementation starts.
 
@@ -215,3 +195,21 @@ But when testing your gut becomes cheap, why not test it?
 The most valuable use of AI coding agents may not be writing the final production code faster.
 
 It may be helping us make better decisions before we commit to that code.
+
+![Traditional ADR workflow compared with an AI-assisted, evidence-based workflow]({{ '/assets/images/architecture-implementation/01-core-idea.png' | relative_url }})
+
+![Architecture decisions supported by working implementation spikes]({{ '/assets/images/architecture-implementation/02-implementation-as-decision-making.png' | relative_url }})
+
+![Cheaper experimentation can create stronger, evidence-based architectural decisions]({{ '/assets/images/architecture-implementation/04-cheaper-experimentation.png' | relative_url }})
+
+![A workflow where the ADR is written after exploration and evaluation]({{ '/assets/images/architecture-implementation/03-adrs-move-later.png' | relative_url }})
+
+![Evaluate architectural options from both the implementation and consumer perspectives]({{ '/assets/images/architecture-implementation/05-evaluate-consumer-side.png' | relative_url }})
+
+![The ADR format remains familiar while the evidence behind it becomes stronger]({{ '/assets/images/architecture-implementation/08-what-has-not-changed.png' | relative_url }})
+
+![AI agents can draft ADRs, but humans remain responsible for architectural judgement]({{ '/assets/images/architecture-implementation/06-agents-draft-humans-judge.png' | relative_url }})
+
+![ADRs preserve architectural context for future engineers and AI coding agents]({{ '/assets/images/architecture-implementation/07-adrs-preserve-context.png' | relative_url }})
+
+![A practical workflow for evidence-based architecture using AI-assisted prototypes]({{ '/assets/images/architecture-implementation/09-practical-workflow.png' | relative_url }})
