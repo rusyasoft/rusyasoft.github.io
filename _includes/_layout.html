@@ -19,6 +19,8 @@
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="{{ page.lang | default: page.language | default: site.language }}">
 
+  <a class="skip-link" href="#content">Skip to content</a>
+
   {% assign container_class = "container " %}
   {% if site.sidebar.position %}
     {% assign container_class = container_class | append: 'sidebar-position-' | append: site.sidebar.position %}
@@ -34,7 +36,7 @@
     <main id="main" class="main">
       <div class="main-inner">
         <div class="content-wrap">
-          <div id="content" class="content">
+          <div id="content" class="content" tabindex="-1">
             {{ content }}
           </div>
           {% include _third-party/duoshuo-hot-articles.html %}
@@ -55,12 +57,12 @@
     </footer>
 
     {% unless site.sidebar.b2t %}
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
+      <button type="button" class="back-to-top" aria-label="Back to top">
+        <i class="fa fa-arrow-up" aria-hidden="true"></i>
         {% if site.sidebar.scrollpercent %}
           <span id="scrollpercent"><span>0</span>%</span>
         {% endif %}
-      </div>
+      </button>
     {% endunless %}
 
   </div>

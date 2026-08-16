@@ -1,12 +1,13 @@
-<div class="popup search-popup local-search-popup">
+<div class="popup search-popup local-search-popup" role="search">
   <div class="local-search-header clearfix">
     <span class="search-icon">
-      <i class="fa fa-search"></i>
+      <i class="fa fa-search" aria-hidden="true"></i>
     </span>
-    <span class="popup-btn-close">
-      <i class="fa fa-times-circle"></i>
-    </span>
+    <button type="button" class="popup-btn-close" aria-label="Close search">
+      <i class="fa fa-times-circle" aria-hidden="true"></i>
+    </button>
     <div class="local-search-input-wrapper">
+      <label class="sr-only" for="local-search-input">{{ __.menu.search }}</label>
       <input autocomplete="off"
              placeholder="{{ __.search.placeholder }}" spellcheck="false"
              type="text" id="local-search-input">

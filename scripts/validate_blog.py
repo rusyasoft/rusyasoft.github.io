@@ -27,6 +27,12 @@ OG_URL_RE = re.compile(r'<meta property="og:url" content="([^"]*)"')
 AD_LOADER_RE = re.compile(r"adsbygoogle\.js")
 AD_PUSH_RE = re.compile(r"adsbygoogle\s*=\s*window\.adsbygoogle")
 
+# Accessibility invariants (issue #35). The viewport must not block pinch-zoom,
+# and every full-layout page must expose a keyboard skip link into the content.
+VIEWPORT_RE = re.compile(r'<meta name="viewport" content="([^"]*)"')
+SKIP_LINK_RE = re.compile(r'<a class="skip-link" href="#content">')
+NAV_TOGGLE_BUTTON_RE = re.compile(r'<div class="site-nav-toggle">\s*<button\b([^>]*)>')
+
 # Pages built from a layout that has no <head> include, so they carry no canonical.
 NO_CANONICAL_ALLOWED = {"404.html", "404 copy.html", "google18d554b47bfebf5f.html"}
 
@@ -149,6 +155,7 @@ def check_built_site() -> None:
 
     checked = 0
     without_canonical: list[str] = []
+    without_skip_link: list[str] = []
     for page in pages:
         rel = page.relative_to(SITE).as_posix()
         text = page.read_text(encoding="utf-8", errors="replace")
@@ -191,17 +198,37 @@ def check_built_site() -> None:
         if "enable_page_level_ads" in text:
             fail(f"{rel} still enables Auto ads, which places ads outside this repository's control")
 
+        # Accessibility: a full-layout page must let users zoom and must offer a
+        # keyboard skip link into the content region.
+        viewport = VIEWPORT_RE.findall(text)
+        if viewport:
+            declared = viewport[0].replace(" ", "")
+            if "maximum-scale" in declared or "user-scalable=no" in declared:
+                fail(f"{rel} viewport blocks zoom: {viewport[0]!r}")
+        if not SKIP_LINK_RE.search(text):
+            without_skip_link.append(rel)
+
         checked += 1
 
     if without_canonical:
         listed = ", ".join(without_canonical[:5])
         fail(f"{len(without_canonical)} generated pages have no canonical tag: {listed}")
 
+    if without_skip_link:
+        listed = ", ".join(without_skip_link[:5])
+        fail(f"{len(without_skip_link)} full-layout pages have no skip link: {listed}")
+
     homepage = SITE / "index.html"
     if homepage.exists():
-        canonical = CANONICAL_RE.findall(homepage.read_text(encoding="utf-8"))
+        home_text = homepage.read_text(encoding="utf-8")
+        canonical = CANONICAL_RE.findall(home_text)
         if canonical != [f"{SITE_URL}/"]:
             fail(f"homepage canonical is {canonical}, expected ['{SITE_URL}/']")
+        toggle = NAV_TOGGLE_BUTTON_RE.search(home_text)
+        if not toggle:
+            fail("homepage has no navigation toggle button")
+        if "aria-label" not in toggle.group(1):
+            fail("homepage navigation toggle button has no accessible name (aria-label)")
 
     print(f"OK: built-site checks passed across {checked} pages")
 

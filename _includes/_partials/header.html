@@ -24,15 +24,15 @@
   </div>
 
   <div class="site-nav-toggle">
-    <button>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
+    <button type="button" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="site-nav">
+      <span class="btn-bar" aria-hidden="true"></span>
+      <span class="btn-bar" aria-hidden="true"></span>
+      <span class="btn-bar" aria-hidden="true"></span>
     </button>
   </div>
 </div>
 
-<nav class="site-nav">
+<nav class="site-nav" id="site-nav">
   {% if site.swiftype_key or site.algolia_search.enable or site.tinysou_Key or site.local_search.enable %}
     {% assign hasSearch = true %}
   {% endif %}
