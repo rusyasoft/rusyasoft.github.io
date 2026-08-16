@@ -14,7 +14,9 @@ date_format: '%Y-%m-%d'
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com' and baseurl as '/child'
-url:
+## Set explicitly so absolute_url (canonical, og:url, feed, sitemap) resolves to the
+## public HTTPS origin in local builds too, not only in the GitHub Pages build.
+url: https://rusyasoft.github.io
 baseurl:
 permalink: pretty
 
