@@ -1,7 +1,5 @@
 {% comment %} open_graph(twitter_id, google_plus, fb_admins, fb_app_id) {% endcomment %}
 {% capture open_graph %}
-  {% assign default_images = '' | split: '' %}
-  {% assign images = page.photos | default: default_images %}
   {% assign page_content = page.content %}
   {% assign description = page.description | default: page.excerpt | default: page_content | default: site.description %}
 
@@ -18,8 +16,27 @@
   {% assign og_title = page.title | default: site.title %}
   {% assign site_name = site.title %}
   {% assign language = page.language | default: site.language %}
-  {% assign updated = page.updated %}
-  {% assign twitter_card = 'summary' %}
+  {% assign updated = page.last_modified_at | default: page.updated %}
+
+  {% comment %}
+    One intentional social image per page instead of scraping every inline <img>.
+    A page's own `image` front matter wins, then its first gallery photo, then the
+    site-wide `og_image` fallback. A page-specific image is treated as a large
+    preview (summary_large_image); the shared avatar fallback stays a `summary`
+    card. og:image and twitter:image are always emitted as absolute HTTPS URLs.
+  {% endcomment %}
+  {% assign primary_image = page.image | default: page.photos.first %}
+  {% if primary_image %}
+    {% assign twitter_card = 'summary_large_image' %}
+  {% else %}
+    {% assign primary_image = site.og_image %}
+    {% assign twitter_card = 'summary' %}
+  {% endif %}
+  {% if primary_image contains '://' %}
+    {% assign primary_image_abs = primary_image %}
+  {% else %}
+    {% assign primary_image_abs = primary_image | absolute_url %}
+  {% endif %}
 
   {% if description %}
     {% assign description = description | strip_html | strip |
@@ -29,18 +46,6 @@
                             replace: '"', '&quot;' |
                             replace: "'", '&apos;' |
                             replace: '\n', ' ' %}
-  {% endif %}
-
-  {% if images.size == 0 and page_content %}
-    {% assign imgs = page_content | strip | split: '<img' | shift %}
-    {% for img in imgs %}
-      {% assign tmp = img | strip | split: 'src=' | shfit %}
-      {% assign tmp = tmp | strip | split: '\"' | shift %}
-      {% assign image = tmp[0] | strip %}
-      {% if image %}
-        {% assign images = images | push: image %}
-      {% endif %}
-    {% endfor %}
   {% endif %}
 
   {% if description %}
@@ -68,14 +73,27 @@
     <!--newline-->
   {% endif %}
 
-  {% for image in images %}
-    <meta property="og:image" content="{{ image }}">
+  {% if primary_image_abs %}
+    <meta property="og:image" content="{{ primary_image_abs }}">
     <!--newline-->
-  {% endfor %}
+  {% endif %}
+
+  {% if page.layout == 'post' %}
+    <meta property="article:published_time" content="{{ page.date | date_to_xmlschema }}">
+    <!--newline-->
+    {% if site.author_profile.url %}
+      <meta property="article:author" content="{{ site.author_profile.url }}">
+      <!--newline-->
+    {% endif %}
+  {% endif %}
 
   {% if updated %}
     <meta property="og:updated_time" content="{{ updated | date_to_xmlschema }}">
     <!--newline-->
+    {% if page.layout == 'post' %}
+      <meta property="article:modified_time" content="{{ updated | date_to_xmlschema }}">
+      <!--newline-->
+    {% endif %}
   {% endif %}
 
   <meta name="twitter:card" content="{{ twitter_card | xml_escape }}"><!--newline-->
@@ -86,8 +104,8 @@
     <!--newline-->
   {% endif %}
 
-  {% if images.size != 0 %}
-    <meta name="twitter:image" content="{{ images[0] }}">
+  {% if primary_image_abs %}
+    <meta name="twitter:image" content="{{ primary_image_abs }}">
     <!--newline-->
   {% endif %}
 

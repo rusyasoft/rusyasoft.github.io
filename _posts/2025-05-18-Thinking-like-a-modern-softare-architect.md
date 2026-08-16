@@ -1,5 +1,10 @@
 ---
 title: Thinking Like a Modern Software Architect
+featured: true
+image: /assets/2025/A_flat-design_digital_illustration_features_a_pers.png
+description: >-
+  Rising above the code to reason about systems, evolution, constraints, and
+  trade-offs - the why, when, and to what extent of architectural decisions.
 categories:
  - architect
 tags:

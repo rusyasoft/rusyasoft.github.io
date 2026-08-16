@@ -208,3 +208,149 @@ select:focus-visible,
   appearance: none;
   font-family: inherit;
 }
+
+
+// Homepage brand and featured writing
+// The homepage opens with a single page-level <h1> (the brand line) and a short
+// author introduction, then a small curated list of featured posts, then the
+// usual chronological feed. This is what tells a first-time visitor who writes
+// here and why, before the feed. See _includes/index.html.
+// --------------------------------------------------
+
+.home-hero {
+  max-width: $post-measure + 8em;
+  margin: 0 auto 36px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid $gray-lighter;
+}
+
+.home-hero-title {
+  margin: 0 0 6px;
+  font-size: 30px;
+  line-height: 1.2;
+}
+
+.home-hero-tagline {
+  margin: 0 0 16px;
+  color: $grey-dark;
+  font-size: 18px;
+}
+
+.home-hero-intro {
+  margin: 0 0 16px;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.home-hero-links {
+  margin: 0;
+  font-size: 15px;
+
+  .home-hero-link + .home-hero-link {
+    margin-left: 8px;
+    padding-left: 12px;
+    border-left: 1px solid $gray-lighter;
+  }
+}
+
+.home-section-title {
+  max-width: $post-measure + 8em;
+  margin: 0 auto 16px;
+  font-size: 15px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: $grey-dark;
+}
+
+.home-featured {
+  margin: 0 auto 36px;
+}
+
+.home-featured-list {
+  max-width: $post-measure + 8em;
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+}
+
+.home-featured-item {
+  padding: 14px 0;
+  border-bottom: 1px solid $gray-lighter;
+
+  &:first-child { padding-top: 0; }
+}
+
+.home-featured-item-title {
+  margin: 0 0 4px;
+  font-size: 20px;
+  line-height: 1.3;
+}
+
+.home-featured-meta {
+  margin: 0 0 6px;
+  font-size: 13px;
+  color: $grey-dark;
+
+  .home-topic-label {
+    margin-right: 6px;
+    text-transform: lowercase;
+  }
+}
+
+.home-featured-item-desc {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+@include mobile() {
+  .home-hero-title { font-size: 26px; }
+  .home-hero-tagline { font-size: 16px; }
+}
+
+
+// Deferred comments control
+// Disqus only loads on click or when scrolled near, so the placeholder needs a
+// real, keyboard-focusable button rather than the theme's <div> trigger.
+// --------------------------------------------------
+
+.comments-load-button {
+  display: inline-block;
+  margin: 0 0 12px;
+  padding: 8px 18px;
+  border: 1px solid $gray-lighter;
+  border-radius: 4px;
+  background: transparent;
+  color: $grey-dark;
+  font-family: inherit;
+  font-size: 15px;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+
+  &:hover { color: $black-deep; border-color: $grey-dark; }
+}
+
+
+// Footer utility links
+// --------------------------------------------------
+
+.footer-links {
+  margin-top: 8px;
+  font-size: 13px;
+}
+
+
+// Article disclosure note
+// Rendered above the body when a post sets `disclosure` front matter, so
+// sponsored, affiliate, or complimentary-access relationships read consistently.
+// --------------------------------------------------
+
+.post-disclosure {
+  margin: 0 0 20px;
+  padding: 10px 14px;
+  border-left: 3px solid $grey-dark;
+  background: rgba($grey-dark, .08);
+  font-size: 14px;
+  line-height: 1.5;
+}

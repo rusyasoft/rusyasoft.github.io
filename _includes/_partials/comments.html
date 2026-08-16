@@ -14,6 +14,9 @@
     {% elsif site.vkontakte_api.enable and site.vkontakte_api.comments %}
       <div id="vk_comments"></div>
     {% elsif site.disqus.enable %}
+      {% if site.disqus.hide %}
+        <button type="button" class="comments-load-button" data-js="comments-load">Show comments</button>
+      {% endif %}
       <div id="disqus_thread">
         <noscript>
           Please enable JavaScript to view the

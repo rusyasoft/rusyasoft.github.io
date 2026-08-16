@@ -1,5 +1,63 @@
 {% assign posts = site.posts %}
 {% if site.paginate > 0 %}{% assign posts = paginator.posts %}{% endif %}
+{% assign on_first_page = false %}
+{% if paginator.page == nil or paginator.page == 1 %}{% assign on_first_page = true %}{% endif %}
+
+{% if on_first_page %}
+  <section class="home-hero" aria-labelledby="home-hero-title">
+    <h1 id="home-hero-title" class="home-hero-title">{{ site.title }}</h1>
+    <p class="home-hero-tagline">{{ site.subtitle }}</p>
+    <p class="home-hero-intro">
+      I am a software engineer who writes about software architecture, backend
+      engineering, AI agents, and security. These are practical notes drawn from
+      real work rather than tutorials. Views here are my own.
+    </p>
+    <p class="home-hero-links">
+      <a class="home-hero-link" href="{{ '/about/' | relative_url }}">About</a>
+      <a class="home-hero-link" href="{{ '/atom.xml' | relative_url }}">RSS</a>
+      <a class="home-hero-link" href="https://github.com/rusyasoft" target="_blank" rel="me noopener">GitHub</a>
+      <a class="home-hero-link" href="https://www.linkedin.com/in/rrustam/" target="_blank" rel="me noopener">LinkedIn</a>
+    </p>
+  </section>
+
+  {% assign featured = site.posts | where: 'featured', true %}
+  {% if featured.size > 0 %}
+    <section class="home-featured" aria-labelledby="home-featured-title">
+      <h2 id="home-featured-title" class="home-section-title">Featured writing</h2>
+      <ul class="home-featured-list">
+        {% for post in featured limit: 5 %}
+          {% assign fwords = post.content | number_of_words %}
+          {% assign fmin = fwords | divided_by: 200 %}
+          {% if fmin < 1 %}{% assign fmin = 1 %}{% endif %}
+          <li class="home-featured-item">
+            <h3 class="home-featured-item-title">
+              <a href="{{ post.url | relative_url }}">{{ post.title | default: __.post.untitled }}</a>
+            </h3>
+            <p class="home-featured-meta">
+              <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: site.date_format }}</time>
+              <span aria-hidden="true">&middot;</span>
+              <span>{{ fmin }} min read</span>
+              {% if post.categories and post.categories.size > 0 %}
+                <span aria-hidden="true">&middot;</span>
+                {% for cat in post.categories limit: 3 %}
+                  {% assign cat_url_encode = cat | url_encode | replace: '+', '%20' %}
+                  <a class="home-topic-label" href="{{ '/category/#/' | relative_url | append: cat_url_encode }}">{{ cat }}</a>
+                {% endfor %}
+              {% endif %}
+            </p>
+            {% assign fdesc = post.description | default: post.excerpt %}
+            {% if fdesc %}
+              <p class="home-featured-item-desc">{{ fdesc | strip_html | normalize_whitespace | truncate: 180 }}</p>
+            {% endif %}
+          </li>
+        {% endfor %}
+      </ul>
+    </section>
+    <h2 class="home-section-title">Latest posts</h2>
+  {% endif %}
+{% else %}
+  <h1 class="sr-only">{{ site.title }} &mdash; page {{ paginator.page }}</h1>
+{% endif %}
 
 <section id="posts" class="posts-expand">
   {% for post in posts %}
