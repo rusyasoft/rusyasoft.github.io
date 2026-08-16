@@ -13,6 +13,7 @@
  *
  * Usage:
  *   node scripts/check_responsive.js [--site _site] [--widths 320,390,1024]
+ *                                    [--pages /a/ --pages /b/] [--verbose]
  *
  * Requires Google Chrome. Skips with a non-fatal notice when Chrome is absent,
  * so `./init.sh` still works on machines without it.
@@ -51,12 +52,18 @@ const DEFAULT_PAGES = [
   '/ai/security/software-engineering/cli/2025/10/25/my-experience-with-caisp/',
   '/git/2019/02/25/git-usefull-commands/',
   '/k8s/2020/09/30/k8s-resources/',
+  '/aws,%20database/2021/04/25/dynmodb-tips/',
   '/algorithms,%20leetcode/2019/06/05/algorithms-3sum-closest/',
 ];
 
 // Phones must not drop below this. 14px body copy was the reported defect.
 const MIN_MOBILE_FONT_PX = 16;
 const MOBILE_MAX_WIDTH = 767;
+
+// Rough characters per line, from the usual "average glyph is half an em" rule.
+// Precise enough to catch a full-width column, which is what the issue reported.
+const MAX_DESKTOP_CHARS_PER_LINE = 80;
+const DESKTOP_MIN_WIDTH = 992;
 
 const MIME = {
   '.html': 'text/html; charset=utf-8',
@@ -78,14 +85,27 @@ const MIME = {
 };
 
 function parseArgs(argv) {
-  const args = { site: '_site', widths: DEFAULT_WIDTHS, pages: DEFAULT_PAGES };
+  const args = { site: '_site', widths: DEFAULT_WIDTHS, pages: DEFAULT_PAGES, verbose: false };
+  let pagesOverridden = false;
   for (let i = 0; i < argv.length; i += 1) {
+    if (argv[i] === '--verbose') {
+      args.verbose = true;
+      continue;
+    }
     const [flag, inlineValue] = argv[i].split('=');
     const value = inlineValue !== undefined ? inlineValue : argv[i + 1];
     if (inlineValue === undefined && value !== undefined) i += 1;
     if (flag === '--site') args.site = value;
     else if (flag === '--widths') args.widths = value.split(',').map((w) => parseInt(w.trim(), 10));
-    else if (flag === '--pages') args.pages = value.split(',').map((p) => p.trim());
+    else if (flag === '--pages') {
+      // Repeated rather than comma-separated: this site has category URLs that
+      // contain commas, so splitting a list on commas would mangle them.
+      if (!pagesOverridden) {
+        args.pages = [];
+        pagesOverridden = true;
+      }
+      args.pages.push(value);
+    }
   }
   return args;
 }
@@ -241,7 +261,12 @@ const MEASURE = `(() => {
       if (offenders.length >= 6) break;
     }
   }
-  const bodyText = document.querySelector('.post-body p, .post-body li, .post-body');
+  // Ask for a paragraph first. A grouped selector would match .post-body itself,
+  // since it precedes its own children in document order, and report the column
+  // width instead of the width of a line of running text.
+  const bodyText = document.querySelector('.post-body > p')
+    || document.querySelector('.post-body p')
+    || document.querySelector('.post-body');
   const fontSize = bodyText ? parseFloat(getComputedStyle(bodyText).fontSize) : null;
   const lineHeight = bodyText ? parseFloat(getComputedStyle(bodyText).lineHeight) : null;
   const measure = bodyText ? Math.round(bodyText.getBoundingClientRect().width) : null;
@@ -329,12 +354,30 @@ async function main() {
           );
         }
 
+        if (args.verbose) {
+          const cpl = measurement.measure && measurement.fontSize
+            ? Math.round(measurement.measure / (measurement.fontSize * 0.5))
+            : '-';
+          console.log(
+            `    ${String(width).padStart(4)}px  document=${measurement.scrollWidth}px  text=${measurement.fontSize}px/${measurement.lineHeight}px  measure=${measurement.measure}px (~${cpl} chars)`,
+          );
+        }
+
         const isArticle = page.split('/').filter(Boolean).length > 1;
         if (isArticle && width <= MOBILE_MAX_WIDTH && measurement.fontSize !== null
             && measurement.fontSize < MIN_MOBILE_FONT_PX) {
           failures.push(
             `${page} @ ${width}px: article text is ${measurement.fontSize}px, below the ${MIN_MOBILE_FONT_PX}px minimum`,
           );
+        }
+
+        if (isArticle && width >= DESKTOP_MIN_WIDTH && measurement.measure && measurement.fontSize) {
+          const charsPerLine = Math.round(measurement.measure / (measurement.fontSize * 0.5));
+          if (charsPerLine > MAX_DESKTOP_CHARS_PER_LINE) {
+            failures.push(
+              `${page} @ ${width}px: running text is about ${charsPerLine} characters per line, over the ${MAX_DESKTOP_CHARS_PER_LINE} maximum`,
+            );
+          }
         }
       }
       console.log(`  checked ${page} at ${args.widths.length} widths`);
