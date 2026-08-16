@@ -13,6 +13,9 @@
     var path = "{{ site.baseurl }}/" + search_path;
     // monitor main search box;
 
+    // Remember which control opened the search so focus can return to it on close.
+    var lastSearchTrigger = null;
+
     var onPopupClose = function (e) {
       $('.popup').hide();
       $('#local-search-input').val('');
@@ -20,6 +23,9 @@
       $('#no-result').remove();
       $(".local-search-pop-overlay").remove();
       $('body').css('overflow', '');
+      if (lastSearchTrigger) {
+        lastSearchTrigger.focus();
+      }
     }
 
     function proceedsearch() {
@@ -296,6 +302,7 @@
     // handle and trigger popup window;
     $('.popup-trigger').click(function(e) {
       e.stopPropagation();
+      lastSearchTrigger = this;
       if (isfetched === false) {
         searchFunc(path, 'local-search-input', 'local-search-result');
       } else {

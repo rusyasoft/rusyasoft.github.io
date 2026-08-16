@@ -1,12 +1,12 @@
 {% comment %} sidebar(is_post) {% endcomment %}
 
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
+  <button type="button" class="sidebar-toggle" aria-label="Toggle sidebar" aria-expanded="false" aria-controls="sidebar">
+    <div class="sidebar-toggle-line-wrap" aria-hidden="true">
       <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
       <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
       <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
     </div>
-  </div>
+  </button>
 
   <aside id="sidebar" class="sidebar">
     <div class="sidebar-inner">
@@ -167,12 +167,12 @@
       {% endif %}
 
       {% if site.sidebar.b2t %}
-        <div class="back-to-top">
-          <i class="fa fa-arrow-up"></i>
+        <button type="button" class="back-to-top" aria-label="Back to top">
+          <i class="fa fa-arrow-up" aria-hidden="true"></i>
           {% if site.sidebar.scrollpercent %}
             <span id="scrollpercent"><span>0</span>%</span>
           {% endif %}
-        </div>
+        </button>
       {% endif %}
 
     </div>

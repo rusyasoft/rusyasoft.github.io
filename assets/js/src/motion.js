@@ -102,6 +102,7 @@ $(document).ready(function () {
     clickHandler: function () {
       this.isSidebarVisible ? this.hideSidebar() : this.showSidebar();
       this.isSidebarVisible = !this.isSidebarVisible;
+      this.toggleEl.attr('aria-expanded', String(this.isSidebarVisible));
     },
     mouseEnterHandler: function () {
       if (this.isSidebarVisible) {
