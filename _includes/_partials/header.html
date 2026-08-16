@@ -77,5 +77,8 @@
   {% endif %}
 </nav>
 
-{% include _third-party/adsense/banner_adsense.html %}
+{% comment %}
+  No ad belongs here: the header renders above every page and article heading.
+  The site's one ad unit lives below the article body, see _macro/post.html.
+{% endcomment %}
 <!-- {% include _custom/header.html %} -->

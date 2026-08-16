@@ -14,7 +14,9 @@ date_format: '%Y-%m-%d'
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com' and baseurl as '/child'
-url:
+## Set explicitly so absolute_url (canonical, og:url, feed, sitemap) resolves to the
+## public HTTPS origin in local builds too, not only in the GitHub Pages build.
+url: https://rusyasoft.github.io
 baseurl:
 permalink: pretty
 
@@ -109,6 +111,28 @@ seo: false
 # If true, will add site-subtitle to index page, added in jekyll config.
 # subtitle: Subtitle
 index_with_subtitle: false
+
+# ---------------------------------------------------------------
+# Advertising
+# ---------------------------------------------------------------
+
+# Ad policy. Placement is decided here, not by Google:
+#   * no ad above a page or article heading
+#   * no side-rail, sticky anchor, or content-covering overlay ads
+#   * no Auto ads / page-level ads (`enable_page_level_ads`)
+#   * at most one responsive unit per article, below the article body
+# Changing any of these means rerunning scripts/check_responsive.js before
+# shipping, since ad frames are what previously widened the page on phones.
+adsense:
+  enable: true
+  client: ca-pub-5444614422000132
+  # Build environments allowed to render ads. Local `jekyll build` and `jekyll serve`
+  # default to `development`, so dev and preview builds stay ad-free.
+  environments:
+    - production
+  # Ad unit slot id, from AdSense > Ads > By ad unit > Display ads. The unit below
+  # the article renders only once this is filled in; until then no ad markup ships.
+  in_article_slot:
 
 # ---------------------------------------------------------------
 # Menu Settings

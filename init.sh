@@ -39,6 +39,16 @@ fi
 echo "== Jekyll build =="
 bundle exec jekyll build --trace
 
+echo "== Built-site checks =="
+python3 scripts/validate_blog.py --site
+
+echo "== Responsive layout checks =="
+if command -v node >/dev/null 2>&1; then
+  node scripts/check_responsive.js
+else
+  echo "SKIP: node is not installed, so responsive layout checks did not run."
+fi
+
 echo "== Clean-state reminder =="
 echo "Review git status and do not commit generated artifacts:"
 git status --short

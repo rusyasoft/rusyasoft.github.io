@@ -1,0 +1,13 @@
+# Local-only overlay that renders the ad markup in a development build, so the
+# ad container can be checked against the mobile-overflow budget without pushing
+# to production. Never referenced by the GitHub Pages build.
+#
+#   bundle exec jekyll build --config _config.yml,_config.ads-preview.yml
+#
+# The slot id below is a placeholder for layout checks only. It is not a real ad
+# unit and will never fill; put the real one in `adsense.in_article_slot`.
+adsense:
+  environments:
+    - development
+    - production
+  in_article_slot: "0000000000"

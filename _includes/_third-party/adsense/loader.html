@@ -1,0 +1,10 @@
+{% comment %}
+  The only place the AdSense library is requested. Loading it from more than one
+  include is what produced duplicate `adsbygoogle` initialisation errors before.
+  Auto ads (`enable_page_level_ads`) stay off on purpose: placement is decided in
+  this repository, not by Google. See the ad policy in _config.yml.
+{% endcomment %}
+{% include _third-party/adsense/enabled.html %}
+{% if adsense_enabled %}
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={{ site.adsense.client }}" crossorigin="anonymous"></script>
+{% endif %}

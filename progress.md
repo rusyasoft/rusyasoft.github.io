@@ -76,3 +76,53 @@ Publish the architecture article using the replacement draft and its nine suppor
 ### Next step
 
 Optional cleanup follow-up: fix the two legacy posts with unbalanced fenced code blocks so the validator can eventually fail on all unbalanced fences, not just the target ACID post.
+
+## 2026-08-16 — P0 site defects: canonical URLs, advertising, responsive layout
+
+### Goal
+
+Close the three P0 issues from the site audit: #33 canonical URLs, #32 intrusive
+and non-responsive advertising, #34 mobile horizontal overflow and article
+readability.
+
+### Changed files
+
+- `_includes/_partials/head.html`: canonical falls back to `page.url`.
+- `_config.yml`: explicit `url`, plus a documented `adsense` policy block.
+- `_includes/_third-party/adsense/`: replaced `adsense.html` and
+  `banner_adsense.html` with `enabled.html`, `loader.html`, `in-article.html`.
+- `_includes/_layout.html`, `_partials/header.html`, `_partials/comments.html`,
+  `_macro/post.html`: one loader, one ad placement, none above a heading.
+- `_sass/_custom/custom.scss`: ad containment, media containment, scrolling
+  tables, article typography, reduced mobile header padding.
+- `scripts/check_responsive.js`: new headless-Chrome layout checker.
+- `scripts/validate_blog.py`: new `--site` mode for built-HTML invariants.
+- `init.sh`: runs both post-build check families.
+- `_config.ads-preview.yml`: local overlay for checking ad layout in a dev build.
+
+### Verification evidence
+
+- `./init.sh` passes end-to-end, now including built-site and responsive checks.
+- Built-site checks pass across 126 pages: one canonical each, absolute HTTPS,
+  equal to the page's own permalink, `og:url` in agreement, at most one AdSense
+  loader and initialisation, no Auto ads.
+- Responsive checks pass across 13 pages x 7 widths (320, 360, 375, 390, 768,
+  1024, 1440): `scrollWidth` equals `innerWidth` everywhere.
+- Article text measures 16px/25.6px on phones, 17px/28.05px from 768px up, with
+  a 612px measure at roughly 72 characters per line.
+- With a production-shaped build (`--config _config.yml,_config.ads-preview.yml`)
+  a forced 970px ad creative stays contained at 360px and 390px.
+- Both new check families were confirmed to fail on an injected regression before
+  being trusted.
+- The two pre-existing legacy fenced-code warnings still stand.
+
+### Blockers
+
+- The single ad unit renders only once `adsense.in_article_slot` is set in
+  `_config.yml`. Until then the site ships no ad markup, by design.
+
+### Next step
+
+Nothing blocking. The remaining audit issues are P1: #35 accessibility (the
+viewport meta still sets `maximum-scale=1`, which blocks pinch zoom), #36-#38
+brand and metadata, #37 taxonomy, and the three editorial issues #39-#41.

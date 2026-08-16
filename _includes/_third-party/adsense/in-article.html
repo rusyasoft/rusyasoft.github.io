@@ -1,0 +1,24 @@
+{% comment %}
+  The single ad placement on the site: one responsive unit below the article body.
+  Renders only when an ad unit slot id is configured, so an unconfigured site ships
+  no ad markup at all rather than an empty frame.
+
+  No height is reserved. The unit sits below the article, where layout shift costs
+  little, and reserving space would leave a large empty block for readers running an
+  ad blocker, which the `.post-ad` rules in _sass/_custom/custom.scss must avoid.
+{% endcomment %}
+{% include _third-party/adsense/enabled.html %}
+{% if adsense_enabled and site.adsense.in_article_slot %}
+  <aside class="post-ad">
+    <span class="post-ad-label">Advertisement</span>
+    <ins class="adsbygoogle post-ad-unit"
+         style="display:block"
+         data-ad-client="{{ site.adsense.client }}"
+         data-ad-slot="{{ site.adsense.in_article_slot }}"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </aside>
+{% endif %}

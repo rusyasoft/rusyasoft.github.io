@@ -1,1 +1,125 @@
 // Custom styles.
+// Loaded last, after the scheme layer, so these rules win without forking the theme.
+
+
+// Advertising
+// The site ships one ad unit, below the article body. These rules keep it inside
+// the content column: an AdSense iframe defaults to its creative's pixel width,
+// which is what used to push the document wider than a phone viewport.
+// --------------------------------------------------
+
+.post-ad {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+  margin: 40px 0 0;
+  padding-top: 15px;
+  border-top: 1px solid $gray-lighter;
+}
+
+.post-ad-label {
+  display: block;
+  margin-bottom: 8px;
+  color: $grey-dark;
+  font-size: 12px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.post-ad-unit {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+}
+
+// Collapse the whole block rather than leaving a labelled empty region when
+// AdSense reports no creative. Nothing reserves height, so an ad blocker that
+// stops the script entirely also leaves no gap.
+ins.adsbygoogle[data-ad-status="unfilled"] { display: none !important; }
+.post-ad:has(ins.adsbygoogle[data-ad-status="unfilled"]) { display: none; }
+
+// Safety net: whatever an ad frame asks for, it cannot exceed its container.
+ins.adsbygoogle,
+ins.adsbygoogle iframe {
+  max-width: 100% !important;
+}
+
+
+// Responsive containment
+// Every embed type that carries its own intrinsic width is capped at its
+// container. Deliberately no `overflow-x: hidden` on html/body: that hides a
+// broken layout instead of fixing it, and silently clips content on phones.
+// --------------------------------------------------
+
+iframe,
+embed,
+object,
+video,
+canvas,
+svg {
+  max-width: 100%;
+}
+
+// Wide tables and code blocks get their own scrolling region so they can be read
+// in full without the document itself growing. Code blocks already scroll via the
+// theme's %code-block; tables need to become a block box to do the same.
+.post-body table {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+
+// Article readability
+// Body copy was 14px everywhere while the desktop column ran the full 700px,
+// which is small on a phone and a long line on a wide screen. Raise the text and
+// cap the measure of running text at roughly 70 characters. Figures, code blocks
+// and tables are left at full column width, so diagrams do not shrink.
+// --------------------------------------------------
+
+$post-measure: 36em;
+
+.posts-expand .post-body {
+  font-size: 17px;
+  line-height: 1.65;
+
+  > p,
+  > ul,
+  > ol,
+  > dl,
+  > blockquote,
+  > h1,
+  > h2,
+  > h3,
+  > h4,
+  > h5,
+  > h6 {
+    max-width: $post-measure;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  @include mobile() {
+    font-size: 16px;
+    line-height: 1.6;
+  }
+}
+
+// Long words in headings, category lists and post navigation must wrap rather
+// than push the layout wider.
+.post-title,
+.post-meta,
+.post-nav-item,
+.menu-item {
+  overflow-wrap: break-word;
+}
+
+// The header reserved 170px of vertical padding on every viewport. With the
+// banner ad gone that left a phone screen mostly empty above the article title.
+@include mobile() {
+  .header-inner { padding: 40px 0 24px; }
+  .posts-expand { padding-top: 20px; }
+}
