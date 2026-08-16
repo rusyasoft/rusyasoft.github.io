@@ -66,6 +66,34 @@
         ],
         "evidence": "Both commands pass; only the two documented legacy fenced-code warnings remain."
       }
+    },
+    {
+      "id": "p0-site-defects",
+      "title": "Close the P0 site audit issues: canonical URLs, advertising, responsive layout",
+      "status": "verified",
+      "priority": 0,
+      "issues": [32, 33, 34],
+      "scope": [
+        "Canonical URLs resolve to each page's own permalink",
+        "Ad placement decided in this repository, not by AdSense Auto ads",
+        "No page-level horizontal overflow at any tested viewport width",
+        "Article body text readable on phones and a bounded measure on desktop"
+      ],
+      "done_criteria": [
+        "Every generated page carries exactly one absolute HTTPS canonical equal to its own permalink, with og:url in agreement",
+        "At most one AdSense loader and one initialisation per page, no Auto ads, no ad above a heading",
+        "scrollWidth equals innerWidth at 320, 360, 375, 390, 768, 1024 and 1440px",
+        "Article text is at least 16px on phones and runs at roughly 72 characters per line on desktop"
+      ],
+      "verification": {
+        "commands": [
+          "./init.sh",
+          "python3 scripts/validate_blog.py --site",
+          "node scripts/check_responsive.js"
+        ],
+        "evidence": "Built-site checks pass across 126 pages. Responsive checks pass across 13 pages and 7 widths. A forced 970px ad creative stays contained at 360px and 390px in a production-shaped build. Both check families were confirmed to fail on an injected regression."
+      },
+      "open_follow_up": "The in-article ad unit renders only once adsense.in_article_slot is set in _config.yml."
     }
   ]
 }
