@@ -11,6 +11,7 @@ visible in the sources.
 """
 from __future__ import annotations
 
+import json
 import re
 import sys
 from pathlib import Path
@@ -32,6 +33,27 @@ AD_PUSH_RE = re.compile(r"adsbygoogle\s*=\s*window\.adsbygoogle")
 VIEWPORT_RE = re.compile(r'<meta name="viewport" content="([^"]*)"')
 SKIP_LINK_RE = re.compile(r'<a class="skip-link" href="#content">')
 NAV_TOGGLE_BUTTON_RE = re.compile(r'<div class="site-nav-toggle">\s*<button\b([^>]*)>')
+
+# SEO/metadata invariants (issues #38, #36). One intentional, absolute social
+# image per page instead of a scrape of every inline <img>; a sane twitter:card;
+# exactly one page-level <h1>; and a valid BlogPosting with the properties that
+# search and social cards depend on.
+H1_OPEN_RE = re.compile(r"<h1[\s/>]")
+# The template-rendered article title, as opposed to any <h1> a legacy post wrote
+# inside its own markdown body. Only the template heading level is our invariant.
+POST_TITLE_H1_RE = re.compile(r'<h1[^>]*\bclass="post-title"')
+OG_IMAGE_RE = re.compile(r'<meta property="og:image" content="([^"]*)"')
+TWITTER_IMAGE_RE = re.compile(r'<meta name="twitter:image" content="([^"]*)"')
+TWITTER_CARD_RE = re.compile(r'<meta name="twitter:card" content="([^"]*)"')
+JSON_LD_RE = re.compile(r'<script type="application/ld\+json">(.*?)</script>', re.DOTALL)
+REQUIRED_BLOGPOSTING_KEYS = (
+    "headline",
+    "url",
+    "datePublished",
+    "author",
+    "publisher",
+    "mainEntityOfPage",
+)
 
 # Pages built from a layout that has no <head> include, so they carry no canonical.
 NO_CANONICAL_ALLOWED = {"404.html", "404 copy.html", "google18d554b47bfebf5f.html"}
@@ -198,6 +220,42 @@ def check_built_site() -> None:
         if "enable_page_level_ads" in text:
             fail(f"{rel} still enables Auto ads, which places ads outside this repository's control")
 
+        # One intentional social image, emitted as an absolute HTTPS URL. The theme
+        # previously scraped every inline <img>, so a post could ship nine relative
+        # og:image tags competing to be the preview (issue #38).
+        og_images = OG_IMAGE_RE.findall(text)
+        if len(og_images) > 1:
+            fail(f"{rel} emits {len(og_images)} og:image tags, expected at most one")
+        for image in og_images + TWITTER_IMAGE_RE.findall(text):
+            if not image.startswith("https://"):
+                fail(f"{rel} has a non-absolute social image: {image}")
+        for card in TWITTER_CARD_RE.findall(text):
+            if card not in ("summary", "summary_large_image"):
+                fail(f"{rel} has an unexpected twitter:card value: {card!r}")
+
+        # A post's title renders as exactly one <h1> (the template heading, not any
+        # <h1> written inside legacy markdown), and the page carries a valid
+        # BlogPosting with the properties search and social cards depend on (#38).
+        if '"@type": "BlogPosting"' in text:
+            title_h1_count = len(POST_TITLE_H1_RE.findall(text))
+            if title_h1_count != 1:
+                fail(f"{rel} renders {title_h1_count} <h1 class=\"post-title\">, expected exactly one")
+            posting = None
+            for block in JSON_LD_RE.findall(text):
+                try:
+                    data = json.loads(block)
+                except ValueError as exc:
+                    fail(f"{rel} has invalid JSON-LD: {exc}")
+                if isinstance(data, dict) and data.get("@type") == "BlogPosting":
+                    posting = data
+            if posting is None:
+                fail(f"{rel} has no parseable BlogPosting JSON-LD")
+            for key in REQUIRED_BLOGPOSTING_KEYS:
+                if not posting.get(key):
+                    fail(f"{rel} BlogPosting JSON-LD is missing {key}")
+            if not posting["author"].get("name"):
+                fail(f"{rel} BlogPosting author has no name")
+
         # Accessibility: a full-layout page must let users zoom and must offer a
         # keyboard skip link into the content region.
         viewport = VIEWPORT_RE.findall(text)
@@ -229,6 +287,14 @@ def check_built_site() -> None:
             fail("homepage has no navigation toggle button")
         if "aria-label" not in toggle.group(1):
             fail("homepage navigation toggle button has no accessible name (aria-label)")
+
+        # The homepage leads with a single brand <h1> above the post feed, whose
+        # titles are now <h2> (issues #38, #36).
+        home_h1s = len(H1_OPEN_RE.findall(home_text))
+        if home_h1s != 1:
+            fail(f"homepage has {home_h1s} <h1> elements, expected exactly one")
+        if '"@type": "WebSite"' not in home_text:
+            fail("homepage is missing its WebSite JSON-LD")
 
     print(f"OK: built-site checks passed across {checked} pages")
 

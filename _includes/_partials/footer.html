@@ -9,6 +9,10 @@
   <span class="author" itemprop="copyrightHolder">{{ site.author }}</span>
 </div>
 
+<nav class="footer-links" aria-label="Footer">
+  <a class="theme-link" href="{{ '/privacy/' | relative_url }}">Privacy and third-party services</a>
+</nav>
+
 {% if site.copyright %}
 <div class="powered-by">
   {{ __.footer.powered | replace: '%s', '<a class="theme-link" href="https://jekyllrb.com">Jekyll</a>') }}

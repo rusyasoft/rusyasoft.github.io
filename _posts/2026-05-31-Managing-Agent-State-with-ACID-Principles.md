@@ -1,5 +1,9 @@
 ---
 title: Managing Agent State with ACID Principles
+featured: true
+description: >-
+  Applying database ACID principles - atomicity, consistency, isolation, and
+  durability - to keep AI agent state recoverable across multi-step tasks.
 categories:
  - ai
  - software-engineering

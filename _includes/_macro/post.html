@@ -28,7 +28,7 @@
 
         {% comment %} % Not to show title for quote posts that do not have a title {% endcomment %}
         {% unless is_index and post.type == 'quote' and post.title == nil %}
-          <{% if site.seo %}h2{% else %}h1{% endif %} class="post-title" itemprop="name headline">
+          <{% if is_index or site.seo %}h2{% else %}h1{% endif %} class="post-title" itemprop="name headline">
           {% comment %} Link posts {% endcomment %}
           {% if post.link %}
               {% if post.sticky > 0 %}
@@ -53,7 +53,7 @@
               </a>
             {% else %}{{ post.title }}{% endif %}
           {% endif %}
-        </{% if site.seo %}h2{% else %}h1{% endif %}>
+        </{% if is_index or site.seo %}h2{% else %}h1{% endif %}>
         {% endunless %}
 
         <div class="post-meta">
@@ -85,6 +85,35 @@
                 {{ post.updated | date: site.date_format }}
               </time>
             {% endif %}
+          </span>
+
+          {% comment %} Visible byline on the article page; the schema author lives in the hidden block above. {% endcomment %}
+          {% unless is_index %}
+            <span class="post-author">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-user-o"></i>
+              </span>
+              <span class="post-meta-item-text">By</span>
+              {% if site.author_profile.url %}
+                <a href="{{ site.author_profile.url }}" rel="author" target="_blank">{{ site.author_profile.name | default: site.author }}</a>
+              {% else %}
+                <span itemprop="author">{{ site.author_profile.name | default: site.author }}</span>
+              {% endif %}
+            </span>
+          {% endunless %}
+
+          {% comment %} Estimated reading time at ~200 words per minute, floored at one minute. {% endcomment %}
+          {% assign reading_words = post.content | number_of_words %}
+          {% assign reading_minutes = reading_words | divided_by: 200 %}
+          {% if reading_minutes < 1 %}{% assign reading_minutes = 1 %}{% endif %}
+          <span class="post-reading-time">
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+              <i class="fa fa-clock-o"></i>
+            </span>
+            <span class="post-meta-item-text">{{ __.post.min2read }}</span>
+            <span>{{ reading_minutes }} min</span>
           </span>
 
           {% if post.categories and post.categories.size > 0 and site.post_meta.categories %}
@@ -252,6 +281,15 @@
 
         </div>
       </header>
+    {% endunless %}
+
+    {% comment %} Consistent place to disclose sponsored, affiliate, or complimentary-access content. {% endcomment %}
+    {% unless is_index %}
+      {% if post.disclosure %}
+        <aside class="post-disclosure" role="note">
+          <strong>Disclosure:</strong> {{ post.disclosure }}
+        </aside>
+      {% endif %}
     {% endunless %}
 
     <div class="post-body{% if site.han %} han-init-context{% endif %}" itemprop="articleBody">

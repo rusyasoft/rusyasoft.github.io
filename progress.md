@@ -126,3 +126,66 @@ readability.
 Nothing blocking. The remaining audit issues are P1: #35 accessibility (the
 viewport meta still sets `maximum-scale=1`, which blocks pinch zoom), #36-#38
 brand and metadata, #37 taxonomy, and the three editorial issues #39-#41.
+
+## 2026-08-16 — P1 SEO, metadata, and presentation: #38, #36, #42
+
+### Goal
+
+Close three related audit issues in one pass: #38 (author metadata, social
+previews, reading time, BlogPosting schema), #36 (homepage/About author brand),
+and #42 (third-party integration hygiene). The #42 AdSense duplicate-init bug was
+already resolved by the P0 work and is enforced by `validate_blog.py --site`; this
+pass finished the third-party hygiene around it.
+
+### Changed files
+
+- `_config.yml`: professional `title`/`subtitle`/`description`; `author_profile`
+  and `og_image`; relevant default `keywords`; deferred Disqus (`hide: true`,
+  `count: false`) with a documented policy.
+- `_includes/_helper/open_graph.html`: one intentional social image (front-matter
+  `image`, then first gallery photo, then site `og_image` fallback), always
+  absolute HTTPS; `summary_large_image` only when a real image exists; added
+  `article:published_time` / `article:modified_time` / `article:author`. Removed
+  the inline-`<img>` scrape that emitted nine relative `og:image` tags.
+- `_includes/_partials/head/structured-data.html` (new): `BlogPosting` JSON-LD on
+  posts, `WebSite` on the homepage, nothing elsewhere. Wired into `head.html`.
+- `_includes/_macro/post.html`: visible byline (author + reading time); article
+  titles are `<h2>` in the index feed and `<h1>` on their own page; optional
+  `disclosure` front-matter note.
+- `_includes/index.html`: homepage hero carrying the single page `<h1>`, a
+  curated "Featured writing" section (`featured: true` posts), then the feed.
+- `about/index.md`: professional narrative, corrected terminology (Programming
+  Languages, Node.js, MySQL, Amazon RDS), personal-views disclaimer.
+- `_includes/_partials/comments.html` + `_third-party/comments/disqus.html`:
+  Disqus loads only on a keyboard-focusable "Show comments" click or when the
+  comments section nears the viewport (IntersectionObserver).
+- `privacy/index.md` (new) + `_partials/footer.html`: a privacy/third-party
+  disclosure page linked from the footer.
+- `_sass/_custom/custom.scss`: hero, featured list, byline, disclosure note,
+  deferred-comments button, footer links (reuses existing theme variables).
+- Featured front matter added to three posts (architecture, ACID, architect);
+  the first two carry a primary `image` for a large social card.
+- `scripts/validate_blog.py`: new `--site` invariants — at most one og:image,
+  absolute HTTPS social images, valid twitter:card, one `<h1 class="post-title">`
+  per post, required `BlogPosting` keys, one homepage `<h1>`, homepage `WebSite`
+  JSON-LD.
+
+### Verification evidence
+
+- `./init.sh` passes end-to-end across 127 pages (added the privacy page).
+- All 117 JSON-LD blocks parse; every post BlogPosting has headline, url,
+  datePublished, author.name, publisher, mainEntityOfPage.
+- Newest post now emits one absolute `og:image`; featured posts with an `image`
+  emit `summary_large_image`; the avatar fallback stays `summary`.
+- Homepage renders exactly one `<h1>` (brand) with post titles as `<h2>`.
+- No Disqus `embed.js` or `count.js` request ships until the reader asks.
+- The two pre-existing legacy fenced-code warnings still stand.
+
+### Notes / follow-ups
+
+- Employment ("Amazon") mirrors the pre-existing About page; the author should
+  confirm it is current (issue #36 asks for verified employment only).
+- First-party related-post links (versus Disqus recommendations) remain a
+  possible #42 follow-up; deferral already stops them loading on view.
+- Legacy posts use `#` headings inside the body (multiple `<h1>` in content); the
+  new h1 invariant checks the template title only, not legacy body content.

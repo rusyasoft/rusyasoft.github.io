@@ -4,13 +4,29 @@
 # ---------------------------------------------------------------
 
 # Site
-title: Welcome to Rustam's Blog
-subtitle:
-description:
+title: Rustam Rakhimov
+subtitle: Software architecture, backend engineering, AI agents, and security
+description: >-
+  Notes on software architecture, backend engineering, AI agents, and security
+  by Rustam Rakhimov, a software engineer at Amazon. Practical write-ups drawn
+  from real work rather than tutorials.
 author: Rustam Rakhimov Igorevich
 # Support language: de, en, fr-FR, id, ja, ko, pt-BR, pt, ru, zh-Hans, zh-hk, zh-tw
 language: en
 date_format: '%Y-%m-%d'
+
+# Canonical author identity, used for post bylines, article:author, and the
+# BlogPosting/Person JSON-LD. Kept here so every surface names the same person.
+author_profile:
+  name: Rustam Rakhimov Igorevich
+  url: https://github.com/rusyasoft
+  image: /assets/images/avatar.gif
+
+# Site-wide fallback social image, used when a post or page sets no `image` in its
+# front matter. A per-page `image:` (site-relative path) becomes the primary
+# large-card preview; without one, this square avatar ships as a `summary` card.
+# Provide an absolute-friendly site-relative path; templates make it absolute.
+og_image: /assets/images/avatar.gif
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com' and baseurl as '/child'
@@ -79,8 +95,8 @@ plugins:
 # Put your favicon.ico into `assets/` directory.
 favicon: /assets/favicon.ico
 
-# Set default keywords (Use a comma to separate)
-keywords: "Jekyll, NexT"
+# Default keywords for pages without their own tags (use a comma to separate).
+keywords: "software architecture, backend engineering, AI agents, Java, security"
 
 # Set rss to false to disable feed link.
 # Leave rss as empty to use site's feed link.
@@ -402,13 +418,18 @@ han: false
 #duoshuo_shortname:
 
 # Disqus
+# The embed is deferred: comments (and Disqus's own recommendation strip) load
+# only after the reader clicks "Show comments", so a post that nobody is
+# discussing does not pull a large third-party iframe or surface unrelated
+# years-old articles on load. See _includes/_partials/comments.html.
 disqus:
   enable: true
   shortname: rusyasoft-github-io
-  count: true
-  # hide comments (visitors need to click to load the comments)
-  # count need to be false when hide is true
-  hide: false
+  # The comment-count badge needs its own script on every listing; leave it off
+  # so no Disqus request is made until the reader asks for comments.
+  count: false
+  # Defer the thread behind an explicit, keyboard-focusable button.
+  hide: true
 
 # Hypercomments
 #hypercomments_id:

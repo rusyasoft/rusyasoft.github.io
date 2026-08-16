@@ -1,6 +1,11 @@
 ---
 title: Architecture Is Becoming Part of the Implementation Process
 date: 2026-07-11
+featured: true
+image: /assets/images/architecture-implementation/01-core-idea.png
+description: >-
+  Why AI-assisted prototyping makes architectural experimentation cheap enough to
+  fold decision-making into implementation, and how ADRs still preserve the context.
 categories:
   - software-engineering
   - architecture

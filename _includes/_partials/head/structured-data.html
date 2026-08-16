@@ -1,0 +1,44 @@
+{% comment %}
+  JSON-LD structured data: BlogPosting on posts, WebSite on the homepage, and
+  nothing elsewhere. Values reuse the same canonical URL and social image as the
+  Open Graph tags, so search engines and social cards see one consistent
+  identity. Every string is passed through `jsonify`, which quotes and escapes it
+  safely, so titles or descriptions containing quotes cannot break the document.
+{% endcomment %}
+{% assign sd_desc = page.description | default: page.excerpt | default: site.description | strip_html | normalize_whitespace | strip | truncate: 300 %}
+{% assign sd_image = page.image | default: page.photos.first | default: site.og_image %}
+{% if sd_image contains '://' %}
+  {% assign sd_image_abs = sd_image %}
+{% else %}
+  {% assign sd_image_abs = sd_image | absolute_url %}
+{% endif %}
+{% assign sd_author_name = site.author_profile.name | default: site.author %}
+
+{% if page.layout == 'post' %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {"@type": "WebPage", "@id": {{ page.url | absolute_url | jsonify }}},
+  "headline": {{ page.title | default: site.title | jsonify }},
+  "description": {{ sd_desc | jsonify }},
+  "url": {{ page.url | absolute_url | jsonify }},
+  "datePublished": {{ page.date | date_to_xmlschema | jsonify }},
+  {% assign sd_mod = page.last_modified_at | default: page.updated %}{% if sd_mod %}"dateModified": {{ sd_mod | date_to_xmlschema | jsonify }},
+  {% endif %}{% if sd_image_abs %}"image": [{{ sd_image_abs | jsonify }}],
+  {% endif %}"author": {"@type": "Person", "name": {{ sd_author_name | jsonify }}, "url": {{ site.author_profile.url | jsonify }}},
+  "publisher": {"@type": "Organization", "name": {{ site.title | jsonify }}, "logo": {"@type": "ImageObject", "url": {{ site.og_image | absolute_url | jsonify }}}}
+}
+</script>
+{% elsif page.layout == 'index' %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": {{ site.title | jsonify }},
+  "url": {{ '/' | absolute_url | jsonify }},
+  "description": {{ site.description | strip_newlines | strip | jsonify }},
+  "author": {"@type": "Person", "name": {{ sd_author_name | jsonify }}, "url": {{ site.author_profile.url | jsonify }}}
+}
+</script>
+{% endif %}
