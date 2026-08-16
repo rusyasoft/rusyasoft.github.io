@@ -1,0 +1,10 @@
+{% comment %}
+  Resolves whether advertising renders in this build and assigns `adsense_enabled`.
+  Every ad include starts from here so the conditions can never drift apart.
+  Ads require the master switch, a publisher id, and a build environment that has
+  opted in (production only by default, see the `adsense` block in _config.yml).
+{% endcomment %}
+{% assign adsense_enabled = false %}
+{% if site.adsense.enable and site.adsense.client and site.adsense.environments contains jekyll.environment %}
+  {% assign adsense_enabled = true %}
+{% endif %}

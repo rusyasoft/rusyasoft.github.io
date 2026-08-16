@@ -319,6 +319,10 @@
       {% endif  %}
     </div>
 
+    {% unless is_index %}
+      {% include _third-party/adsense/in-article.html %}
+    {% endunless %}
+
     <div>
       {% unless is_index %}
         {% include _macro/wechat-subscriber.html %}

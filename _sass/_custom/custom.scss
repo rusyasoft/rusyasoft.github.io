@@ -1,1 +1,46 @@
 // Custom styles.
+// Loaded last, after the scheme layer, so these rules win without forking the theme.
+
+
+// Advertising
+// The site ships one ad unit, below the article body. These rules keep it inside
+// the content column: an AdSense iframe defaults to its creative's pixel width,
+// which is what used to push the document wider than a phone viewport.
+// --------------------------------------------------
+
+.post-ad {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+  margin: 40px 0 0;
+  padding-top: 15px;
+  border-top: 1px solid $gray-lighter;
+}
+
+.post-ad-label {
+  display: block;
+  margin-bottom: 8px;
+  color: $grey-dark;
+  font-size: 12px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.post-ad-unit {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+}
+
+// Collapse the whole block rather than leaving a labelled empty region when
+// AdSense reports no creative. Nothing reserves height, so an ad blocker that
+// stops the script entirely also leaves no gap.
+ins.adsbygoogle[data-ad-status="unfilled"] { display: none !important; }
+.post-ad:has(ins.adsbygoogle[data-ad-status="unfilled"]) { display: none; }
+
+// Safety net: whatever an ad frame asks for, it cannot exceed its container.
+ins.adsbygoogle,
+ins.adsbygoogle iframe {
+  max-width: 100% !important;
+}
