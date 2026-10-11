@@ -5,10 +5,10 @@ categories:
   - llm
   - ai
 tags:
-  - ai, llm, mcp, agent, ai-agent, agentic-ai, agentic, custom-connector, muse, hackathon, ngrok
+  - ai, llm, mcp, agent, ai-agent, agentic-ai, agentic, custom-connector, muse, ngrok
 ---
 
-Recently I took part in a hackathon where the goal was to build a custom connector that Muse — Meta's personal AI agent — could use to reach a remote service of mine. The idea was simple: start with a temporary hello-world API as a proof of concept, prove the full round trip, and only then think about real functionality.
+Recently I wanted to discover how to build a custom connector that Muse — Meta's personal AI agent — could use to reach a remote service of mine. The idea was simple: start with a temporary hello-world API as a proof of concept, prove the full round trip, and only then think about real functionality.
 
 This post is the exact recipe I followed, written so that another builder — or another AI agent — can repeat it end to end. All the code is below.
 
@@ -35,7 +35,7 @@ The API key comes from the `HACKATHON_API_KEY` environment variable, and the por
 
 ```python
 #!/usr/bin/env python3
-"""PoC hello-world API for the Muse custom-connector hackathon demo.
+"""PoC hello-world API for the Muse custom-connector.
 
 Endpoints:
   GET /health  - no auth, liveness check
