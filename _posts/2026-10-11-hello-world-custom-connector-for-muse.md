@@ -159,6 +159,10 @@ The moment of truth: Muse called `/hello` through the connector, from its cloud 
 
 The full round trip worked — the request left Muse's cloud, traveled through ngrok to my Mac, the server checked the Bearer key, and the JSON came back.
 
+## 🔧 Open-source examples worth studying
+
+- [KaiCalls submission notes](https://github.com/KaiCalls/kaicalls-mcp/pull/5) — a pull request documenting what Meta's `muse.ai/platform` directory submission form actually asks for, field by field. If you plan to submit your own connector to Meta's directory, this shows exactly what information they collect before you start.
+
 ## Repeating this yourself: the checklist
 
 1. Save the server code above as `server.py`.
