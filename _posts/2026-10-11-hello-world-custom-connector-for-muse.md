@@ -159,9 +159,40 @@ The moment of truth: Muse called `/hello` through the connector, from its cloud 
 
 The full round trip worked — the request left Muse's cloud, traveled through ngrok to my Mac, the server checked the Bearer key, and the JSON came back.
 
+## 💡 Best practices for building Muse connectors
+
+A few things worth knowing before you design your own connector:
+
+**Pick your entry point.** Muse connects three ways: an **MCP server URL** (streamable HTTP), a **REST API** (OpenAPI spec or docs page), or a **CLI package**. You hand Muse the entry point in chat and it builds the integration itself. For a first proof of concept, REST with a Bearer token is the fastest thing that works — we just proved it above. MCP over streamable HTTP is the better answer if you want the connector to also work with other agents and look "standard": it's the USB-C of agent tools.
+
+**Remote, stable, HTTPS.** Whatever you build, the endpoint has to be reachable from Muse's cloud. A laptop-only server is not — which is exactly why we used ngrok.
+
+**Design for an agent, not a human:**
+- Tool and endpoint names are your UI — that's how Muse decides when to call you. Name things like `get_order_status`, not `endpoint_2`.
+- Keep responses fast. Agents feel broken above a few seconds per step.
+- Return explicit errors, not ambiguous partial success — agents handle those badly.
+- Separate read and write scopes; require confirmation for anything destructive.
+- Validate all inputs. Prompt injection trickling into your backend is the classic attack here (a malicious email body shouldn't become a SQL query).
+- Ship an OpenAPI spec and/or an `llms.txt` so the agent can self-serve your docs.
+- Auth via Bearer token or OAuth 2.0 authorization-code flow. Keys go through Muse's secure credential prompt, never chat.
+
+**Know the OAuth wrinkle.** One builder documented that Muse's OAuth flow can ask for a Client ID via dynamic client registration rather than registering itself — worth knowing if you go the MCP + OAuth route (see cortex-mcp's docs below).
+
 ## 🔧 Open-source examples worth studying
 
+- [cortex-mcp](https://github.com/JoseJimenez-M/cortex-mcp) — a self-hosted MCP server written in Go, with explicit [Meta Muse connection docs](https://github.com/josejimenez-m/cortex-mcp/blob/HEAD/docs/connecting-clients.md) that walk through the OAuth client-registration dance. The best single repo to study if you want to learn the MCP path.
 - [KaiCalls submission notes](https://github.com/KaiCalls/kaicalls-mcp/pull/5) — a pull request documenting what Meta's `muse.ai/platform` directory submission form actually asks for, field by field. If you plan to submit your own connector to Meta's directory, this shows exactly what information they collect before you start.
+- [tickadoo's Muse connector](https://github.com/tickadoo/tickadoo-mcp/tree/main/connectors/muse) — a real MCP server that ships a Muse-specific connector folder. A good reference for how to structure the Muse side of an MCP project.
+- [agent-layer](https://github.com/lopushok9/agent-layer) — an x402 payments MCP with a dedicated Muse onboarding page. A good example of the "Connect via Muse" UX pattern if your service needs users to authorize it.
+
+## 📚 Further reading
+
+- [Meta's official Help Center article on connectors](https://www.meta.com/help/artificial-intelligence/1687253048996149/) — the only official word from Meta on custom connectors. It's short, but it's the ground truth: you ask Muse to create a custom connector and it guides you through the setup.
+- [Parallel: Meta Muse Custom Integrations](https://parallel.ai/articles/meta-muse-custom-integrations) — the clearest end-to-end playbook out there: entry points, the prompt template, credential handling, approval policies.
+- [Stackademic: Building Muse Connectors, a developer's guide](https://stackademic.com/blog/building-muse-connectors-a-developer-s-guide-to-plugging-services-into-meta-s-agent) — goes deeper on security: audit trails, input validation, rate limits, latency.
+- [Ship with Muse: connectors guide](https://shipwithmuse.live/blog/muse-connectors-guide) — how builders actually ship: OpenAPI + `llms.txt` + Bearer auth, plus starter templates.
+- [make-it-muse skill](https://github.com/aris10223/make-it-muse/blob/HEAD/skills/make-it-muse/SKILL.md) — documents both the directory-submission path and the custom-connector prompt approach in one place.
+- [Meta Muse Connectors Explained (video)](https://www.youtube.com/watch?v=nzM7rOHCOaQ) — walks through MCP, going live, and the submission requirements with a real app.
 
 ## Repeating this yourself: the checklist
 
