@@ -108,14 +108,15 @@
         "Two self-contained, runnable examples with setup and expected outcomes",
         "Overview of possible next steps and a practical kickoff checklist",
         "Independent review and revision",
-        "Site validation and build"
+        "Site validation and build",
+        "Advanced agent example combines goldens, tool-call checks, and tracing with a deliberately failing case"
       ],
       "verification": {
         "commands": [
           "./init.sh",
           "node scripts/check_responsive.js --pages /ai/software-engineering/2026/11/13/learning-ai-evals-with-deepeval/"
         ],
-        "evidence": "Full baseline and final verification passed; article-specific responsive checks passed at seven widths. Both Python examples were extracted from the post and executed using DeepEval 4.3.3, including a live Codex judge run."
+        "evidence": "Full baseline and final verification passed; article-specific responsive checks passed at seven widths. Both Python examples were extracted from the post and executed using DeepEval 4.3.3, including a live Codex judge run. The advanced example was independently reviewed and executed in both normal and broken modes."
       }
     }
   ]

@@ -208,3 +208,8 @@ pass finished the third-party hygiene around it.
 ### Editorial revision
 
 - Reframed the article as practical examples and next steps, removing the lesson-based language at the author’s request.
+
+### Advanced agent example
+
+- Added a reproducible two-golden example with instrumented agent and tool spans, an explicit ToolCorrectnessMetric check, and a deliberate wrong-argument case. It distinguishes trace collection from direct metric evaluation and documents CI exit behavior.
+- Both modes were executed from the article code blocks (2/2 and 1/2 passed). An independent reviewer reran them and confirmed the DeepEval API behavior; their notes on tool-type matching and exit codes were incorporated.
