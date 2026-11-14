@@ -105,8 +105,8 @@
       "status": "verified",
       "target_file": "_posts/2026-11-13-learning-ai-evals-with-deepeval.md",
       "done_criteria": [
-        "Two self-contained, runnable lessons with setup and expected outcomes",
-        "Overview of subsequent lessons and a practical kickoff checklist",
+        "Two self-contained, runnable examples with setup and expected outcomes",
+        "Overview of possible next steps and a practical kickoff checklist",
         "Independent review and revision",
         "Site validation and build"
       ],
@@ -115,7 +115,7 @@
           "./init.sh",
           "node scripts/check_responsive.js --pages /ai/software-engineering/2026/11/13/learning-ai-evals-with-deepeval/"
         ],
-        "evidence": "Full baseline and final verification passed; article-specific responsive checks passed at seven widths. Both Python lessons were extracted from the post and executed using DeepEval 4.3.3, including a live Codex judge run."
+        "evidence": "Full baseline and final verification passed; article-specific responsive checks passed at seven widths. Both Python examples were extracted from the post and executed using DeepEval 4.3.3, including a live Codex judge run."
       }
     }
   ]

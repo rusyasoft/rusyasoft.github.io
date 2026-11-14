@@ -194,7 +194,7 @@ pass finished the third-party hygiene around it.
 
 ### Changed files
 
-- Added `_posts/2026-11-13-learning-ai-evals-with-deepeval.md`: motivation, two self-contained exercises, overviews of lessons 3–10, and a kickoff checklist for people and coding agents.
+- Added `_posts/2026-11-13-learning-ai-evals-with-deepeval.md`: motivation, two self-contained exercises, overviews of next-step topics, and a kickoff checklist for people and coding agents.
 - Updated `feature_list.json` with the verified article state.
 
 ### Review and verification
@@ -204,3 +204,7 @@ pass finished the third-party hygiene around it.
 - `./init.sh` passed before and after the change, with `BUNDLE_PATH` pointing at the main checkout's local vendor bundle. The final run built and checked 129 pages and passed the standard responsive checks. Two pre-existing legacy fence warnings remain.
 - The article-specific responsive check passed at all seven default widths. No ad slot was configured, so its creative containment check was skipped.
 - Baseline setup required restoring compatible, locally cached native gem extensions for the current macOS version; no generated output or vendor files are tracked by this change.
+
+### Editorial revision
+
+- Reframed the article as practical examples and next steps, removing the lesson-based language at the author’s request.

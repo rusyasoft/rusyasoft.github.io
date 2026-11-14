@@ -26,7 +26,7 @@ My first two questions were:
 1. Can I check an answer with a simple, explainable rule?
 2. What changes when I ask a language model to judge the answer instead?
 
-This post is a hands-on starting point for both. It includes all the code needed to run the examples. At the end, I describe the next lessons for datasets, tools, RAG, conversations, safety, and tracing.
+This post is a hands-on starting point for both. It includes all the code needed to run the examples. At the end, I outline possible next steps, including datasets, tools, RAG, conversations, safety, and tracing.
 
 ## A small vocabulary before the code
 
@@ -46,13 +46,13 @@ source .venv/bin/activate
 python -m pip install 'deepeval==4.3.3'
 ```
 
-On Windows, activate the environment with `.venv\Scripts\activate` instead. Lesson 1 makes no model calls and requires no API key. Lesson 2 requires an installed Codex CLI, a working ChatGPT login for Codex, and network access; it uses Codex access and its applicable usage limits. A ChatGPT login is **not** an OpenAI API key and does not make the default OpenAI API-backed DeepEval judge available automatically.
+On Windows, activate the environment with `.venv\Scripts\activate` instead. The offline example makes no model calls and requires no API key. The Codex example requires an installed Codex CLI, a working ChatGPT login for Codex, and network access; it uses Codex access and its applicable usage limits. A ChatGPT login is **not** an OpenAI API key and does not make the default OpenAI API-backed DeepEval judge available automatically.
 
-## Lesson 1: A simple offline metric
+## A simple offline metric
 
 Our sample policy is: **electronics can be returned within 15 days if unopened**. We will check whether an answer contains both `15 days` and `unopened`.
 
-Create a file named `lesson_01.py`:
+Create a file named `offline_metric.py`:
 
 ```python
 from deepeval.metrics import BaseMetric
@@ -108,7 +108,7 @@ for label, answer in examples:
 Run it:
 
 ```bash
-python lesson_01.py
+python offline_metric.py
 ```
 
 Expected output:
@@ -122,7 +122,7 @@ The metric subclasses DeepEval's `BaseMetric`, implements synchronous and asynch
 
 This is easy to understand, but it is not a complete correctness check. “Return electronics **after** 15 days, even if unopened” contains both strings and would pass despite being wrong. A correct paraphrase such as “within fifteen days, still sealed” could fail. Try both. These are useful failures to discover before trusting the metric.
 
-## Lesson 2: Use Codex as a judge
+## Use Codex as a judge
 
 A language model can consider meaning rather than exact strings. DeepEval's [GEval](https://deepeval.com/docs/metrics-llm-evals) accepts an evaluation criterion and a judge model. For this experiment, I already had access to Codex but did not have an OpenAI API key, so I created a small custom DeepEval model adapter that calls the locally authenticated CLI.
 
@@ -195,7 +195,7 @@ class CodexJudge(DeepEvalBaseLLM):
 
 The adapter uses the custom `DeepEvalBaseLLM` interface. When DeepEval provides a schema, it asks for JSON and validates the response. Invalid output is reported as an error instead of silently receiving a score. The adapter does not implement retries, batching, or token-cost tracking; it is intentionally small enough to inspect.
 
-Create `lesson_02.py` in the same directory:
+Create `judge_example.py` in the same directory:
 
 ```python
 from deepeval.metrics import GEval
@@ -239,7 +239,7 @@ for label, answer in answers:
 Run it from the same directory:
 
 ```bash
-python lesson_02.py
+python judge_example.py
 ```
 
 One run of the original examples gave the correct answer `1.0`, the wrong window `0.4`, and an ambiguous answer `0.2`. Treat those as illustrations, not assertions: the wording, model, and run can change a judge's score or explanation. Read the reasons and compare them with your own judgment. A result below `0.7` fails this example's threshold; it does not prove that every failure is equally serious.
@@ -248,20 +248,20 @@ If `codex` is missing, install the CLI and ensure it is on your `PATH`. If authe
 
 ## What I would learn next
 
-These are the next lessons in my learning path. They are overviews rather than full implementations in this post:
+These are some next steps to explore. They are overviews rather than full implementations in this post:
 
-| Lesson | Question to explore | What to capture |
+| Topic | Question to explore | What to capture |
 | --- | --- | --- |
-| 3. Datasets | How does the system perform across multiple cases? | A set of questions and expected answers, including failures and edge cases. DeepEval's [`Golden` and `EvaluationDataset`](https://deepeval.com/docs/evaluation-datasets) help organize these. |
-| 4. Tool correctness | Did the agent call the right tool with the right arguments? | Actual and expected tool names and inputs; for example, the correct order ID. |
-| 5. Task completion | Did the agent complete every part of the request? | The request, observed steps and final outcome, including a deliberately incomplete run. |
-| 6. Custom criteria | What does a useful answer mean for this product? | A rubric for clarity, supported claims, and behavior the application actually needs. |
-| 7. RAG | Is the answer supported by retrieved context, and was the right context retrieved? | Retrieved chunks, the answer, and reference material; faithfulness and retrieval quality are different questions. |
-| 8. Conversations | Does the assistant remember relevant facts across turns? | A multi-turn conversation and cases where it remembers or forgets the order ID. |
-| 9. Safety | How does the assistant handle sensitive data or hostile requests? | Representative, fictional inputs, a clearly defined policy, and examples that should pass and fail. |
-| 10. Tracing | Where did an agent go wrong? | Spans for the agent, tools, retrieval, and model calls, subject to the tracing setup and data policy. |
+| Datasets | How does the system perform across multiple cases? | A set of questions and expected answers, including failures and edge cases. DeepEval's [`Golden` and `EvaluationDataset`](https://deepeval.com/docs/evaluation-datasets) help organize these. |
+| Tool correctness | Did the agent call the right tool with the right arguments? | Actual and expected tool names and inputs; for example, the correct order ID. |
+| Task completion | Did the agent complete every part of the request? | The request, observed steps and final outcome, including a deliberately incomplete run. |
+| Custom criteria | What does a useful answer mean for this product? | A rubric for clarity, supported claims, and behavior the application actually needs. |
+| RAG | Is the answer supported by retrieved context, and was the right context retrieved? | Retrieved chunks, the answer, and reference material; faithfulness and retrieval quality are different questions. |
+| Conversations | Does the assistant remember relevant facts across turns? | A multi-turn conversation and cases where it remembers or forgets the order ID. |
+| Safety | How does the assistant handle sensitive data or hostile requests? | Representative, fictional inputs, a clearly defined policy, and examples that should pass and fail. |
+| Tracing | Where did an agent go wrong? | Spans for the agent, tools, retrieval, and model calls, subject to the tracing setup and data policy. |
 
-The first three lessons above can start with fixed examples or a small local agent. For a real application, replace sample outputs with the actual agent's response and capture its real tool calls and retrieval context. Add cases from observed failures, but review and sanitize data before sending it to a judge.
+Datasets, tool checks, and task-completion checks can start with fixed examples or a small local agent. For a real application, replace sample outputs with the actual agent's response and capture its real tool calls and retrieval context. Add cases from observed failures, but review and sanitize data before sending it to a judge.
 
 ## A kickoff checklist for a person or an agent
 
@@ -272,4 +272,4 @@ The first three lessons above can start with fixed examples or a small local age
 5. Connect the eval to the real system, capture its outputs and relevant intermediate steps, and compare results before and after a change. Distinguish a failed eval from a failed model call.
 6. Expand the dataset as you learn, and monitor cost, latency, nondeterminism, and data handling before using the workflow in CI or production.
 
-For me, the important lesson is that an evaluation is not just a score. It is a way to make an expectation explicit, run an experiment, and investigate the result. Starting with a tiny example gave me a much better foundation for the harder question: whether an agent actually helps the user accomplish a task.
+For me, an evaluation is more than a score. It is a way to make an expectation explicit, run an experiment, and investigate the result. Starting with a tiny example gave me a much better foundation for the harder question: whether an agent actually helps the user accomplish a task.
