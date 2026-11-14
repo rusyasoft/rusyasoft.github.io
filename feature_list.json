@@ -72,7 +72,11 @@
       "title": "Close the P0 site audit issues: canonical URLs, advertising, responsive layout",
       "status": "verified",
       "priority": 0,
-      "issues": [32, 33, 34],
+      "issues": [
+        32,
+        33,
+        34
+      ],
       "scope": [
         "Canonical URLs resolve to each page's own permalink",
         "Ad placement decided in this repository, not by AdSense Auto ads",
@@ -94,6 +98,26 @@
         "evidence": "Built-site checks pass across 126 pages. Responsive checks pass across 13 pages and 7 widths. A forced 970px ad creative stays contained at 360px and 390px in a production-shaped build. Both check families were confirmed to fail on an injected regression."
       },
       "open_follow_up": "The in-article ad unit renders only once adsense.in_article_slot is set in _config.yml."
+    },
+    {
+      "id": "deepeval-learning-introduction",
+      "title": "Publish a practical introduction to DeepEval",
+      "status": "verified",
+      "target_file": "_posts/2026-11-13-learning-ai-evals-with-deepeval.md",
+      "done_criteria": [
+        "Two self-contained, runnable examples with setup and expected outcomes",
+        "Overview of possible next steps and a practical kickoff checklist",
+        "Independent review and revision",
+        "Site validation and build",
+        "Advanced agent example combines goldens, tool-call checks, and tracing with a deliberately failing case"
+      ],
+      "verification": {
+        "commands": [
+          "./init.sh",
+          "node scripts/check_responsive.js --pages /ai/software-engineering/2026/11/13/learning-ai-evals-with-deepeval/"
+        ],
+        "evidence": "Full baseline and final verification passed; article-specific responsive checks passed at seven widths. Both Python examples were extracted from the post and executed using DeepEval 4.3.3, including a live Codex judge run. The advanced example was independently reviewed and executed in both normal and broken modes."
+      }
     }
   ]
 }
