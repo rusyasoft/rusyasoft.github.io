@@ -189,3 +189,18 @@ pass finished the third-party hygiene around it.
   possible #42 follow-up; deferral already stops them loading on view.
 - Legacy posts use `#` headings inside the body (multiple `<h1>` in content); the
   new h1 invariant checks the template title only, not legacy body content.
+
+## 2026-11-13 — DeepEval learning introduction
+
+### Changed files
+
+- Added `_posts/2026-11-13-learning-ai-evals-with-deepeval.md`: motivation, two self-contained exercises, overviews of lessons 3–10, and a kickoff checklist for people and coding agents.
+- Updated `feature_list.json` with the verified article state.
+
+### Review and verification
+
+- An independent reviewer extracted and ran both code examples; no blocking issues were found. Their feedback on read-only sandbox limits and inherited environment was incorporated into the article.
+- Both Python examples were extracted directly from the article and run with Python 3.14 and DeepEval 4.3.3. The offline example matched its documented output. A live Codex run scored the correct answer 1.0, the wrong return window 0.5, and the ambiguous answer 0.2; judge scores may vary.
+- `./init.sh` passed before and after the change, with `BUNDLE_PATH` pointing at the main checkout's local vendor bundle. The final run built and checked 129 pages and passed the standard responsive checks. Two pre-existing legacy fence warnings remain.
+- The article-specific responsive check passed at all seven default widths. No ad slot was configured, so its creative containment check was skipped.
+- Baseline setup required restoring compatible, locally cached native gem extensions for the current macOS version; no generated output or vendor files are tracked by this change.
